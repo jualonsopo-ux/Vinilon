@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vinilone - Soluciones de Privacidad y Control Solar</title>
+    <meta name="description"
+        content="Vinilone: Expertos en láminas solares y vinilos de privacidad. Instalación profesional en Madrid, Valencia y toda España.">
+    <meta name="theme-color" content="#F8FAFC">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Inter+Tight:wght@600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind.config.js"></script>
+
+    <link rel="stylesheet" href="assets/css/styles.css?v=2.0">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="assets/js/components/Wizard.js?v=1.0"></script>
+    <script src="assets/js/script.js?v=3.0" defer></script>
+</head>
+
+<body class="bg-azure-25 text-azure-900 antialiased selection:bg-brand-200 selection:text-brand-900">
+
+    <!-- SVG Sprite Sheet (iconos reutilizables) -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+        <symbol id="icon-google" viewBox="0 0 24 24">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </symbol>
+        <symbol id="icon-stars-5" viewBox="0 0 60 12">
+            <path fill="#FACC15" d="M6 0l1.8 3.6 4 .6-2.9 2.8.7 4L6 9.2 2.4 11l.7-4L.2 4.2l4-.6L6 0zm12 0l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.8-3.6 1.8.7-4-2.9-2.8 4-.6L18 0zm12 0l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.8-3.6 1.8.7-4-2.9-2.8 4-.6L30 0zm12 0l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.8-3.6 1.8.7-4-2.9-2.8 4-.6L42 0zm12 0l1.8 3.6 4 .6-2.9 2.8.7 4-3.6-1.8-3.6 1.8.7-4-2.9-2.8 4-.6L54 0z"/>
+        </symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </symbol>
+        <symbol id="icon-tiktok" viewBox="0 0 24 24">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+        </symbol>
+    </svg>
+
+    <div class="app-container flex flex-col px-4 py-5 pb-24">
+
+        <!-- Hero Background Image -->
+        <div class="hero-bg" aria-hidden="true">
+            <img src="assets/img/salon-ext-CHROME-285XC.jpg" alt="" class="hero-bg-image">
+            <div class="hero-bg-overlay"></div>
+        </div>
+
+        <div class="hero-layout">
+
+        <header class="relative z-10 flex flex-col items-center text-center mt-4 mb-8 animate-fade-in">
+            <div class="mb-5 pt-20 md:pt-28 lg:pt-32"> <!-- Replaced [80px] with pt-20 (5rem) -->
+                <img src="assets/img/Logo_Vinilone.png" alt="Logotipo de Vinilone"
+                    class="h-12 w-auto object-contain mx-auto" width="180" height="48">
+            </div>
+
+            <h1 class="font-black text-azure-900 leading-tight mb-2 tracking-tight">
+                Privacidad y frescor <br>
+                <span class="text-brand-600">sin perder la luz</span>
+            </h1>
+
+            <p class="text-azure-500 max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-5 leading-relaxed text-lg md:text-xl">
+                <!-- Changed h5 to p for semantic correctness -->
+                Expertos en láminas solares. Instalación profesional en toda España.
+            </p>
+
+            <div
+                class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#E0E7FF]/30 text-azure-600 text-sm font-medium mb-6 backdrop-blur-sm border border-white/50 shadow-sm">
+                <i data-lucide="map-pin" class="w-4 h-4 text-brand-600 fill-brand-600/20"></i>
+                <span>Servicio Nacional • España</span>
+            </div>
+
+            <div class="flex gap-3 md:gap-4 mb-6">
+                <a href="#" aria-label="Síguenos en Instagram" class="icon-btn"><i data-lucide="instagram"
+                        class="w-5 h-5"></i></a>
+                <a href="#" aria-label="Contáctanos por WhatsApp" class="icon-btn hover:text-[#25D366] transition-colors">
+                    <svg class="w-5 h-5 fill-current"><use href="#icon-whatsapp"/></svg>
+                </a>
+                <a href="#" aria-label="Síguenos en TikTok" class="icon-btn">
+                    <svg class="w-5 h-5 fill-current"><use href="#icon-tiktok"/></svg>
+                </a>
+            </div>
+
+        </header>
+
+            <section id="presupuesto" class="wizard-section">
+
+                <!-- Screen reader announcements -->
+                <div id="wizard-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+                <div id="calculator-container" class="wizard-container" role="group" aria-labelledby="wizard-title">
+
+                    <!-- PASO 1: Ubicación -->
+                    <div id="step-1" data-wizard-step="1" class="calc-step relative z-10 w-full animate-fade-in text-center">
+
+                        <div class="wizard-step-tag mx-auto mb-4">Presupuesto en 1 min</div>
+                        <h2 id="wizard-title" class="text-white mb-4">Calcula tu<br>Presupuesto</h2>
+
+                        <!-- Progress indicator (SR only) -->
+                        <div id="wizard-progress" role="progressbar" aria-valuenow="1" aria-valuemin="1"
+                            aria-valuemax="4" aria-label="Progreso del formulario: paso 1 de 4" class="sr-only"></div>
+
+                        <!-- Visual breadcrumb -->
+                        <nav id="wizard-breadcrumb" data-wizard-breadcrumb class="flex justify-center gap-2 mb-6"
+                            aria-label="Progreso del formulario">
+                            <button class="breadcrumb-step active" data-step="1" aria-current="step">
+                                <span class="breadcrumb-dot"></span>
+                                <span class="breadcrumb-label">Ubicación</span>
+                            </button>
+                            <div class="breadcrumb-line"></div>
+                            <button class="breadcrumb-step" data-step="2" disabled>
+                                <span class="breadcrumb-dot"></span>
+                                <span class="breadcrumb-label">Ventanas</span>
+                            </button>
+                            <div class="breadcrumb-line"></div>
+                            <button class="breadcrumb-step" data-step="3" disabled>
+                                <span class="breadcrumb-dot"></span>
+                                <span class="breadcrumb-label">Modelo</span>
+                            </button>
+                            <div class="breadcrumb-line"></div>
+                            <button class="breadcrumb-step" data-step="4" disabled>
+                                <span class="breadcrumb-dot"></span>
+                                <span class="breadcrumb-label">Contacto</span>
+                            </button>
+                        </nav>
+
+                        <p class="text-base text-white/80 font-medium mb-6">Dinos dónde instalaríamos para empezar:</p>
+
+                        <div class="space-y-4 mb-4">
+
+                            <div class="relative mb-3 group">
+                                <div class="input-group-icon"><i data-lucide="map" class="w-5 h-5"></i></div>
+                                <select id="calc-province" aria-label="Selecciona tu provincia"
+                                    class="form-input pl-11 cursor-pointer appearance-none">
+                                    <option value="" disabled selected>Selecciona tu Provincia...</option>
+                                    <!-- Provincias cargadas dinámicamente desde provinces.json -->
+                                </select>
+                                <div
+                                    class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-azure-400">
+                                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                                </div>
+                            </div>
+
+                            <div id="group-municipality"
+                                class="relative mb-3 hidden opacity-0 transition-opacity duration-500">
+                                <div class="input-group-icon"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                                <input type="text" id="calc-municipality" aria-label="Introduce tu municipio"
+                                    placeholder="Municipio / Localidad" class="form-input input-with-icon pl-11">
+                            </div>
+                        </div>
+
+                        <button id="btn-step-1" class="btn-primary-dark w-full justify-center" data-action="next-step"
+                            disabled>
+                            <span>Siguiente</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- PASO 2: Ventanas -->
+                    <div id="step-2" data-wizard-step="2" class="calc-step hidden relative z-10 w-full animate-fade-in">
+                        <div class="flex justify-between items-center mb-6">
+                            <button
+                                class="text-white/70 hover:text-white flex items-center gap-2 uppercase font-bold text-sm tracking-widest transition-colors"
+                                data-action="prev-step" aria-label="Volver al paso anterior">
+                                <i data-lucide="arrow-left" class="w-3 h-3"></i> Atrás
+                            </button>
+                            <div
+                                class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                                Paso 2 de 4
+                            </div>
+                        </div>
+
+                        <h3 class="text-3xl text-white font-bold mb-1">¿Qué ventanas tienes?</h3>
+                        <p class="text-white/60 mb-6 text-lg">Selecciona la cantidad por tipo.</p>
+
+                        <div class="space-y-3 mb-4">
+                            <div class="selector-card">
+                                <div class="selector-info">
+                                    <div class="selector-icon-box"><i data-lucide="door-open" class="w-6 h-6"></i></div>
+                                    <div>
+                                        <p class="text-white font-bold text-lg leading-tight">Grande</p>
+                                        <p class="text-white/60 text-sm">Balcón / Ventanal</p>
+                                    </div>
+                                </div>
+                                <div class="selector-stepper" role="group" aria-label="Cantidad de ventanas grandes">
+                                    <button class="stepper-btn" data-action="update-counter" data-window="grande"
+                                        data-value="-1" aria-label="Quitar ventana grande">-</button>
+                                    <span id="count-grande" class="stepper-value" aria-live="polite">0</span>
+                                    <button class="stepper-btn plus" data-action="update-counter" data-window="grande"
+                                        data-value="1" aria-label="Añadir ventana grande">+</button>
+                                </div>
+                            </div>
+
+                            <div class="selector-card">
+                                <div class="selector-info">
+                                    <div class="selector-icon-box"><i data-lucide="maximize" class="w-6 h-6"></i></div>
+                                    <div>
+                                        <p class="text-white font-bold text-lg leading-tight">Mediana</p>
+                                        <p class="text-white/60 text-sm">Normal / Estándar</p>
+                                    </div>
+                                </div>
+                                <div class="selector-stepper" role="group" aria-label="Cantidad de ventanas medianas">
+                                    <button class="stepper-btn" data-action="update-counter" data-window="mediana"
+                                        data-value="-1" aria-label="Quitar ventana mediana">-</button>
+                                    <span id="count-mediana" class="stepper-value" aria-live="polite">0</span>
+                                    <button class="stepper-btn plus" data-action="update-counter" data-window="mediana"
+                                        data-value="1" aria-label="Añadir ventana mediana">+</button>
+                                </div>
+                            </div>
+
+                            <div class="selector-card">
+                                <div class="selector-info">
+                                    <div class="selector-icon-box"><i data-lucide="minimize" class="w-6 h-6"></i></div>
+                                    <div>
+                                        <p class="text-white font-bold text-lg leading-tight">Pequeña</p>
+                                        <p class="text-white/60 text-sm">Baño / Cocina</p>
+                                    </div>
+                                </div>
+                                <div class="selector-stepper" role="group" aria-label="Cantidad de ventanas pequeñas">
+                                    <button class="stepper-btn" data-action="update-counter" data-window="pequena"
+                                        data-value="-1" aria-label="Quitar ventana pequeña">-</button>
+                                    <span id="count-pequena" class="stepper-value" aria-live="polite">0</span>
+                                    <button class="stepper-btn plus" data-action="update-counter" data-window="pequena"
+                                        data-value="1" aria-label="Añadir ventana pequeña">+</button>
+                                </div>
+                            </div>
+
+                            <div class="selector-card">
+                                <div class="selector-info">
+                                    <div class="selector-icon-box"><i data-lucide="plus" class="w-6 h-6"></i></div>
+                                    <div>
+                                        <p class="text-white font-bold text-lg leading-tight">Otro</p>
+                                        <p class="text-white/60 text-sm">Formas raras</p>
+                                    </div>
+                                </div>
+                                <div class="selector-stepper" role="group" aria-label="Cantidad de otras ventanas">
+                                    <button class="stepper-btn" data-action="update-counter" data-window="otro"
+                                        data-value="-1" aria-label="Quitar otra ventana">-</button>
+                                    <span id="count-otro" class="stepper-value" aria-live="polite">0</span>
+                                    <button class="stepper-btn plus" data-action="update-counter" data-window="otro"
+                                        data-value="1" aria-label="Añadir otra ventana">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="btn-step-2" class="btn-primary-dark w-full justify-center btn-disabled"
+                            data-action="next-step" disabled>
+                            <span>Siguiente</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- PASO 3: Modelo -->
+                    <div id="step-3" data-wizard-step="3" class="calc-step hidden relative z-10 w-full animate-fade-in">
+                        <div class="flex justify-between items-center mb-6">
+                            <button
+                                class="text-white/70 hover:text-white flex items-center gap-2 uppercase font-bold text-sm tracking-widest transition-colors"
+                                data-action="prev-step" aria-label="Volver al paso anterior">
+                                <i data-lucide="arrow-left" class="w-3 h-3"></i> Atrás
+                            </button>
+                            <div
+                                class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                                Paso 3 de 4
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl text-white text-left font-bold mb-6">Elige tu Vinilo ideal:</h3>
+
+                        <div class="space-y-3 text-left mb-4">
+                            <div class="calc-model-card bg-white text-azure-900 rounded-xl p-3 border-2 border-transparent cursor-pointer hover:shadow-md relative group transition-all active:scale-[0.98] duration-200"
+                                data-model="cantabria" role="button" tabindex="0"
+                                aria-label="Seleccionar Modelo Cantabria - Privacidad más luz natural">
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center shrink-0 text-brand-600 border border-brand-100 shadow-sm">
+                                        <i data-lucide="sun" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="font-bold text-sm">Modelo Cantabria</h4>
+                                            <span class="badge badge-accent text-[10px] px-2 py-0.5">Top</span>
+                                        </div>
+                                        <p class="text-xs text-azure-500 leading-tight mt-1">Privacidad + Luz natural.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="check-icon absolute top-3 right-3 text-brand-600 opacity-0 scale-50 transition-all">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 fill-current"></i>
+                                </div>
+                            </div>
+
+                            <div class="calc-model-card bg-white text-azure-900 rounded-xl p-3 border-2 border-transparent cursor-pointer hover:shadow-md relative group transition-all active:scale-[0.98] duration-200"
+                                data-model="valencia" role="button" tabindex="0"
+                                aria-label="Seleccionar Modelo Valencia - Equilibrio calor y luz">
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center shrink-0 text-orange-600 border border-orange-100 shadow-sm">
+                                        <i data-lucide="scale" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm">Modelo Valencia</h4>
+                                        <p class="text-xs text-azure-500 leading-tight mt-1">Equilibrio calor / luz.</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="check-icon absolute top-3 right-3 text-brand-600 opacity-0 scale-50 transition-all">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 fill-current"></i>
+                                </div>
+                            </div>
+
+                            <div class="calc-model-card bg-white text-azure-900 rounded-xl p-3 border-2 border-transparent cursor-pointer hover:shadow-md relative group transition-all active:scale-[0.98] duration-200"
+                                data-model="andalucia" role="button" tabindex="0"
+                                aria-label="Seleccionar Modelo Andalucía - Máxima protección solar">
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-lg bg-azure-50 flex items-center justify-center shrink-0 text-azure-600 border border-azure-100 shadow-sm">
+                                        <i data-lucide="shield" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm">Modelo Andalucía</h4>
+                                        <p class="text-xs text-azure-500 leading-tight mt-1">Máxima protección.</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="check-icon absolute top-3 right-3 text-brand-600 opacity-0 scale-50 transition-all">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 fill-current"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="btn-step-3" class="btn-primary-dark w-full justify-center" data-action="next-step"
+                            disabled>
+                            <span>Siguiente</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- PASO 4: Contacto -->
+                    <div id="step-4" data-wizard-step="4" class="calc-step hidden relative z-10 w-full animate-fade-in">
+
+                        <div class="flex justify-between items-center mb-6">
+                            <button
+                                class="text-white/70 hover:text-white flex items-center gap-2 uppercase font-bold text-sm tracking-widest transition-colors"
+                                data-action="prev-step" aria-label="Volver al paso anterior">
+                                <i data-lucide="arrow-left" class="w-3 h-3"></i> Atrás
+                            </button>
+                            <div
+                                class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                                Paso 4 de 4
+                            </div>
+                        </div>
+
+                        <h3 class="wizard-title-message text-xl font-bold leading-snug mb-6">
+                            Te contactamos en menos de 24h y calculamos el coste sin compromiso
+                        </h3>
+
+                        <div class="space-y-4 text-left mb-4">
+
+                            <div class="relative group">
+                                <div class="input-group-icon"><i data-lucide="user" class="w-5 h-5"></i></div>
+                                <input type="text" id="calc-name" aria-label="Nombre completo" placeholder="Tu Nombre"
+                                    class="form-input input-with-icon pl-11">
+                            </div>
+                            <div class="input-group flex items-stretch overflow-hidden p-0 rounded-xl bg-white">
+                                <div class="relative flex-shrink-0">
+                                    <select id="calc-prefix"
+                                        class="h-full bg-azure-50 border-r border-azure-100 text-azure-900 text-sm font-bold focus:ring-0 cursor-pointer pl-3 pr-8 appearance-none outline-none hover:bg-azure-100 transition-colors">
+                                        <option value="+34">🇪🇸 +34</option>
+                                        <option value="+33">🇫🇷 +33</option>
+                                        <option value="+351">🇵🇹 +351</option>
+                                        <option value="+39">🇮🇹 +39</option>
+                                        <option value="+49">🇩🇪 +49</option>
+                                        <option value="+44">🇬🇧 +44</option>
+                                    </select>
+                                    <div
+                                        class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-azure-500">
+                                        <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                                    </div>
+                                </div>
+                                <input type="tel" id="calc-phone" aria-label="Número de teléfono"
+                                    placeholder="600 000 000"
+                                    class="form-input border-0 shadow-none pl-3 focus:ring-0 rounded-none h-auto py-3 flex-1">
+                            </div>
+                        </div>
+
+                        <button id="btn-submit-whatsapp" class="btn-whatsapp w-full">
+                            <svg class="w-5 h-5 fill-current"><use href="#icon-whatsapp"/></svg>
+                            <span>Ver Presupuesto</span>
+                        </button>
+
+                        <div class="mt-4 flex justify-center items-center gap-2 text-[10px] text-white opacity-80">
+                            <i data-lucide="lock" class="w-3 h-3"></i>
+                            <span class="font-medium">Tus datos están 100% seguros</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div><!-- /.hero-layout -->
+
+        <main class="flex-1 w-full space-y-5 md:space-y-8 lg:space-y-10">
+
+            <!-- SOBRE NOSOTROS (Vista Dual: Trigger + Expandido) -->
+            <section id="about-section" class="w-full">
+                <!-- Trigger Button (Vista inicial) -->
+                <button id="about-trigger"
+                    class="directory-card w-full p-4 flex items-center justify-between group cursor-pointer text-left relative z-10 hover:shadow-md"
+                    aria-expanded="false" aria-controls="about-content">
+                    <div class="flex items-center gap-3 w-full">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-azure-900 leading-none">Sobre Nosotros</h3>
+                            <p class="text-sm text-azure-400 mt-1">Nuestra tecnología y experiencia</p>
+                        </div>
+                        <i data-lucide="chevron-down"
+                            class="about-arrow-icon w-5 h-5 text-azure-400 transition-transform duration-300"></i>
+                    </div>
+                </button>
+
+                <!-- Contenido Expandido (Oculto inicialmente) -->
+                <div id="about-content" class="about-expandable-content">
+                    <div class="directory-card w-full p-4 relative animate-fade-in">
+
+                        <!-- Botón Cerrar (esquina superior derecha) -->
+                        <button id="about-close"
+                            class="absolute top-4 right-4 p-2 rounded-lg text-azure-400 hover:bg-azure-100 hover:text-azure-600 transition-colors z-10"
+                            aria-label="Cerrar">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+
+                        <!-- Header interno (coherente con trigger) -->
+                        <div class="flex items-center gap-3 mb-4 pr-10">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-azure-900 leading-none">Sobre Nosotros</h3>
+                                <p class="text-sm text-azure-400 mt-1">Nuestra tecnología y experiencia</p>
+                            </div>
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="mb-8">
+                            <p class="text-base text-azure-600 leading-relaxed mb-6">
+                                <span class="font-bold text-brand-600">Vinilone</span> no vende pegatinas, vende
+                                confort. Nos especializamos en soluciones que mejoran el aislamiento térmico y la
+                                estética de cualquier inmueble.
+                            </p>
+
+                            <!-- Lista vertical de beneficios -->
+                            <div class="space-y-3">
+                                <div class="p-4 bg-azure-50 rounded-xl">
+                                    <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center mb-3">
+                                        <i data-lucide="thermometer-sun" class="w-5 h-5 text-brand-600"></i>
+                                    </div>
+                                    <h5 class="font-bold text-azure-900 text-sm">Control Térmico y Ahorro</h5>
+                                    <p class="text-azure-500 text-sm leading-snug mt-1">Mejora el confort térmico reduciendo el calor directo. Esto se traduce en un notable ahorro energético en aire acondicionado.</p>
+                                </div>
+                                <div class="p-4 bg-azure-50 rounded-xl">
+                                    <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center mb-3">
+                                        <i data-lucide="eye-off" class="w-5 h-5 text-brand-600"></i>
+                                    </div>
+                                    <h5 class="font-bold text-azure-900 text-sm">Privacidad Diurna</h5>
+                                    <p class="text-azure-500 text-sm leading-snug mt-1">Efecto espejo durante el día: "ves sin ser visto". Mantén tu intimidad total desde el exterior sin sacrificar la luz natural.</p>
+                                </div>
+                                <div class="p-4 bg-azure-50 rounded-xl">
+                                    <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center mb-3">
+                                        <i data-lucide="shield" class="w-5 h-5 text-brand-600"></i>
+                                    </div>
+                                    <h5 class="font-bold text-azure-900 text-sm">Protección UV del 99%</h5>
+                                    <p class="text-azure-500 text-sm leading-snug mt-1">Bloquea los rayos ultravioleta dañinos, protegiendo suelos, muebles y escaparates de la decoloración y el deterioro.</p>
+                                </div>
+                                <div class="p-4 bg-azure-50 rounded-xl">
+                                    <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center mb-3">
+                                        <i data-lucide="badge-check" class="w-5 h-5 text-brand-600"></i>
+                                    </div>
+                                    <h5 class="font-bold text-azure-900 text-sm">Garantía y Durabilidad</h5>
+                                    <p class="text-azure-500 text-sm leading-snug mt-1">Inversión a largo plazo. Ofrecemos 5 años de garantía con una vida útil de nuestros materiales de hasta 15 años.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carrusel de Instalaciones -->
+                        <div class="-mx-4 -mb-4">
+                            <h4 class="text-sm font-bold text-azure-400 mb-4 px-4">Instalaciones Recientes</h4>
+                            <div class="h-scroll-snap flex gap-3 px-4 pb-4 overflow-x-auto">
+                                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] shadow-sm group shrink-0">
+                                    <img src="assets/img/office-madrid.jpg" loading="lazy"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        alt="Oficinas en Madrid">
+                                    <div
+                                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                                        <span class="text-white text-sm font-medium">Oficinas Madrid</span>
+                                    </div>
+                                </div>
+                                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] shadow-sm group shrink-0">
+                                    <img src="assets/img/residential-valencia.jpg" loading="lazy"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        alt="Residencial Valencia">
+                                    <div
+                                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                                        <span class="text-white text-sm font-medium">Residencial Valencia</span>
+                                    </div>
+                                </div>
+                                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] shadow-sm group shrink-0">
+                                    <img src="assets/img/model-andalucia.jpg" loading="lazy"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        alt="Nave Industrial Norte">
+                                    <div
+                                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                                        <span class="text-white text-sm font-medium">Nave Industrial Norte</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NUESTROS MODELOS (Carrusel + Overlay Fullscreen) -->
+            <section id="models-section" class="w-full">
+                <div class="directory-card w-full p-4">
+                    <!-- Header -->
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-azure-900 leading-none">Nuestros Modelos</h3>
+                            <p class="text-sm text-azure-400 mt-1">Explora las opciones disponibles</p>
+                        </div>
+                    </div>
+
+                    <!-- Carrusel de Modelos -->
+                    <div class="-mx-4 -mb-4">
+                        <div id="models-carousel" class="h-scroll-snap flex gap-3 px-4 pb-4 overflow-x-auto">
+                            <!-- Cantabria -->
+                            <button class="model-card-trigger snap-item shrink-0" data-model="cantabria"
+                                aria-label="Ver detalles modelo Cantabria">
+                                <img src="assets/img/model-cantabria.jpg" loading="lazy"
+                                    class="w-full h-full object-cover absolute inset-0 transition-transform duration-500 group-hover:scale-110"
+                                    alt="Modelo Cantabria">
+                                <div class="model-card-overlay">
+                                    <span class="badge badge-highlight font-semibold mb-1">Top Ventas</span>
+                                    <h4 class="text-white font-bold text-xl leading-tight">Cantabria</h4>
+                                    <p class="text-white/80 text-sm mt-1 mb-3">Privacidad + Luz</p>
+                                    <div class="model-card-cta">
+                                        <i data-lucide="info" class="w-4 h-4"></i>
+                                        <span>Más info</span>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <!-- Valencia -->
+                            <button class="model-card-trigger snap-item shrink-0" data-model="valencia"
+                                aria-label="Ver detalles modelo Valencia">
+                                <img src="assets/img/model-valencia.jpg" loading="lazy"
+                                    class="w-full h-full object-cover absolute inset-0 transition-transform duration-500 group-hover:scale-110"
+                                    alt="Modelo Valencia">
+                                <div class="model-card-overlay">
+                                    <h4 class="text-white font-bold text-xl leading-tight">Valencia</h4>
+                                    <p class="text-white/80 text-sm mt-1 mb-3">Equilibrio Solar</p>
+                                    <div class="model-card-cta">
+                                        <i data-lucide="info" class="w-4 h-4"></i>
+                                        <span>Más info</span>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <!-- Andalucía -->
+                            <button class="model-card-trigger snap-item shrink-0" data-model="andalucia"
+                                aria-label="Ver detalles modelo Andalucía">
+                                <img src="assets/img/model-andalucia.jpg" loading="lazy"
+                                    class="w-full h-full object-cover absolute inset-0 transition-transform duration-500 group-hover:scale-110"
+                                    alt="Modelo Andalucía">
+                                <div class="model-card-overlay">
+                                    <h4 class="text-white font-bold text-xl leading-tight">Andalucía</h4>
+                                    <p class="text-white/80 text-sm mt-1 mb-3">Máxima Protección</p>
+                                    <div class="model-card-cta">
+                                        <i data-lucide="info" class="w-4 h-4"></i>
+                                        <span>Más info</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Overlay Fullscreen para Detalle de Modelo -->
+            <div id="model-detail-overlay" class="model-detail-overlay hidden" aria-hidden="true">
+                <!-- Contenido inyectado dinámicamente por JS -->
+            </div>
+
+            <!-- Simulador oculto temporalmente -->
+            <section class="mt-8 hidden">
+                <div class="bg-white rounded-xl shadow-sm border border-azure-100 p-5">
+                    <header class="flex justify-between items-center mb-5">
+                        <h2 class="flex items-center gap-2 text-lg font-bold text-azure-900">
+                            <i data-lucide="layers" class="w-5 h-5 text-brand-600"></i>
+                            Simulador
+                        </h2>
+                        <span class="badge badge-brand">Interactivo</span>
+                    </header>
+
+                    <p class="text-azure-400 text-xs text-center mb-6">Arrastra el vinilo sobre la ventana para probarlo
+                    </p>
+
+                    <div class="simulador-container">
+                        <div class="window-assembly" id="dropTarget">
+                            <div class="landscape-view"></div>
+                            <div class="vinyl-tint-layer" id="tintLayer"></div>
+                            <div class="window-frame">
+                                <div class="sash">
+                                    <div class="reflection"></div>
+                                </div>
+                                <div class="sash">
+                                    <div class="reflection"></div>
+                                </div>
+                            </div>
+                            <div class="handle"></div>
+                        </div>
+
+                        <div class="flex flex-col gap-3 w-20 shrink-0"> <!-- Replaced w-[85px] with w-20 -->
+                            <div class="vinyl-card card-cantabria" data-color="rgba(30, 60, 90, 0.2)">
+                                <div class="sample-box">
+                                    <span class="text-lg font-black percent-text">20%</span>
+                                    <span class="sample-label">Cantabria</span>
+                                </div>
+                            </div>
+                            <div class="vinyl-card card-valencia" data-color="rgba(30, 45, 60, 0.5)">
+                                <div class="sample-box">
+                                    <span class="text-lg font-black percent-text">50%</span>
+                                    <span class="sample-label">Valencia</span>
+                                </div>
+                            </div>
+                            <div class="vinyl-card card-andalucia" data-color="rgba(10, 15, 20, 0.85)">
+                                <div class="sample-box">
+                                    <span class="text-lg font-black percent-text">80%</span>
+                                    <span class="sample-label">Andalucía</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOCIAL PROOF (GOOGLE STYLE) -->
+            <section id="reviews-section" class="w-full">
+                <div class="directory-card w-full p-4 bg-azure-100">
+                    <!-- Header -->
+                    <div class="flex items-stretch justify-between text-left mb-4">
+                        <div class="flex-1 flex flex-col justify-center">
+                            <h3 class="font-bold text-azure-900 leading-tight">Lo que dicen<br>nuestros clientes</h3>
+                            <p class="text-sm text-azure-400 mt-1">32 reseñas</p>
+                        </div>
+                        <div class="flex flex-col items-end justify-between">
+                            <span class="font-bold text-brand-600 text-[40px] leading-none">5/5</span>
+                            <a href="https://www.google.com/search?sa=X&sca_esv=896419ed210a4547&rlz=1C5CHFA_enES1030ES1030&aep=1&sxsrf=ANbL-n7IOfWXy2BjhofLG-M-WEdzii1N2w:1770653896016&q=Vinilone+Rese%C3%B1as&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDY1NTI3MLY0NzGzMDM3sTQxM9rAyPiKUTAsMy8zJz8vVSEotTj18MbE4kWsmGIAMiAvnEMAAAA&rldimm=13552703974686749462&tbm=lcl&prmd=ivns&hl=es-ES&ved=2ahUKEwi3z_fj58ySAxXbQ_EDHYqYJGgQ9fQKegQIQRAG&biw=1728&bih=992&dpr=2#lkt=LocalPoiReviews"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="p-1 rounded hover:bg-white/50 transition-colors">
+                                <i data-lucide="external-link" class="w-4 h-4 text-azure-400 hover:text-brand-500 transition-colors"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Carruseles de reseñas -->
+                    <div class="-mx-4 -mb-4">
+                        <!-- Marquee 1: Izquierda -->
+                        <div class="marquee-container mb-3 pr-4">
+                    <div class="marquee-track animate-scroll-left">
+                        <div class="flex gap-3">
+                            <!-- Jesús Ml -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Jesús Ml</h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2026-01-09">Hace 1 mes</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">El trato de Guillermo
+                                    fue súper amable y el trabajo super profesional. Muy contentos con el resultado, se
+                                    nota muchísimo la diferencia de temperatura.</p>
+                            </div>
+                            <!-- María S -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">María S</h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2025-09-09">Hace 5 meses</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">¡Todo un acierto en
+                                    casa! Solicitamos los vinilos con el objetivo de reducir el calor y la verdad que se
+                                    nota muchísimo la diferencia. El trato con Guillermo genial.</p>
+                            </div>
+                            <!-- Raquel -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Raquel</h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2025-03-09">Hace 11 meses</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Servicio y resultado
+                                    impecable! Buscaba un vinilo que aportara privacidad y redujera el calor en verano.
+                                    Guillermo me asesoró y el resultado es perfecto.</p>
+                            </div>
+                            <!-- Daniel -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Daniel</h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2025-02-09">Hace 1 año</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Buen servicio</p>
+                            </div>
+                            <!-- Christian -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Christian</h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2024-02-09">Hace 2 años</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Excelente servicio. Muy
+                                    recomendable</p>
+                            </div>
+                            <!-- Eduardo González -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Eduardo González
+                                        </h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2024-02-09">Hace 2 años</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Excelente servicio y
+                                    atención! Colocaron una lámina para el sol en un ático y estamos encantados con el
+                                    resultado. Muy profesionales y eficientes.</p>
+                            </div>
+                        </div>
+                        <!-- Duplicado clonado automáticamente via JS -->
+                    </div>
+                </div>
+
+                        <!-- Marquee 2: Derecha -->
+                        <div class="marquee-container pr-4 pb-4">
+                    <div class="marquee-track animate-scroll-right">
+                        <div class="flex gap-3">
+                            <!-- DCL -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">DCL</h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2024-02-09">Hace 2 años</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Muy buen servicio y
+                                    atención. Rápido, eficaz y buen resultado. Muy recomendable.</p>
+                            </div>
+                            <!-- Ignacio Mut -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Ignacio Mut</h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2024-02-09">Hace 2 años</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Instalaron un vinilo en
+                                    mi casa para proteger del sol. La instalación fue rápida, limpia y el resultado
+                                    excelente. Muy profesionales. 100% recomendable.</p>
+                            </div>
+                            <!-- Javier García Braojos -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Javier García B.
+                                        </h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2024-02-09">Hace 2 años</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Gran servicio.
+                                    Recomendable.</p>
+                            </div>
+                            <!-- Israel Maldonado -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Israel Maldonado
+                                        </h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2023-02-09">Hace 3 años</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Muy buenos
+                                    profesionales. Muy recomendables.</p>
+                            </div>
+                            <!-- Santiago Franco -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">Santiago Franco
+                                        </h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2023-02-09">Hace 3 años</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Muy profesionales,
+                                    puntuales y trabajadores. Me instalaron láminas en 16 ventanas en menos de lo
+                                    esperado. Recomendados 100%.</p>
+                            </div>
+                            <!-- María Gallego -->
+                            <div class="review-card flex flex-col relative overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h5 class="font-semibold text-azure-900 text-lg leading-tight">María Gallego
+                                        </h5>
+                                        <span class="text-sm text-azure-400 block dynamic-date"
+                                            data-date="2023-02-09">Hace 3 años</span>
+                                    </div>
+                                    <svg class="w-5 h-5"><use href="#icon-google"/></svg>
+                                </div>
+                                <svg class="w-16 h-3 mb-2"><use href="#icon-stars-5"/></svg>
+                                <p class="text-base text-azure-600 leading-relaxed line-clamp-4">Muy profesionales,
+                                    rápidos y el resultado final ha superado nuestras expectativas. Laminado de 3
+                                    ventanas grandes en nuestro ático.</p>
+                            </div>
+                        </div>
+                        <!-- Duplicado clonado automáticamente via JS -->
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CÓMO TRABAJAMOS -->
+            <section id="how-we-work" class="w-full">
+                <div class="directory-card w-full p-4">
+                    <!-- Header -->
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-azure-900 leading-none">Cómo Trabajamos</h3>
+                            <p class="text-sm text-azure-400 mt-1">Proceso sencillo en 3 pasos</p>
+                        </div>
+                    </div>
+
+                    <!-- Steps -->
+                    <div class="space-y-3">
+                        <!-- Step 1 -->
+                        <div class="p-4 bg-azure-50 rounded-xl">
+                            <div class="w-10 h-10 rounded-lg bg-brand-600 flex items-center justify-center mb-3">
+                                <span class="text-white font-bold text-lg">1</span>
+                            </div>
+                            <h5 class="font-bold text-azure-900 text-sm">Solicita tu Presupuesto</h5>
+                            <p class="text-azure-500 text-sm leading-snug mt-1">Contacta con nosotros indicando tu ciudad y tipo de necesidad (podrás hacer una estimación orientativa de tu presupuesto concreto directamente en la web).</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="p-4 bg-azure-50 rounded-xl">
+                            <div class="w-10 h-10 rounded-lg bg-brand-600 flex items-center justify-center mb-3">
+                                <span class="text-white font-bold text-lg">2</span>
+                            </div>
+                            <h5 class="font-bold text-azure-900 text-sm">Asesoramiento Técnico</h5>
+                            <p class="text-azure-500 text-sm leading-snug mt-1">Analizamos la orientación y el tipo de cristal para recomendarte la lámina exacta.</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="p-4 bg-azure-50 rounded-xl">
+                            <div class="w-10 h-10 rounded-lg bg-brand-600 flex items-center justify-center mb-3">
+                                <span class="text-white font-bold text-lg">3</span>
+                            </div>
+                            <h5 class="font-bold text-azure-900 text-sm">Instalación Profesional</h5>
+                            <p class="text-azure-500 text-sm leading-snug mt-1">Equipo propio en tu zona. Instalación rápida, limpia y sin obras.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA FINAL -->
+            <section id="cta-final" class="w-full">
+                <div class="relative rounded-2xl overflow-hidden flex flex-col">
+                    <!-- Background image -->
+                    <img src="assets/img/view-depressed-woman-looking-through-window.jpg"
+                        alt="" aria-hidden="true"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <!-- Overlay gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20"></div>
+
+                    <!-- Content inicial (se oculta cuando se expande wizard) -->
+                    <div id="cta-initial-content" class="relative z-10 p-4 md:p-8 text-center min-h-80 lg:min-h-96 flex flex-col justify-end">
+                        <h3 class="text-white font-bold text-xl mb-1.5">¿Necesitas más privacidad?</h3>
+                        <p class="text-white/70 text-sm mb-4">Pide tu presupuesto sin compromiso</p>
+                        <div class="flex flex-col md:flex-row md:justify-center gap-4">
+                            <a href="#" class="btn-secondary w-full md:flex-1 normal-case font-semibold">
+                                <svg class="w-4 h-4 fill-current"><use href="#icon-whatsapp"/></svg>
+                                <span>Consulta gratuita</span>
+                            </a>
+                            <button id="cta-calc-btn" class="btn-primary w-full md:flex-1 normal-case font-semibold transition-all" aria-expanded="false">
+                                <span>Calcular mi presupuesto ahora</span>
+                                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Wizard expandible (réplica exacta del wizard principal) -->
+                    <div id="cta-wizard-wrapper" class="relative z-10 p-4 hidden">
+                        <div class="wizard-container rounded-xl overflow-hidden">
+
+                            <!-- CTA PASO 1: Ubicación -->
+                            <div id="cta-step-1" data-wizard-step="1" class="cta-wizard-step relative z-10 w-full text-center">
+                                <!-- Header -->
+                                <div class="mb-4">
+                                    <p class="text-xs text-white/60 font-bold uppercase tracking-widest mb-1">Presupuesto en 1 min</p>
+                                    <h3 class="text-2xl text-white font-bold">Calcula tu Presupuesto</h3>
+                                </div>
+
+                                <!-- Breadcrumb -->
+                                <div class="flex items-center justify-center gap-2 mb-6">
+                                    <div class="flex items-center gap-1 text-white">
+                                        <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                        <span class="text-xs font-bold">Ubicación</span>
+                                    </div>
+                                    <div class="w-4 h-px bg-white/30"></div>
+                                    <div class="flex items-center gap-1 text-white/40">
+                                        <i data-lucide="layout-grid" class="w-3 h-3"></i>
+                                        <span class="text-xs">Ventanas</span>
+                                    </div>
+                                    <div class="w-4 h-px bg-white/30"></div>
+                                    <div class="flex items-center gap-1 text-white/40">
+                                        <i data-lucide="sun" class="w-3 h-3"></i>
+                                        <span class="text-xs">Modelo</span>
+                                    </div>
+                                    <div class="w-4 h-px bg-white/30"></div>
+                                    <div class="flex items-center gap-1 text-white/40">
+                                        <i data-lucide="user" class="w-3 h-3"></i>
+                                        <span class="text-xs">Contacto</span>
+                                    </div>
+                                </div>
+
+                                <p class="text-base text-white/80 font-medium mb-6">Dinos dónde instalaríamos:</p>
+
+                                <div class="space-y-4 mb-4">
+                                    <div class="relative mb-3 group">
+                                        <div class="input-group-icon"><i data-lucide="map" class="w-5 h-5"></i></div>
+                                        <select id="cta-province" class="form-input pl-11 cursor-pointer appearance-none">
+                                            <option value="" disabled selected>Selecciona tu Provincia...</option>
+                                        </select>
+                                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-azure-400">
+                                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                                        </div>
+                                    </div>
+
+                                    <div id="cta-mun-group" class="relative mb-3 hidden opacity-0 transition-opacity duration-500">
+                                        <div class="input-group-icon"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                                        <input type="text" id="cta-municipality" placeholder="Municipio / Localidad" class="form-input input-with-icon pl-11">
+                                    </div>
+                                </div>
+
+                                <button id="cta-btn-step-1" class="btn-primary-dark w-full justify-center" data-action="next-step" disabled>
+                                    <span>Siguiente</span>
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- CTA PASO 2: Ventanas -->
+                            <div id="cta-step-2" data-wizard-step="2" class="cta-wizard-step hidden relative z-10 w-full">
+                                <div class="flex justify-between items-center mb-6">
+                                    <button class="text-white/70 hover:text-white flex items-center gap-2 uppercase font-bold text-sm tracking-widest transition-colors" data-action="prev-step">
+                                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Atrás
+                                    </button>
+                                    <div class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                                        Paso 2 de 4
+                                    </div>
+                                </div>
+
+                                <h3 class="text-3xl text-white font-bold mb-1">¿Qué ventanas tienes?</h3>
+                                <p class="text-white/60 mb-6 text-lg">Selecciona la cantidad por tipo.</p>
+
+                                <div class="space-y-3 mb-4">
+                                    <div class="selector-card">
+                                        <div class="selector-info">
+                                            <div class="selector-icon-box"><i data-lucide="door-open" class="w-6 h-6"></i></div>
+                                            <div>
+                                                <p class="text-white font-bold text-lg leading-tight">Grande</p>
+                                                <p class="text-white/60 text-sm">Balcón / Ventanal</p>
+                                            </div>
+                                        </div>
+                                        <div class="selector-stepper" role="group" aria-label="Cantidad de ventanas grandes">
+                                            <button class="stepper-btn" data-window="grande" data-value="-1" aria-label="Quitar ventana grande">-</button>
+                                            <span id="cta-count-grande" class="stepper-value" aria-live="polite">0</span>
+                                            <button class="stepper-btn plus" data-window="grande" data-value="1" aria-label="Añadir ventana grande">+</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="selector-card">
+                                        <div class="selector-info">
+                                            <div class="selector-icon-box"><i data-lucide="maximize" class="w-6 h-6"></i></div>
+                                            <div>
+                                                <p class="text-white font-bold text-lg leading-tight">Mediana</p>
+                                                <p class="text-white/60 text-sm">Normal / Estándar</p>
+                                            </div>
+                                        </div>
+                                        <div class="selector-stepper" role="group" aria-label="Cantidad de ventanas medianas">
+                                            <button class="stepper-btn" data-window="mediana" data-value="-1" aria-label="Quitar ventana mediana">-</button>
+                                            <span id="cta-count-mediana" class="stepper-value" aria-live="polite">0</span>
+                                            <button class="stepper-btn plus" data-window="mediana" data-value="1" aria-label="Añadir ventana mediana">+</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="selector-card">
+                                        <div class="selector-info">
+                                            <div class="selector-icon-box"><i data-lucide="minimize" class="w-6 h-6"></i></div>
+                                            <div>
+                                                <p class="text-white font-bold text-lg leading-tight">Pequeña</p>
+                                                <p class="text-white/60 text-sm">Baño / Cocina</p>
+                                            </div>
+                                        </div>
+                                        <div class="selector-stepper" role="group" aria-label="Cantidad de ventanas pequeñas">
+                                            <button class="stepper-btn" data-window="pequena" data-value="-1" aria-label="Quitar ventana pequeña">-</button>
+                                            <span id="cta-count-pequena" class="stepper-value" aria-live="polite">0</span>
+                                            <button class="stepper-btn plus" data-window="pequena" data-value="1" aria-label="Añadir ventana pequeña">+</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="selector-card">
+                                        <div class="selector-info">
+                                            <div class="selector-icon-box"><i data-lucide="plus" class="w-6 h-6"></i></div>
+                                            <div>
+                                                <p class="text-white font-bold text-lg leading-tight">Otro</p>
+                                                <p class="text-white/60 text-sm">Formas raras</p>
+                                            </div>
+                                        </div>
+                                        <div class="selector-stepper" role="group" aria-label="Cantidad de otras ventanas">
+                                            <button class="stepper-btn" data-window="otro" data-value="-1" aria-label="Quitar otra ventana">-</button>
+                                            <span id="cta-count-otro" class="stepper-value" aria-live="polite">0</span>
+                                            <button class="stepper-btn plus" data-window="otro" data-value="1" aria-label="Añadir otra ventana">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button id="cta-btn-step-2" class="btn-primary-dark w-full justify-center btn-disabled" data-action="next-step" disabled>
+                                    <span>Siguiente</span>
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- CTA PASO 3: Modelo -->
+                            <div id="cta-step-3" data-wizard-step="3" class="cta-wizard-step hidden relative z-10 w-full">
+                                <div class="flex justify-between items-center mb-6">
+                                    <button class="text-white/70 hover:text-white flex items-center gap-2 uppercase font-bold text-sm tracking-widest transition-colors" data-action="prev-step">
+                                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Atrás
+                                    </button>
+                                    <div class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                                        Paso 3 de 4
+                                    </div>
+                                </div>
+
+                                <h3 class="text-xl text-white text-left font-bold mb-6">Elige tu Vinilo ideal:</h3>
+
+                                <div class="space-y-3 text-left mb-4">
+                                    <div class="calc-model-card bg-white text-azure-900 rounded-xl p-3 border-2 border-transparent cursor-pointer hover:shadow-md relative group transition-all active:scale-[0.98] duration-200"
+                                        data-model="cantabria" role="button" tabindex="0">
+                                        <div class="flex items-start gap-4">
+                                            <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center shrink-0 text-brand-600 border border-brand-100 shadow-sm">
+                                                <i data-lucide="sun" class="w-5 h-5"></i>
+                                            </div>
+                                            <div>
+                                                <div class="flex items-center gap-2">
+                                                    <h4 class="font-bold text-sm">Modelo Cantabria</h4>
+                                                    <span class="badge badge-accent text-[10px] px-2 py-0.5">Top</span>
+                                                </div>
+                                                <p class="text-xs text-azure-500 leading-tight mt-1">Privacidad + Luz natural.</p>
+                                            </div>
+                                        </div>
+                                        <div class="check-icon absolute top-3 right-3 text-brand-600 opacity-0 scale-50 transition-all">
+                                            <i data-lucide="check-circle-2" class="w-5 h-5 fill-current"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="calc-model-card bg-white text-azure-900 rounded-xl p-3 border-2 border-transparent cursor-pointer hover:shadow-md relative group transition-all active:scale-[0.98] duration-200"
+                                        data-model="valencia" role="button" tabindex="0">
+                                        <div class="flex items-start gap-4">
+                                            <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center shrink-0 text-orange-600 border border-orange-100 shadow-sm">
+                                                <i data-lucide="scale" class="w-5 h-5"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-bold text-sm">Modelo Valencia</h4>
+                                                <p class="text-xs text-azure-500 leading-tight mt-1">Equilibrio calor / luz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="check-icon absolute top-3 right-3 text-brand-600 opacity-0 scale-50 transition-all">
+                                            <i data-lucide="check-circle-2" class="w-5 h-5 fill-current"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="calc-model-card bg-white text-azure-900 rounded-xl p-3 border-2 border-transparent cursor-pointer hover:shadow-md relative group transition-all active:scale-[0.98] duration-200"
+                                        data-model="andalucia" role="button" tabindex="0">
+                                        <div class="flex items-start gap-4">
+                                            <div class="w-10 h-10 rounded-lg bg-azure-50 flex items-center justify-center shrink-0 text-azure-600 border border-azure-100 shadow-sm">
+                                                <i data-lucide="shield" class="w-5 h-5"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-bold text-sm">Modelo Andalucía</h4>
+                                                <p class="text-xs text-azure-500 leading-tight mt-1">Máxima protección.</p>
+                                            </div>
+                                        </div>
+                                        <div class="check-icon absolute top-3 right-3 text-brand-600 opacity-0 scale-50 transition-all">
+                                            <i data-lucide="check-circle-2" class="w-5 h-5 fill-current"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button id="cta-btn-step-3" class="btn-primary-dark w-full justify-center" data-action="next-step" disabled>
+                                    <span>Siguiente</span>
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <!-- CTA PASO 4: Contacto -->
+                            <div id="cta-step-4" data-wizard-step="4" class="cta-wizard-step hidden relative z-10 w-full">
+                                <div class="flex justify-between items-center mb-6">
+                                    <button class="text-white/70 hover:text-white flex items-center gap-2 uppercase font-bold text-sm tracking-widest transition-colors" data-action="prev-step">
+                                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Atrás
+                                    </button>
+                                    <div class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                                        Paso 4 de 4
+                                    </div>
+                                </div>
+
+                                <h3 class="wizard-title-message text-xl font-bold leading-snug mb-6">
+                                    Te contactamos en menos de 24h y calculamos el coste sin compromiso
+                                </h3>
+
+                                <div class="space-y-4 text-left mb-4">
+                                    <div class="relative group">
+                                        <div class="input-group-icon"><i data-lucide="user" class="w-5 h-5"></i></div>
+                                        <input type="text" id="cta-name" placeholder="Tu Nombre" class="form-input input-with-icon pl-11">
+                                    </div>
+                                    <div class="relative group">
+                                        <div class="input-group-icon"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                                        <input type="tel" id="cta-phone" placeholder="Tu Teléfono" class="form-input input-with-icon pl-11">
+                                    </div>
+                                </div>
+
+                                <button id="cta-btn-whatsapp" class="btn-whatsapp w-full" data-action="submit-whatsapp">
+                                    <svg class="w-5 h-5 fill-current"><use href="#icon-whatsapp"/></svg>
+                                    <span>Ver Presupuesto</span>
+                                </button>
+
+                                <div class="mt-4 flex justify-center items-center gap-2 text-[10px] text-white opacity-80">
+                                    <i data-lucide="lock" class="w-3 h-3"></i>
+                                    <span class="font-medium">Tus datos están 100% seguros</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER (fuera del app-container para extender edge-to-edge) -->
+    <footer class="bg-white border-t border-azure-100">
+        <!-- Contenido principal -->
+        <div class="px-5 pt-8 pb-6 md:max-w-3xl lg:max-w-6xl mx-auto">
+            <!-- Desktop: multi-columna -->
+            <div class="lg:flex lg:items-start lg:justify-between lg:gap-12 lg:mb-8">
+                <!-- Logo + Redes -->
+                <div class="lg:flex-shrink-0">
+                    <!-- Logo -->
+                    <div class="text-center lg:text-left mb-6">
+                        <img src="assets/img/Logo_Vinilone.png" alt="Vinilone" class="h-10 w-auto mx-auto lg:mx-0">
+                    </div>
+
+                    <!-- Redes Sociales -->
+                    <div class="flex justify-center lg:justify-start gap-3 mb-8 lg:mb-0">
+                        <a href="#" aria-label="Instagram" class="w-11 h-11 rounded-xl bg-azure-50 text-azure-600 flex items-center justify-center hover:bg-brand-50 hover:text-brand-600 transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" aria-label="WhatsApp" class="w-11 h-11 rounded-xl bg-azure-50 text-azure-600 flex items-center justify-center hover:bg-[#25D366]/10 hover:text-[#25D366] transition-colors">
+                            <svg class="w-5 h-5 fill-current"><use href="#icon-whatsapp"/></svg>
+                        </a>
+                        <a href="#" aria-label="TikTok" class="w-11 h-11 rounded-xl bg-azure-50 text-azure-600 flex items-center justify-center hover:bg-brand-50 hover:text-brand-600 transition-colors">
+                            <svg class="w-5 h-5 fill-current"><use href="#icon-tiktok"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contacto -->
+                <div class="flex flex-col md:flex-row items-center gap-3 md:gap-6 mb-8 lg:mb-0">
+                    <a href="tel:+34900000000" class="flex items-center gap-2 text-azure-500 hover:text-brand-600 transition-colors text-sm font-medium">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        <span>900 000 000</span>
+                    </a>
+                    <a href="mailto:info@vinilone.com" class="flex items-center gap-2 text-azure-500 hover:text-brand-600 transition-colors text-sm font-medium">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        <span>info@vinilone.com</span>
+                    </a>
+                </div>
+
+                <!-- Links legales -->
+                <div class="flex flex-wrap justify-center lg:justify-end gap-x-4 gap-y-2 text-xs text-azure-400 mb-6 lg:mb-0">
+                    <a href="#" class="hover:text-azure-600 transition-colors">Política de Privacidad</a>
+                    <a href="#" class="hover:text-azure-600 transition-colors">Política de Cookies</a>
+                    <a href="#" class="hover:text-azure-600 transition-colors">Aviso Legal</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="bg-azure-50 px-5 py-4">
+            <p class="text-xs text-azure-400 text-center">© 2026 Vinilone. Made with ♥ in Spain.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

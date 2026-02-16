@@ -1,0 +1,88 @@
+---
+import SectionCard from './ui/SectionCard.astro';
+import { Image } from 'astro:assets';
+---
+<section id="about-section" class="w-full">
+    <!-- Trigger Button (Vista inicial) -->
+    <SectionCard 
+        title="Sobre Nosotros" 
+        subtitle="Nuestra tecnología y experiencia" 
+        class="animate-fade-in shadow-none"
+        collapsible={true}
+    >
+        <!-- Descripción -->
+        <div class="mb-8">
+            <p class="text-base text-azure-600 leading-relaxed mb-6">
+                <span class="font-bold text-brand-600">Vinilone</span> no vende pegatinas, vende
+                confort. Nos especializamos en soluciones que mejoran el aislamiento térmico y la
+                estética de cualquier inmueble.
+            </p>
+
+            <!-- Lista vertical de beneficios -->
+            <div class="space-y-3 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
+                <div class="p-4 bg-azure-50 rounded-xl h-full">
+                    <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center mb-3">
+                        <i data-lucide="thermometer-sun" class="w-5 h-5 text-brand-600"></i>
+                    </div>
+                    <h5 class="font-bold text-azure-900 text-sm">Control Térmico y Ahorro</h5>
+                    <p class="text-azure-500 mt-1">Mejora el confort térmico reduciendo el calor directo. Esto se traduce en un notable ahorro energético en aire acondicionado.</p>
+                </div>
+                <div class="p-4 bg-azure-50 rounded-xl h-full">
+                    <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center mb-3">
+                        <i data-lucide="eye-off" class="w-5 h-5 text-brand-600"></i>
+                    </div>
+                    <h5 class="font-bold text-azure-900 text-sm">Privacidad Diurna</h5>
+                    <p class="text-azure-500 mt-1">Efecto espejo durante el día: "ves sin ser visto". Mantén tu intimidad total desde el exterior sin sacrificar la luz natural.</p>
+                </div>
+                <div class="p-4 bg-azure-50 rounded-xl h-full">
+                    <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center mb-3">
+                        <i data-lucide="shield" class="w-5 h-5 text-brand-600"></i>
+                    </div>
+                    <h5 class="font-bold text-azure-900 text-sm">Protección UV del 99%</h5>
+                    <p class="text-azure-500 mt-1">Bloquea los rayos ultravioleta dañinos, protegiendo suelos, muebles y escaparates de la decoloración y el deterioro.</p>
+                </div>
+                <div class="p-4 bg-azure-50 rounded-xl h-full">
+                    <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center mb-3">
+                        <i data-lucide="badge-check" class="w-5 h-5 text-brand-600"></i>
+                    </div>
+                    <h5 class="font-bold text-azure-900 text-sm">Garantía y Durabilidad</h5>
+                    <p class="text-azure-500 mt-1">Inversión a largo plazo. Ofrecemos 5 años de garantía con una vida útil de nuestros materiales de hasta 15 años.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carrusel de Instalaciones -->
+        <div class="-mx-4 -mb-4 lg:mx-0 lg:mb-0">
+            <h4 class="text-sm font-bold text-azure-400 mb-4 px-4 lg:px-0">Instalaciones Recientes</h4>
+            <div class="h-scroll-snap flex gap-3 px-4 lg:px-0 pb-4 lg:pb-0 overflow-x-auto lg:overflow-visible lg:grid lg:grid-cols-3">
+                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] group shrink-0">
+                    <Image src={import('../assets/img/office-madrid.jpg')} loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt="Oficinas en Madrid" />
+                    <div
+                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                        <span class="text-white text-sm font-medium">Oficinas Madrid</span>
+                    </div>
+                </div>
+                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] group shrink-0">
+                    <img src="/assets/img/residential-valencia.jpg" loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt="Residencial Valencia" />
+                    <div
+                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                        <span class="text-white text-sm font-medium">Residencial Valencia</span>
+                    </div>
+                </div>
+                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] group shrink-0">
+                    <Image src={import('../assets/img/model-andalucia.jpg')} loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt="Nave Industrial Norte" />
+                    <div
+                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                        <span class="text-white text-sm font-medium">Nave Industrial Norte</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </SectionCard>
+</section>

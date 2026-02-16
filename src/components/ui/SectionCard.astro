@@ -1,0 +1,85 @@
+---
+// src/components/ui/SectionCard.astro
+interface Props {
+  title?: string;
+  subtitle?: string;
+  id?: string;
+  class?: string;
+  collapsible?: boolean;
+}
+
+const { title, subtitle, id, class: className, collapsible = false } = Astro.props;
+---
+
+<div
+    id={id}
+    class:list={[
+        "directory-card section-card w-full p-4 lg:p-8 text-base transition-all duration-300",
+        className,
+        { 'section-card-collapsible': collapsible }
+    ]}
+    data-collapsible={collapsible ? "true" : undefined}
+>
+    {(title || Astro.slots.has('title') || subtitle || Astro.slots.has('actions')) && (
+        <div class:list={[
+            "flex items-center gap-3 section-card-header-inner",
+            { 'cursor-pointer section-card-header': collapsible },
+            { 'mb-4 lg:mb-8': !collapsible }
+        ]}>
+            <div class="flex-1">
+                {Astro.slots.has('title') ? (
+                    <h3 class="font-bold text-azure-900 leading-none mb-0"><slot name="title" /></h3>
+                ) : (
+                    title && <h3 class="font-bold text-azure-900 leading-none mb-0">{title}</h3>
+                )}
+                {subtitle && <p class="text-base text-azure-400 mt-1">{subtitle}</p>}
+            </div>
+
+            <slot name="actions" />
+
+            {collapsible && (
+                <i
+                    data-lucide="chevron-down"
+                    class="w-5 h-5 text-azure-400 transition-transform duration-300 lg:hidden section-card-icon pointer-events-none"
+                ></i>
+            )}
+        </div>
+    )}
+
+    <div class:list={[
+        "section-card-content",
+        { 'hidden lg:block': collapsible }
+    ]}>
+        <slot />
+    </div>
+</div>
+
+<style is:global>
+    /* Forzar padding en SectionCard - todos los breakpoints */
+    .section-card.directory-card {
+        padding: 1rem !important; /* 16px mobile/tablet */
+    }
+
+    @media (min-width: 1024px) {
+        .section-card.directory-card {
+            padding: 2rem !important; /* 32px desktop */
+        }
+    }
+
+    /* Collapsible: sin margin en header cuando está cerrado */
+    .section-card-collapsible .section-card-header-inner {
+        margin-bottom: 0;
+    }
+
+    /* Collapsible: añadir margin cuando está abierto */
+    .section-card-collapsible.open .section-card-header-inner {
+        margin-bottom: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+        /* En desktop siempre está abierto */
+        .section-card-collapsible .section-card-header-inner {
+            margin-bottom: 2rem;
+        }
+    }
+</style>

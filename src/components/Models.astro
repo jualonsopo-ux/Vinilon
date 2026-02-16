@@ -1,0 +1,298 @@
+---
+import SectionCard from './ui/SectionCard.astro';
+import { Image } from 'astro:assets';
+import ModelCard from './ui/ModelCard.astro';
+
+// Datos de modelos - Single Source of Truth
+const MODELS = {
+    cantabria: {
+        title: 'Modelo Cantabria',
+        subtitle: 'Lámina de Control Solar Residencial',
+        badge: 'Top Ventas',
+        price: '45€',
+        desc: 'El modelo Cantabria representa el pináculo de la ingeniería en films solares residenciales. Ofrece el equilibrio perfecto entre luminosidad natural y protección térmica avanzada.',
+        specs: { heat: '65%', uv: '99%', light: '35%' },
+        features: [
+            { icon: 'zap', title: 'Ahorro Energético', desc: 'Reduce costes de climatización' },
+            { icon: 'shield', title: 'Privacidad', desc: 'Visión unidireccional diurna' },
+            { icon: 'armchair', title: 'Protección Muebles', desc: 'Evita la decoloración solar' }
+        ],
+        image: '/assets/img/model-cantabria.jpg'
+    },
+    valencia: {
+        title: 'Modelo Valencia',
+        subtitle: 'Equilibrio Solar Avanzado',
+        price: '42€',
+        desc: 'Un equilibrio perfecto. Ofrece un nivel intermedio de privacidad con una reducción de luz más notable, ideal para zonas con alta incidencia solar.',
+        specs: { heat: '75%', uv: '99%', light: '25%' },
+        features: [
+            { icon: 'thermometer-sun', title: 'Confort Térmico', desc: 'Ideal para zonas soleadas' },
+            { icon: 'eye', title: 'Visión Clara', desc: 'Baja reflectividad interior' },
+            { icon: 'sun', title: 'Control Solar', desc: 'Reducción significativa de calor' }
+        ],
+        image: '/assets/img/model-valencia.jpg'
+    },
+    andalucia: {
+        title: 'Modelo Andalucía',
+        subtitle: 'Máxima Protección Solar',
+        price: '48€',
+        desc: 'Nuestra opción más potente. Proporciona privacidad total y un rechazo de calor superior. Ideal para estancias muy expuestas, áticos o escaparates.',
+        specs: { heat: '85%', uv: '99%', light: '15%' },
+        features: [
+            { icon: 'shield-check', title: 'Privacidad Total', desc: 'Máxima intimidad día y noche' },
+            { icon: 'flame', title: 'Anti-Calor', desc: 'Rechazo térmico extremo' },
+            { icon: 'lock', title: 'Seguridad', desc: 'Protección contra roturas' }
+        ],
+        image: '/assets/img/model-andalucia.jpg'
+    }
+};
+---
+
+<section id="models-section" class="w-full">
+    <SectionCard id="models-card" subtitle="">
+        <!-- Header personalizado con botón "Volver" (oculto por defecto) -->
+        <div slot="title" class="flex items-center gap-3">
+            <button
+                id="btn-back-models"
+                class="hidden items-center gap-2 text-azure-600 hover:text-brand-600 font-bold transition-colors group"
+                aria-label="Volver a todos los modelos"
+            >
+                <div class="w-8 h-8 rounded-full bg-azure-50 flex items-center justify-center group-hover:bg-brand-50 transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                </div>
+            </button>
+            <span id="models-title">Nuestros Modelos</span>
+            <span id="models-subtitle" class="text-base text-azure-400 font-normal ml-2 hidden lg:inline">— Explora las opciones</span>
+        </div>
+
+        <!-- ========== VISTA LISTA (Master) ========== -->
+        <div id="models-list-view" class="-mx-4 -mb-4 lg:mx-0 lg:mb-0">
+            <div id="models-carousel" class="h-scroll-snap flex gap-3 px-4 pb-4 overflow-x-auto">
+                <ModelCard
+                    slug="cantabria"
+                    title="Cantabria"
+                    subtitle="Privacidad + Luz"
+                    image={import('../assets/img/model-cantabria.jpg')}
+                    badge="Top Ventas"
+                />
+                <ModelCard
+                    slug="valencia"
+                    title="Valencia"
+                    subtitle="Equilibrio Solar"
+                    image={import('../assets/img/model-valencia.jpg')}
+                />
+                <ModelCard
+                    slug="andalucia"
+                    title="Andalucía"
+                    subtitle="Máxima Protección"
+                    image={import('../assets/img/model-andalucia.jpg')}
+                />
+            </div>
+        </div>
+
+        <!-- ========== VISTA DETALLE (Detail) ========== -->
+        <!-- Mobile: fixed fullscreen | Desktop: static dentro de la card -->
+        <div id="models-detail-view" class="hidden">
+            <div class="
+                fixed inset-0 z-[9999] bg-white flex flex-col
+                lg:static lg:z-auto lg:bg-transparent lg:block lg:-mx-4 lg:-mb-4 lg:mx-0 lg:mb-0
+            ">
+                <!-- Header Mobile (solo visible en < lg) -->
+                <div class="flex items-center justify-between p-4 border-b border-azure-100 lg:hidden">
+                    <button id="btn-close-mobile" class="flex items-center gap-2 text-azure-600 font-bold">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                        <span>Volver</span>
+                    </button>
+                    <button id="btn-x-mobile" class="p-2 text-azure-400 hover:text-azure-900">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <!-- Contenido del detalle -->
+                <div class="flex-1 overflow-y-auto lg:overflow-visible p-4 lg:p-0">
+                    <div class="grid lg:grid-cols-12 gap-6 lg:gap-8">
+
+                        <!-- Columna Izquierda: Imagen -->
+                        <div class="lg:col-span-7 h-64 lg:h-[400px] rounded-2xl overflow-hidden bg-gray-100 relative">
+                            <img id="detail-img" src="" alt="" class="w-full h-full object-cover" />
+                            <span id="detail-badge" class="absolute top-4 left-4 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full hidden"></span>
+                        </div>
+
+                        <!-- Columna Derecha: Info -->
+                        <div class="lg:col-span-5 flex flex-col">
+                            <h2 id="detail-title" class="text-2xl lg:text-3xl font-bold text-azure-900 leading-tight mb-1"></h2>
+                            <p id="detail-subtitle" class="text-lg text-azure-500 mb-4"></p>
+                            <p id="detail-desc" class="text-azure-600 text-base leading-relaxed mb-6"></p>
+
+                            <!-- Specs -->
+                            <div class="bg-azure-50 rounded-xl p-5 mb-6 border border-azure-100">
+                                <h4 class="text-xs font-bold text-azure-400 uppercase tracking-widest mb-4">Especificaciones</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center py-2 border-b border-azure-200/50">
+                                        <span class="flex items-center gap-2 text-azure-700 font-medium">
+                                            <i data-lucide="thermometer-sun" class="w-4 h-4 text-brand-500"></i> Reducción Calor
+                                        </span>
+                                        <span id="spec-heat" class="font-bold text-azure-900 text-lg"></span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-2 border-b border-azure-200/50">
+                                        <span class="flex items-center gap-2 text-azure-700 font-medium">
+                                            <i data-lucide="shield" class="w-4 h-4 text-brand-500"></i> Protección UV
+                                        </span>
+                                        <span id="spec-uv" class="font-bold text-azure-900 text-lg"></span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-2">
+                                        <span class="flex items-center gap-2 text-azure-700 font-medium">
+                                            <i data-lucide="sun" class="w-4 h-4 text-brand-500"></i> Entrada Luz
+                                        </span>
+                                        <span id="spec-light" class="font-bold text-azure-900 text-lg"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Features -->
+                            <div id="detail-features" class="grid grid-cols-3 gap-3 mb-6">
+                                <!-- Se rellena con JS -->
+                            </div>
+
+                            <!-- Footer: Precio + CTA -->
+                            <div class="mt-auto pt-4 border-t border-azure-100 flex items-center justify-between gap-4">
+                                <div>
+                                    <span class="text-xs font-bold text-azure-400 uppercase">Precio Material</span>
+                                    <div class="flex items-baseline gap-1">
+                                        <span id="detail-price" class="text-2xl font-black text-brand-600"></span>
+                                        <span class="text-sm font-medium text-azure-400">/m²</span>
+                                    </div>
+                                </div>
+                                <button
+                                    id="btn-add-budget"
+                                    class="flex-1 lg:flex-none bg-brand-600 text-white py-3 px-6 rounded-xl font-bold shadow-lg shadow-brand-500/30 hover:bg-brand-700 transition-all flex items-center justify-center gap-2 group"
+                                >
+                                    Pedir Presupuesto
+                                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </SectionCard>
+</section>
+
+<script is:inline define:vars={{ MODELS }}>
+(function() {
+    // Referencias DOM
+    const listView = document.getElementById('models-list-view');
+    const detailView = document.getElementById('models-detail-view');
+    const btnBack = document.getElementById('btn-back-models');
+    const btnCloseMobile = document.getElementById('btn-close-mobile');
+    const btnXMobile = document.getElementById('btn-x-mobile');
+    const titleEl = document.getElementById('models-title');
+    const subtitleEl = document.getElementById('models-subtitle');
+
+    // Abrir detalle
+    function openDetail(key) {
+        const data = MODELS[key];
+        if (!data) return;
+
+        // Rellenar datos
+        document.getElementById('detail-img').src = data.image;
+        document.getElementById('detail-img').alt = data.title;
+        document.getElementById('detail-title').textContent = data.title;
+        document.getElementById('detail-subtitle').textContent = data.subtitle;
+        document.getElementById('detail-desc').textContent = data.desc;
+        document.getElementById('spec-heat').textContent = data.specs.heat;
+        document.getElementById('spec-uv').textContent = data.specs.uv;
+        document.getElementById('spec-light').textContent = data.specs.light;
+        document.getElementById('detail-price').textContent = data.price;
+
+        // Badge
+        const badge = document.getElementById('detail-badge');
+        if (data.badge) {
+            badge.textContent = data.badge;
+            badge.classList.remove('hidden');
+        } else {
+            badge.classList.add('hidden');
+        }
+
+        // Features
+        const featuresEl = document.getElementById('detail-features');
+        featuresEl.innerHTML = data.features.map(f => `
+            <div class="bg-white border border-azure-100 p-3 rounded-lg text-center">
+                <div class="w-8 h-8 bg-azure-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="${f.icon}" class="w-4 h-4"></i>
+                </div>
+                <h5 class="font-bold text-azure-900 text-xs mb-0.5">${f.title}</h5>
+                <p class="text-[10px] text-azure-500 leading-tight">${f.desc}</p>
+            </div>
+        `).join('');
+
+        // Recrear iconos Lucide
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+
+        // Cambiar vistas
+        listView.classList.add('hidden');
+        detailView.classList.remove('hidden');
+
+        // Cambiar header
+        btnBack.classList.remove('hidden');
+        btnBack.classList.add('flex');
+        titleEl.textContent = 'Volver';
+        if (subtitleEl) subtitleEl.classList.add('hidden');
+
+        // Mobile: bloquear scroll
+        if (window.innerWidth < 1024) {
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // Cerrar detalle
+    function closeDetail() {
+        detailView.classList.add('hidden');
+        listView.classList.remove('hidden');
+
+        // Restaurar header
+        btnBack.classList.add('hidden');
+        btnBack.classList.remove('flex');
+        titleEl.textContent = 'Nuestros Modelos';
+        if (subtitleEl) subtitleEl.classList.remove('hidden');
+
+        document.body.style.overflow = '';
+    }
+
+    // Event Listeners
+    function init() {
+        // Clicks en tarjetas del carrusel
+        document.querySelectorAll('.model-card-trigger').forEach(btn => {
+            btn.addEventListener('click', () => openDetail(btn.dataset.model));
+        });
+
+        // Botones de volver/cerrar
+        btnBack?.addEventListener('click', closeDetail);
+        btnCloseMobile?.addEventListener('click', closeDetail);
+        btnXMobile?.addEventListener('click', closeDetail);
+
+        // ESC para cerrar
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !detailView.classList.contains('hidden')) {
+                closeDetail();
+            }
+        });
+
+        // Botón añadir presupuesto
+        document.getElementById('btn-add-budget')?.addEventListener('click', () => {
+            closeDetail();
+            document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    // Inicializar (compatible con Astro View Transitions)
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    document.addEventListener('astro:page-load', init);
+})();
+</script>

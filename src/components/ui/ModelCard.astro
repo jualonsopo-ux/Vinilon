@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  slug: string;
+  title: string;
+  subtitle: string;
+  image: ImageMetadata;
+  badge?: string;
+}
+
+const { slug, title, subtitle, image, badge } = Astro.props;
+---
+
+<button class="model-card-trigger snap-item shrink-0" data-model={slug} aria-label={`Ver detalles modelo ${title}`}>
+  <Image 
+    src={image} 
+    loading="lazy"
+    class="w-full h-full object-cover absolute inset-0 transition-transform duration-500 group-hover:scale-110"
+    alt={`Modelo ${title}`} 
+  />
+  <div class="model-card-overlay">
+    {badge && <span class="badge badge-highlight font-semibold mb-1">{badge}</span>}
+    <!-- Added mb-0 to remove 8px margin -->
+    <h4 class="text-white font-bold text-xl leading-tight mb-0">{title}</h4>
+    <p class="text-white/80 mt-1 mb-3">{subtitle}</p>
+    <div class="model-card-cta">
+      <i data-lucide="info" class="w-4 h-4"></i>
+      <span>Más info</span>
+    </div>
+  </div>
+</button>

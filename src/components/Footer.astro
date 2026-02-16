@@ -1,0 +1,56 @@
+---
+const currentYear = new Date().getFullYear();
+---
+<footer class="bg-white border-t border-azure-100 mt-16 lg:mt-24">
+    <!-- Contenido principal -->
+    <div class="px-5 pt-12 pb-8 md:max-w-3xl lg:max-w-6xl mx-auto">
+        <!-- Flex Container Principal: Columna en móvil, Fila en desktop -->
+        <div class="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 lg:gap-12">
+            
+            <!-- Logo + Redes -->
+            <div class="flex flex-col items-center lg:items-start gap-6 lg:flex-shrink-0">
+                <!-- Logo -->
+                <div>
+                    <img src="/assets/img/Logo_Vinilone.png" alt="Vinilone" class="h-10 w-auto">
+                </div>
+
+                <!-- Redes Sociales -->
+                <div class="flex gap-3">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-11 h-11 rounded-xl bg-azure-50 text-azure-600 flex items-center justify-center hover:bg-brand-50 hover:text-brand-600 transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-11 h-11 rounded-xl bg-azure-50 text-azure-600 flex items-center justify-center hover:bg-[#25D366]/10 hover:text-[#25D366] transition-colors">
+                        <svg class="w-5 h-5 fill-current"><use href="#icon-whatsapp"/></svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-11 h-11 rounded-xl bg-azure-50 text-azure-600 flex items-center justify-center hover:bg-brand-50 hover:text-brand-600 transition-colors">
+                        <svg class="w-5 h-5 fill-current"><use href="#icon-tiktok"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contacto -->
+            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                <a href="tel:+34900000000" class="flex items-center gap-2 text-azure-500 hover:text-brand-600 transition-colors text-base font-semibold">
+                    <i data-lucide="phone" class="w-5 h-5 text-brand-600"></i>
+                    <span>900 000 000</span>
+                </a>
+                <a href="mailto:info@vinilone.com" class="flex items-center gap-2 text-azure-500 hover:text-brand-600 transition-colors text-base font-semibold">
+                    <i data-lucide="mail" class="w-5 h-5 text-brand-600"></i>
+                    <span>info@vinilone.com</span>
+                </a>
+            </div>
+
+            <!-- Links legales -->
+            <div class="flex flex-wrap justify-center lg:justify-end gap-x-6 gap-y-3 text-sm text-azure-400">
+                <a href="/privacidad" class="hover:text-azure-600 transition-colors">Política de Privacidad</a>
+                <a href="/cookies" class="hover:text-azure-600 transition-colors">Política de Cookies</a>
+                <a href="/aviso-legal" class="hover:text-azure-600 transition-colors">Aviso Legal</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="bg-azure-50 px-5 py-4 border-t border-azure-100">
+        <p class="text-sm text-azure-400 text-center font-medium">© {currentYear} Vinilone. Todos los derechos reservados.</p>
+    </div>
+</footer>

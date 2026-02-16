@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Wizard from '../components/Wizard.astro';
+import About from '../components/About.astro';
+import Models from '../components/Models.astro';
+import Reviews from '../components/Reviews.astro';
+import HowWeWork from '../components/HowWeWork.astro';
+import CTAFinal from '../components/CTAFinal.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import heroBgImage from '../assets/img/salon-ext-CHROME-285XC.jpg';
+---
+
+<Layout title="Vinilone - Soluciones de Privacidad y Control Solar">
+    <!-- Hero Background Image -->
+    <div class="hero-bg" aria-hidden="true">
+        <Image src={heroBgImage} alt="" class="hero-bg-image" loading="eager" />
+        <div class="hero-bg-overlay"></div>
+    </div>
+
+    <div class="hero-layout">
+        <Hero />
+        <Wizard prefix="hero" />
+    </div><!-- /.hero-layout -->
+
+    <main class="flex-1 w-full space-y-5 md:space-y-8 lg:space-y-10">
+
+        <!-- SOBRE NOSOTROS (Vista Dual: Trigger + Expandido) -->
+        <About />
+
+        <!-- NUESTROS MODELOS (Carrusel + Overlay Fullscreen) -->
+        <Models />
+
+        <!-- SOCIAL PROOF (GOOGLE STYLE) -->
+        <Reviews />
+
+        <!-- CÓMO TRABAJAMOS -->
+        <HowWeWork />
+
+        <!-- CTA FINAL -->
+        <CTAFinal />
+
+    </main>
+
+    <!-- FOOTER -->
+    <Footer />
+</Layout>

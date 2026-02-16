@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import Wizard from './Wizard.astro';
+import Button from './ui/Button.astro';
+import ctaBgImage from '../assets/img/view-depressed-woman-looking-through-window.jpg';
+---
+
+<section id="cta-final" class="w-full">
+    <div class="relative rounded-2xl overflow-hidden flex flex-col">
+        <!-- Background image -->
+        <Image src={ctaBgImage} alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
+        <!-- Overlay gradient -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20"></div>
+
+        <!-- Content inicial (se oculta cuando se expande wizard) -->
+        <div id="cta-initial-content" class="relative z-10 p-4 md:p-8 text-center min-h-80 lg:min-h-96 flex flex-col justify-end transition-opacity duration-300">
+            <h3 class="text-white font-bold text-xl mb-1.5">¿Necesitas más privacidad?</h3>
+            <p class="text-white/70 text-sm mb-4">Pide tu presupuesto sin compromiso</p>
+            <div class="flex flex-col md:flex-row md:justify-center gap-4">
+                <Button variant="secondary" href="#" class="w-full md:flex-1 normal-case font-semibold">
+                    <svg class="w-4 h-4 fill-current"><use href="#icon-whatsapp"/></svg>
+                    <span>Consulta gratuita</span>
+                </Button>
+                <Button variant="primary" id="cta-calc-btn" class="w-full md:flex-1 normal-case font-semibold transition-all shadow-xl hover:shadow-2xl" aria-expanded="false">
+                    <span>Calcular mi presupuesto ahora</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300"></i>
+                </Button>
+            </div>
+        </div>
+
+        <!-- Wizard expandible -->
+        <div id="cta-wizard-wrapper" class="relative z-10 p-0 hidden opacity-0 transition-opacity duration-500">
+            <Wizard prefix="cta" class="!py-0 !shadow-none !ring-0 !bg-transparent" />
+        </div>
+    </div>
+</section>
+
+<script>
+    function initCTALogic() {
+        const ctaBtn = document.getElementById('cta-calc-btn');
+        const initialContent = document.getElementById('cta-initial-content');
+        const wizardWrapper = document.getElementById('cta-wizard-wrapper');
+
+        if (ctaBtn && initialContent && wizardWrapper) {
+            ctaBtn.addEventListener('click', () => {
+                // Ocultar contenido inicial
+                initialContent.classList.add('hidden', 'opacity-0');
+                
+                // Mostrar Wizard
+                wizardWrapper.classList.remove('hidden');
+                // Timeout para permitir que se quite hidden antes de opacidad para transición
+                setTimeout(() => {
+                    wizardWrapper.classList.remove('opacity-0');
+                }, 10);
+
+                // Scroll suave al contenedor
+                wizardWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+    }
+
+    // Inicializar en carga y navegación de Astro
+    document.addEventListener('DOMContentLoaded', initCTALogic);
+    document.addEventListener('astro:page-load', initCTALogic);
+</script>
