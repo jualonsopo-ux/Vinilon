@@ -1,0 +1,79 @@
+---
+/**
+ * BaseCard - Componente base para todas las tarjetas
+ * Single source of truth para estilos de contenedores (bordes, fondos, sombras, padding).
+ */
+
+interface Props {
+  /** Variante visual */
+  variant?: 'filled' | 'bordered' | 'glass' | 'ghost' | 'white';
+  /** Padding interno */
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  /** Radio de borde */
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  /** Efecto hover */
+  hoverEffect?: 'none' | 'lift' | 'scale' | 'glow' | 'border';
+  /** Elemento HTML polimórfico (div por defecto) */
+  as?: string;
+  /** Clases adicionales */
+  class?: string;
+  [key: string]: any; // Rest props (id, data-attributes, etc.)
+}
+
+const {
+  variant = 'filled',
+  padding = 'md',
+  radius = 'lg',
+  hoverEffect = 'none',
+  as: Element = 'div',
+  class: className,
+  ...rest
+} = Astro.props;
+
+// Mapas de estilos
+const variants = {
+  filled: 'bg-azure-50 border border-transparent',
+  bordered: 'bg-white border border-azure-200',
+  white: 'bg-white shadow-sm border border-transparent', // Similar a filled pero blanco
+  glass: 'bg-glass-bg border border-glass-border text-white',
+  ghost: 'bg-transparent border border-transparent',
+};
+
+const paddings = {
+  none: 'p-0',
+  sm: 'p-3',
+  md: 'p-4',
+  lg: 'p-6 lg:p-8',
+};
+
+const radii = {
+  none: 'rounded-none',
+  sm: 'rounded-sm',     // 8px
+  md: 'rounded',        // 12px
+  lg: 'rounded-lg',     // 16px (Standard)
+  xl: 'rounded-xl',     // 24px
+  full: 'rounded-full',
+};
+
+const hovers = {
+  none: '',
+  lift: 'transition-all duration-300 hover:-translate-y-1 hover:shadow-lg',
+  scale: 'transition-transform duration-300 hover:scale-[1.02]',
+  glow: 'transition-all duration-300 hover:shadow-brand hover:border-brand-200',
+  border: 'transition-colors duration-200 hover:border-brand-300',
+};
+---
+
+<Element
+  class:list={[
+    'relative overflow-hidden', // Base resets
+    variants[variant],
+    paddings[padding],
+    radii[radius],
+    hovers[hoverEffect],
+    className
+  ]}
+  {...rest}
+>
+  <slot />
+</Element>

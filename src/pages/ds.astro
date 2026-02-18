@@ -1,0 +1,1246 @@
+---
+/**
+ * Design System Playground v4.0
+ * ==============================================
+ * Documentación visual COMPLETA y AUTO-ACTUALIZABLE del sistema de diseño Vinilone.
+ *
+ * Acceso: /ds
+ *
+ * Características:
+ * - Auto-discovery de componentes en src/components/ui/
+ * - Todos los tokens visualizados
+ * - Inspector de estilos en tiempo real
+ * - Demos interactivas de cada componente
+ */
+
+import Layout from '../layouts/Layout.astro';
+
+// ══════════════════════════════════════════════════════════════════════
+// 1. COMPONENTES UI - Importación explícita para demos controlados
+// ══════════════════════════════════════════════════════════════════════
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import IconBox from '../components/ui/IconBox.astro';
+import BaseCard from '../components/ui/BaseCard.astro';
+import FeatureCard from '../components/ui/FeatureCard.astro';
+import SectionCard from '../components/ui/SectionCard.astro';
+import SpecRow from '../components/ui/SpecRow.astro';
+import ModelCard from '../components/ui/ModelCard.astro';
+import ReviewCard from '../components/ui/ReviewCard.astro';
+import SelectorCard from '../components/ui/SelectorCard.astro';
+import SocialIconButton from '../components/ui/SocialIconButton.astro';
+import GalleryItem from '../components/ui/GalleryItem.astro';
+
+// Imágenes para demos
+import demoImage from '../assets/img/salon-ext-CHROME-285XC.jpg';
+
+// ══════════════════════════════════════════════════════════════════════
+// 2. AUTO-DISCOVERY DE COMPONENTES (para el índice automático)
+// ══════════════════════════════════════════════════════════════════════
+const uiComponents = await Astro.glob('../components/ui/*.astro');
+const sectionComponents = await Astro.glob('../components/sections/*.astro');
+
+// Crear registro de componentes
+interface ComponentInfo {
+  name: string;
+  path: string;
+  folder: string;
+  hasSlot: boolean;
+}
+
+function parseComponents(components: any[], folder: string): ComponentInfo[] {
+  return components.map(comp => {
+    const pathParts = comp.file.split('/');
+    const name = pathParts.pop()?.replace('.astro', '') || '';
+    return {
+      name,
+      path: comp.file,
+      folder,
+      hasSlot: true // Simplified assumption
+    };
+  }).sort((a, b) => a.name.localeCompare(b.name));
+}
+
+const uiRegistry = parseComponents(uiComponents, 'ui');
+const sectionsRegistry = parseComponents(sectionComponents, 'sections');
+
+// Contador de componentes
+const totalComponents = uiRegistry.length + sectionsRegistry.length;
+---
+
+<Layout title="Vinilone Design System v4.0">
+<main class="ds">
+  <!-- ══════════════════════════════════════════════════════════════════════
+       SIDEBAR NAVIGATION
+       ══════════════════════════════════════════════════════════════════════ -->
+  <nav class="ds-nav">
+    <div class="ds-nav-header">
+      <div class="ds-nav-brand">
+        <span class="ds-logo">DS</span>
+        <div>
+          <span class="ds-version">v4.0</span>
+          <span class="ds-count">{totalComponents} componentes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-nav-scroll">
+      <p class="ds-nav-group">Fundamentos</p>
+      <a href="#colors"><i data-lucide="palette" class="w-4 h-4"></i> Colores</a>
+      <a href="#typography"><i data-lucide="type" class="w-4 h-4"></i> Tipografía</a>
+      <a href="#spacing"><i data-lucide="ruler" class="w-4 h-4"></i> Espaciado (8px)</a>
+      <a href="#shadows"><i data-lucide="layers" class="w-4 h-4"></i> Sombras</a>
+
+      <p class="ds-nav-group">Componentes Atómicos</p>
+      <a href="#buttons"><i data-lucide="square" class="w-4 h-4"></i> Button</a>
+      <a href="#badges"><i data-lucide="tag" class="w-4 h-4"></i> Badge</a>
+      <a href="#iconbox"><i data-lucide="box" class="w-4 h-4"></i> IconBox</a>
+
+      <p class="ds-nav-group">Cards</p>
+      <a href="#basecard"><i data-lucide="credit-card" class="w-4 h-4"></i> BaseCard</a>
+      <a href="#featurecard"><i data-lucide="zap" class="w-4 h-4"></i> FeatureCard</a>
+      <a href="#sectioncard"><i data-lucide="layout" class="w-4 h-4"></i> SectionCard</a>
+      <a href="#modelcard"><i data-lucide="image" class="w-4 h-4"></i> ModelCard</a>
+      <a href="#reviewcard"><i data-lucide="message-square" class="w-4 h-4"></i> ReviewCard</a>
+      <a href="#selectorcard"><i data-lucide="sliders" class="w-4 h-4"></i> SelectorCard</a>
+
+      <p class="ds-nav-group">Otros Componentes</p>
+      <a href="#specrow"><i data-lucide="list" class="w-4 h-4"></i> SpecRow</a>
+      <a href="#galleryitem"><i data-lucide="image" class="w-4 h-4"></i> GalleryItem</a>
+      <a href="#socialiconbutton"><i data-lucide="share-2" class="w-4 h-4"></i> SocialIconButton</a>
+
+      <p class="ds-nav-group">Formularios</p>
+      <a href="#forms"><i data-lucide="text-cursor" class="w-4 h-4"></i> Inputs</a>
+
+      <p class="ds-nav-group">Registro</p>
+      <a href="#registry"><i data-lucide="list-tree" class="w-4 h-4"></i> Índice Completo</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="ds-main">
+    <header class="ds-header">
+      <div class="ds-header-top">
+        <div>
+          <h1>Vinilone Design System</h1>
+          <p>v4.0 - Sistema completo con spacing múltiplos de 8px, tipografía semántica y {totalComponents} componentes</p>
+        </div>
+        <div class="ds-controls">
+          <label class="ds-switch">
+            <input type="checkbox" id="inspector-toggle">
+            <span class="ds-switch-slider"></span>
+            <span class="ds-switch-label">Inspector</span>
+          </label>
+          <a href="/DESIGN_SYSTEM.md" target="_blank" class="ds-doc-link">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            Docs MD
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         COLORES
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="colors" class="ds-section">
+      <h2>Colores</h2>
+      <p class="ds-desc">Sistema de colores con CSS Custom Properties. El primario es brand-500.</p>
+
+      <div class="ds-label">Brand (Primario = 500)</div>
+      <div class="ds-palette" data-autofill="bg">
+        {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => (
+          <div
+            class:list={["ds-chip", shade >= 400 && "ds-chip-light", shade === 500 && "ds-chip-primary"]}
+            style={`background:var(--brand-${shade})`}
+          >
+            <small>{shade}</small>
+            <span class="ds-val"></span>
+          </div>
+        ))}
+      </div>
+
+      <div class="ds-label">Azure (Neutros)</div>
+      <div class="ds-palette" data-autofill="bg">
+        {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => (
+          <div
+            class:list={["ds-chip", shade >= 400 && "ds-chip-light"]}
+            style={`background:var(--azure-${shade})`}
+          >
+            <small>{shade}</small>
+            <span class="ds-val"></span>
+          </div>
+        ))}
+      </div>
+
+      <div class="ds-label">Semánticos</div>
+      <div class="ds-palette ds-palette-loose" data-autofill="bg">
+        <div class="ds-chip-named" style="background:var(--color-success-light);color:var(--color-success-dark)">Success Light</div>
+        <div class="ds-chip-named" style="background:var(--color-success);color:#fff">Success</div>
+        <div class="ds-chip-named" style="background:var(--color-error-light);color:var(--color-error-dark)">Error Light</div>
+        <div class="ds-chip-named" style="background:var(--color-error);color:#fff">Error</div>
+        <div class="ds-chip-named" style="background:var(--color-warning-bg);color:var(--color-warning-text)">Warning</div>
+        <div class="ds-chip-named" style="background:var(--color-whatsapp);color:#fff">WhatsApp</div>
+      </div>
+
+      <div class="ds-label">Clases de Color de Texto</div>
+      <div class="ds-live">
+        <span class="text-primary">.text-primary</span>
+        <span class="text-secondary">.text-secondary</span>
+        <span class="text-tertiary">.text-tertiary</span>
+        <span class="text-muted">.text-muted</span>
+        <span class="text-brand">.text-brand</span>
+      </div>
+      <div class="ds-live ds-dark">
+        <span class="text-white">.text-white</span>
+        <span class="text-inverse">.text-inverse</span>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         TIPOGRAFÍA
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="typography" class="ds-section">
+      <h2>Sistema Tipográfico</h2>
+      <p class="ds-desc">Escala modular con clases semánticas. Mobile-first con breakpoints responsivos.</p>
+
+      <div class="ds-label">Display (Heroes)</div>
+      <div class="ds-typo-group">
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta"><code>.display-1</code><span>48px → 72px</span></div>
+          <h1 class="display-1" style="margin:0">Display 1</h1>
+        </div>
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta"><code>.display-2</code><span>40px → 56px</span></div>
+          <h1 class="display-2" style="margin:0">Display 2</h1>
+        </div>
+      </div>
+
+      <div class="ds-label">Headings</div>
+      <div class="ds-typo-group">
+        {[
+          { class: 'heading-1', sizes: '42px → 64px', text: 'Heading 1: Secciones principales' },
+          { class: 'heading-2', sizes: '36px → 48px', text: 'Heading 2: Subsecciones' },
+          { class: 'heading-3', sizes: '28px → 40px', text: 'Heading 3: Cards grandes' },
+          { class: 'heading-4', sizes: '24px fijo', text: 'Heading 4: Cards medianas' },
+          { class: 'heading-5', sizes: '20px fijo', text: 'Heading 5: Cards pequeñas' },
+          { class: 'heading-6', sizes: '18px fijo', text: 'HEADING 6: ITEMS, LABELS' },
+        ].map(({ class: cls, sizes, text }) => (
+          <div class="ds-typo-row">
+            <div class="ds-typo-meta"><code>.{cls}</code><span>{sizes}</span></div>
+            <p class={cls} style="margin:0">{text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="ds-label">Body & Labels</div>
+      <div class="ds-grid-3">
+        <div class="ds-inspect-card">
+          <code>.text-lg</code>
+          <p class="text-lg" style="margin:8px 0 0">Texto introductorio 18px</p>
+        </div>
+        <div class="ds-inspect-card">
+          <code>.text-body</code>
+          <p class="text-body" style="margin:8px 0 0">Cuerpo estándar 16px</p>
+        </div>
+        <div class="ds-inspect-card">
+          <code>.caption</code>
+          <p class="caption" style="margin:8px 0 0">Caption text 14px</p>
+        </div>
+        <div class="ds-inspect-card">
+          <code>.eyebrow</code>
+          <p class="eyebrow" style="margin:8px 0 0">CATEGORÍA</p>
+        </div>
+        <div class="ds-inspect-card">
+          <code>.label</code>
+          <p class="label" style="margin:8px 0 0">Form Label</p>
+        </div>
+        <div class="ds-inspect-card">
+          <code>.text-xs</code>
+          <p class="text-xs" style="margin:8px 0 0">Texto mínimo 12px</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         ESPACIADO
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="spacing" class="ds-section">
+      <h2>Sistema de Espaciado</h2>
+      <p class="ds-desc">LEY UNIVERSAL: Todos los espaciados usan múltiplos de 8px.</p>
+
+      <div class="ds-label">Escala de Espaciado</div>
+      <div class="ds-spacing-grid">
+        {[
+          { px: 0, tw: 'gap-0' },
+          { px: 8, tw: 'gap-2' },
+          { px: 16, tw: 'gap-4' },
+          { px: 24, tw: 'gap-6' },
+          { px: 32, tw: 'gap-8' },
+          { px: 40, tw: 'gap-10' },
+          { px: 48, tw: 'gap-12' },
+          { px: 64, tw: 'gap-16' },
+        ].map(({ px, tw }) => (
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-box" style={`width:${Math.max(px, 4)}px;height:${Math.max(px, 4)}px`}></div>
+            <span>{px}px</span>
+            <code>{tw}</code>
+          </div>
+        ))}
+      </div>
+
+      <div class="ds-alert ds-alert-warning">
+        <strong>NO USAR:</strong> gap-1 (4px), gap-3 (12px), gap-5 (20px) - No son múltiplos de 8px base.
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SOMBRAS
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="shadows" class="ds-section">
+      <h2>Sombras y Efectos</h2>
+      <p class="ds-desc">Sistema de sombras coherente para elevar elementos.</p>
+
+      <div class="ds-label">Sombras Estándar</div>
+      <div class="ds-grid-4">
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-sm)">
+          <code>shadow-sm</code>
+        </div>
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-md)">
+          <code>shadow-md</code>
+        </div>
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-lg)">
+          <code>shadow-lg</code>
+        </div>
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-xl)">
+          <code>shadow-xl</code>
+        </div>
+      </div>
+
+      <div class="ds-label">Sombras Brand</div>
+      <div class="ds-grid-2">
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-brand)">
+          <code>shadow-brand</code>
+        </div>
+        <div class="ds-shadow-demo" style="box-shadow: var(--shadow-brand-strong)">
+          <code>shadow-brand-strong</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         BUTTONS
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="buttons" class="ds-section">
+      <h2>Button</h2>
+      <p class="ds-desc">Sistema unificado de botones con alturas múltiplos de 8px.</p>
+
+      <div class="ds-label">Tamaños (xs=32, sm=40, md=48, lg=56)</div>
+      <div class="ds-live ds-demo-component">
+        <Button size="xs" variant="primary">XS 32px</Button>
+        <Button size="sm" variant="primary">SM 40px</Button>
+        <Button size="md" variant="primary">MD 48px</Button>
+        <Button size="lg" variant="primary">LG 56px</Button>
+      </div>
+
+      <div class="ds-label">Variantes Solid</div>
+      <div class="ds-live ds-demo-component">
+        <Button variant="primary">Primary</Button>
+        <Button variant="dark">Dark</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="whatsapp" iconLeft="message-circle">WhatsApp</Button>
+        <Button variant="danger">Danger</Button>
+      </div>
+
+      <div class="ds-label">Variantes Outline</div>
+      <div class="ds-live ds-demo-component">
+        <Button variant="outline">Outline</Button>
+        <Button variant="outline-brand">Outline Brand</Button>
+      </div>
+
+      <div class="ds-label">Variantes Ghost</div>
+      <div class="ds-live ds-demo-component">
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="ghost-brand">Ghost Brand</Button>
+      </div>
+      <div class="ds-live ds-dark ds-demo-component">
+        <Button variant="ghost-white">Ghost White (dark bg)</Button>
+      </div>
+
+      <div class="ds-label">Modificadores</div>
+      <div class="ds-live ds-demo-component">
+        <Button variant="primary" rounded>Rounded</Button>
+        <Button variant="primary" uppercase>Uppercase</Button>
+        <Button variant="primary" iconLeft="arrow-left">Icon Left</Button>
+        <Button variant="primary" iconRight="arrow-right">Icon Right</Button>
+        <Button variant="secondary" iconOnly aria-label="Cerrar"><i data-lucide="x" class="w-5 h-5"></i></Button>
+      </div>
+
+      <div class="ds-label">Estados</div>
+      <div class="ds-live ds-demo-component">
+        <Button variant="primary" disabled>Disabled</Button>
+        <Button variant="primary" loading>Loading</Button>
+      </div>
+
+      <div class="ds-label">Full Width</div>
+      <div class="ds-live ds-demo-component" style="max-width:400px">
+        <Button variant="primary" fullWidth iconRight="arrow-right">Full Width Button</Button>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         BADGES
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="badges" class="ds-section">
+      <h2>Badge</h2>
+      <p class="ds-desc">Sistema de etiquetas con variantes de color y tamaño.</p>
+
+      <div class="ds-label">Tamaños</div>
+      <div class="ds-live ds-demo-component">
+        <Badge size="xs">XS</Badge>
+        <Badge size="sm">SM (default)</Badge>
+        <Badge size="md">MD</Badge>
+        <Badge size="lg">LG</Badge>
+      </div>
+
+      <div class="ds-label">Variantes</div>
+      <div class="ds-live ds-demo-component">
+        <Badge variant="default">Default</Badge>
+        <Badge variant="brand">Brand</Badge>
+        <Badge variant="highlight">Highlight</Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="error">Error</Badge>
+        <Badge variant="accent">Accent</Badge>
+      </div>
+      <div class="ds-live ds-dark ds-demo-component">
+        <Badge variant="glass">Glass (dark bg)</Badge>
+      </div>
+
+      <div class="ds-label">Con Iconos</div>
+      <div class="ds-live ds-demo-component">
+        <Badge variant="success" iconLeft="check">Verificado</Badge>
+        <Badge variant="highlight" iconLeft="flame">Top Ventas</Badge>
+        <Badge variant="brand" iconLeft="star">Nuevo</Badge>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         ICONBOX
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="iconbox" class="ds-section">
+      <h2>IconBox</h2>
+      <p class="ds-desc">Contenedor cuadrado para iconos. Tamaños: 32px, 40px, 48px.</p>
+
+      <div class="ds-label">Tamaños</div>
+      <div class="ds-live ds-demo-component">
+        <div class="ds-stack-center">
+          <IconBox icon="sun" size="sm" />
+          <code>sm 32px</code>
+        </div>
+        <div class="ds-stack-center">
+          <IconBox icon="sun" size="md" />
+          <code>md 40px</code>
+        </div>
+        <div class="ds-stack-center">
+          <IconBox icon="sun" size="lg" />
+          <code>lg 48px</code>
+        </div>
+      </div>
+
+      <div class="ds-label">Variantes</div>
+      <div class="ds-live ds-demo-component">
+        <IconBox icon="zap" variant="brand" />
+        <IconBox icon="zap" variant="brand-solid" />
+        <IconBox icon="zap" variant="azure" />
+        <IconBox icon="zap" variant="white" />
+        <IconBox icon="zap" variant="success" />
+      </div>
+      <div class="ds-live ds-dark ds-demo-component">
+        <IconBox icon="zap" variant="glass" />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         BASECARD
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="basecard" class="ds-section">
+      <h2>BaseCard</h2>
+      <p class="ds-desc">Card base con variantes de estilo. Todos los demás cards heredan de este.</p>
+
+      <div class="ds-label">Variantes</div>
+      <div class="ds-grid-3 ds-demo-component">
+        <BaseCard padding="md">
+          <p class="font-bold">Filled (default)</p>
+          <p class="text-sm text-muted">bg-azure-50</p>
+        </BaseCard>
+        <BaseCard variant="bordered" padding="md">
+          <p class="font-bold">Bordered</p>
+          <p class="text-sm text-muted">bg-white + border</p>
+        </BaseCard>
+        <BaseCard variant="white" padding="md" hoverEffect="lift">
+          <p class="font-bold">White + Lift</p>
+          <p class="text-sm text-muted">shadow + hover</p>
+        </BaseCard>
+      </div>
+
+      <div class="ds-label">En contexto oscuro (glass)</div>
+      <div class="ds-live ds-dark ds-demo-component">
+        <BaseCard variant="glass" padding="md">
+          <p class="font-bold text-white">Glass</p>
+          <p class="text-sm text-white/70">Para fondos oscuros</p>
+        </BaseCard>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         FEATURECARD
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="featurecard" class="ds-section">
+      <h2>FeatureCard</h2>
+      <p class="ds-desc">Card para mostrar features/beneficios con icono, título y descripción.</p>
+
+      <div class="ds-label">Variantes</div>
+      <div class="ds-grid-3 ds-demo-component">
+        <FeatureCard icon="zap" title="Estándar" description="Variante filled por defecto" />
+        <FeatureCard icon="shield" title="Bordered" description="Con borde visible" variant="bordered" />
+        <FeatureCard step={1} title="Con Step" description="Numerado con paso" />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SECTIONCARD
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="sectioncard" class="ds-section">
+      <h2>SectionCard</h2>
+      <p class="ds-desc">Wrapper de sección con header (título + acciones) y contenido.</p>
+
+      <div class="ds-demo-component" style="max-width:600px">
+        <SectionCard subtitle="12 items">
+          <span slot="title">Título de Sección</span>
+          <div slot="actions">
+            <Button variant="ghost" size="sm">Ver más</Button>
+          </div>
+          <p class="text-body text-secondary">Contenido de la sección con tipografía semántica.</p>
+        </SectionCard>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         MODELCARD
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="modelcard" class="ds-section">
+      <h2>ModelCard</h2>
+      <p class="ds-desc">Card de modelo de producto con imagen, overlay y badge opcional.</p>
+
+      <div class="ds-grid-3 ds-demo-component">
+        <div style="max-width:280px">
+          <ModelCard
+            slug="demo"
+            title="Cantabria"
+            subtitle="Privacidad + Luz"
+            image={demoImage}
+            badge="Top Ventas"
+          />
+        </div>
+        <div style="max-width:280px">
+          <ModelCard
+            slug="demo2"
+            title="Valencia"
+            subtitle="Equilibrio Solar"
+            image={demoImage}
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         REVIEWCARD
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="reviewcard" class="ds-section">
+      <h2>ReviewCard</h2>
+      <p class="ds-desc">Card de reseña de Google con nombre, fecha, estrellas y texto.</p>
+
+      <div class="ds-live ds-demo-component" style="background: var(--azure-100)">
+        <ReviewCard
+          name="María García"
+          date="2025-12-15"
+          text="Excelente servicio y atención. Los vinilos quedaron perfectos y el instalador fue muy profesional."
+          rating={5}
+        />
+        <ReviewCard
+          name="Juan Pérez"
+          date="2025-11-20"
+          text="Muy contento con el resultado. Se nota la diferencia de temperatura."
+          rating={5}
+        />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SELECTORCARD
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="selectorcard" class="ds-section">
+      <h2>SelectorCard</h2>
+      <p class="ds-desc">Card selectora con stepper (+/-). Usado en el Wizard para cantidades.</p>
+
+      <div class="ds-live ds-dark ds-demo-component" style="flex-direction:column; gap:12px; max-width:400px">
+        <SelectorCard
+          icon="maximize"
+          title="Grande"
+          subtitle="Balcón / Ventanal"
+          windowType="grande"
+          counterId="demo-grande"
+          initialValue={2}
+        />
+        <SelectorCard
+          icon="square"
+          title="Mediana"
+          subtitle="Ventana estándar"
+          windowType="mediana"
+          counterId="demo-mediana"
+          initialValue={4}
+        />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SPECROW
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="specrow" class="ds-section">
+      <h2>SpecRow</h2>
+      <p class="ds-desc">Fila de especificación técnica con icono, label y valor.</p>
+
+      <div class="ds-inspect-card ds-demo-component" style="max-width:500px">
+        <div class="flex flex-col gap-4">
+          <SpecRow icon="thermometer-sun" label="Reducción de Calor" value="65%" />
+          <SpecRow icon="shield" label="Protección UV" value="99%" />
+          <SpecRow icon="eye" label="Transmisión de Luz" value="35%" isLast />
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         GALLERYITEM
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="galleryitem" class="ds-section">
+      <h2>GalleryItem</h2>
+      <p class="ds-desc">Item de galería con imagen y caption overlay.</p>
+
+      <div class="ds-grid-3 ds-demo-component">
+        <GalleryItem
+          image={demoImage}
+          alt="Oficinas Madrid"
+          caption="Oficinas Madrid"
+          class="w-full rounded-xl"
+        />
+        <GalleryItem
+          image={demoImage}
+          alt="Residencial Valencia"
+          caption="Residencial Valencia"
+          aspectRatio="16/9"
+          class="w-full rounded-xl"
+        />
+        <GalleryItem
+          image={demoImage}
+          alt="Ático Barcelona"
+          caption="Ático Barcelona"
+          aspectRatio="1/1"
+          class="w-full rounded-xl"
+        />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SOCIALICONBUTTON
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="socialiconbutton" class="ds-section">
+      <h2>SocialIconButton</h2>
+      <p class="ds-desc">Botón de red social con variantes hero y footer.</p>
+
+      <div class="ds-label">Variante Hero</div>
+      <div class="ds-live ds-demo-component">
+        <SocialIconButton platform="instagram" href="#" variant="hero" />
+        <SocialIconButton platform="whatsapp" href="#" variant="hero" />
+        <SocialIconButton platform="tiktok" href="#" variant="hero" />
+        <SocialIconButton platform="facebook" href="#" variant="hero" />
+      </div>
+
+      <div class="ds-label">Variante Footer</div>
+      <div class="ds-live ds-demo-component">
+        <SocialIconButton platform="instagram" href="#" variant="footer" />
+        <SocialIconButton platform="whatsapp" href="#" variant="footer" />
+        <SocialIconButton platform="tiktok" href="#" variant="footer" />
+        <SocialIconButton platform="linkedin" href="#" variant="footer" />
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         FORMULARIOS
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="forms" class="ds-section">
+      <h2>Formularios</h2>
+      <p class="ds-desc">Inputs y controles de formulario.</p>
+
+      <div class="ds-label">Input Text</div>
+      <div class="ds-inspect-card ds-demo-component" style="max-width:400px">
+        <input type="text" class="form-input" placeholder="Escribe algo...">
+      </div>
+
+      <div class="ds-label">Input con Icono</div>
+      <div class="ds-inspect-card ds-demo-component" style="max-width:400px">
+        <div class="input-group">
+          <span class="input-group-icon">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </span>
+          <input type="text" class="form-input input-with-icon" placeholder="Código postal...">
+        </div>
+      </div>
+
+      <div class="ds-label">Input Error</div>
+      <div class="ds-inspect-card ds-demo-component" style="max-width:400px">
+        <input type="text" class="form-input input-error" value="Valor inválido">
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         REGISTRO AUTOMÁTICO
+         ══════════════════════════════════════════════════════════════════ -->
+    <section id="registry" class="ds-section">
+      <h2>Registro de Componentes</h2>
+      <p class="ds-desc">Índice automático de todos los componentes. Se actualiza al añadir nuevos archivos .astro.</p>
+
+      <div class="ds-label">Componentes UI ({uiRegistry.length})</div>
+      <div class="ds-registry-grid">
+        {uiRegistry.map(({ name }) => (
+          <div class="ds-registry-item">
+            <i data-lucide="component" class="w-4 h-4 text-brand-500"></i>
+            <span>{name}</span>
+            <code class="ds-registry-path">ui/{name}.astro</code>
+          </div>
+        ))}
+      </div>
+
+      <div class="ds-label">Secciones ({sectionsRegistry.length})</div>
+      <div class="ds-registry-grid">
+        {sectionsRegistry.map(({ name }) => (
+          <div class="ds-registry-item">
+            <i data-lucide="layout" class="w-4 h-4 text-azure-500"></i>
+            <span>{name}</span>
+            <code class="ds-registry-path">sections/{name}.astro</code>
+          </div>
+        ))}
+      </div>
+
+      <div class="ds-alert ds-alert-info">
+        <strong>Auto-actualización:</strong> Al crear un nuevo componente en <code>src/components/ui/</code> o <code>src/components/sections/</code>, aparecerá automáticamente en esta lista.
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     INSPECTOR TOOLTIP
+     ══════════════════════════════════════════════════════════════════════ -->
+<div id="ds-inspector-tooltip" class="ds-tooltip"></div>
+<div id="ds-inspector-highlight" class="ds-highlight"></div>
+
+<script is:inline>
+  // Auto-fill color tokens
+  function rgbToHex(rgb) {
+    if (!rgb || rgb === 'rgba(0, 0, 0, 0)') return '';
+    const rgbValues = rgb.match(/\d+/g);
+    if (!rgbValues) return rgb;
+    const r = parseInt(rgbValues[0]);
+    const g = parseInt(rgbValues[1]);
+    const b = parseInt(rgbValues[2]);
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+  }
+
+  function autoFillTokens() {
+    document.querySelectorAll('[data-autofill="bg"] .ds-chip, [data-autofill="bg"] .ds-chip-named').forEach(el => {
+      const bg = window.getComputedStyle(el).backgroundColor;
+      const hex = rgbToHex(bg);
+      const valSpan = el.querySelector('.ds-val');
+      if (valSpan) valSpan.textContent = hex;
+    });
+  }
+
+  // Inspector Mode
+  const tooltip = document.getElementById('ds-inspector-tooltip');
+  const highlighter = document.getElementById('ds-inspector-highlight');
+  const toggle = document.getElementById('inspector-toggle');
+  let isInspectorActive = false;
+
+  if (toggle) {
+    toggle.addEventListener('change', (e) => {
+      isInspectorActive = e.target.checked;
+      document.body.classList.toggle('ds-inspect-mode-active', isInspectorActive);
+      if (!isInspectorActive && tooltip && highlighter) {
+        tooltip.style.opacity = '0';
+        highlighter.style.opacity = '0';
+      }
+    });
+  }
+
+  document.addEventListener('mouseover', (e) => {
+    if (!isInspectorActive || !tooltip || !highlighter) return;
+    const target = e.target;
+    const demoContainer = target.closest('.ds-demo-component');
+    if (!demoContainer || target === demoContainer) return;
+
+    const styles = window.getComputedStyle(target);
+    const rect = target.getBoundingClientRect();
+
+    highlighter.style.width = rect.width + 'px';
+    highlighter.style.height = rect.height + 'px';
+    highlighter.style.top = (rect.top + window.scrollY) + 'px';
+    highlighter.style.left = (rect.left + window.scrollX) + 'px';
+    highlighter.style.opacity = '1';
+
+    const tag = target.tagName.toLowerCase();
+    const classes = Array.from(target.classList).filter(c => !c.startsWith('ds-')).slice(0, 5).join(' ');
+    const font = styles.fontFamily.split(',')[0].replace(/['"]/g, '');
+    const color = rgbToHex(styles.color);
+    const size = styles.fontSize;
+    const weight = styles.fontWeight;
+    const padding = styles.padding;
+    const gap = styles.gap;
+
+    tooltip.innerHTML = `
+      <div class="ds-tooltip-header">
+        <span class="ds-tooltip-tag">${tag}</span>
+        ${classes ? `<span class="ds-tooltip-class">${classes}</span>` : ''}
+      </div>
+      <div class="ds-tooltip-grid">
+        <span>Font:</span><span>${font} (${weight})</span>
+        <span>Size:</span><span>${size}</span>
+        <span>Color:</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:${color};display:inline-block;border-radius:2px;border:1px solid rgba(255,255,255,.3)"></span>${color}</span>
+        ${padding !== '0px' ? `<span>Padding:</span><span>${padding}</span>` : ''}
+        ${gap !== 'normal' ? `<span>Gap:</span><span>${gap}</span>` : ''}
+      </div>
+    `;
+
+    let top = rect.top + window.scrollY - tooltip.offsetHeight - 8;
+    let left = rect.left + window.scrollX;
+    if (top < window.scrollY + 10) top = rect.bottom + window.scrollY + 8;
+    if (left + 220 > window.innerWidth) left = window.innerWidth - 230;
+
+    tooltip.style.top = top + 'px';
+    tooltip.style.left = Math.max(10, left) + 'px';
+    tooltip.style.opacity = '1';
+  });
+
+  // Smooth scroll for navigation
+  document.querySelectorAll('.ds-nav a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Update URL without scroll
+        history.pushState(null, '', link.getAttribute('href'));
+      }
+    });
+  });
+
+  // Highlight active nav item
+  const sections = document.querySelectorAll('.ds-section[id]');
+  const navLinks = document.querySelectorAll('.ds-nav a[href^="#"]');
+
+  function updateActiveNav() {
+    const scrollPos = window.scrollY + 100;
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      const id = section.getAttribute('id');
+      if (scrollPos >= top && scrollPos < bottom) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav);
+  window.addEventListener('load', () => {
+    autoFillTokens();
+    updateActiveNav();
+  });
+</script>
+</Layout>
+
+<style is:global>
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM DASHBOARD STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Base */
+.ds { display: flex; min-height: 100vh; background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
+.ds * { box-sizing: border-box; }
+.ds .hero-bg, .ds .hero-layout { display: none !important; }
+
+/* Nav */
+.ds-nav {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 240px;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+.ds-nav-header {
+  padding: 20px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.ds-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ds-logo {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+}
+.ds-version {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  display: block;
+}
+.ds-count {
+  font-size: 11px;
+  color: #94a3b8;
+  display: block;
+}
+.ds-nav-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px 40px;
+}
+.ds-nav-group {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  margin: 20px 0 8px 8px;
+}
+.ds-nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: #475569;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all .15s;
+}
+.ds-nav a:hover { background: #f1f5f9; color: #3c20e5; }
+.ds-nav a.active { background: #ece9fc; color: #3c20e5; font-weight: 600; }
+.ds-nav a i { opacity: 0.6; }
+.ds-nav a:hover i, .ds-nav a.active i { opacity: 1; }
+
+/* Main */
+.ds-main {
+  flex: 1;
+  padding: 40px 48px 200px;
+  max-width: 1100px;
+  min-width: 0;
+}
+.ds-header {
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.ds-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+.ds-header h1 {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+}
+.ds-header p {
+  color: #64748b;
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+.ds-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.ds-doc-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #f1f5f9;
+  color: #475569;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all .15s;
+}
+.ds-doc-link:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Switch */
+.ds-switch { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+.ds-switch input { display: none; }
+.ds-switch-slider { width: 36px; height: 20px; background: #e2e8f0; border-radius: 20px; position: relative; transition: .2s; }
+.ds-switch-slider::before { content: ''; position: absolute; width: 16px; height: 16px; background: #fff; border-radius: 50%; top: 2px; left: 2px; transition: .2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+.ds-switch input:checked + .ds-switch-slider { background: #3c20e5; }
+.ds-switch input:checked + .ds-switch-slider::before { transform: translateX(16px); }
+.ds-switch-label { font-size: 13px; font-weight: 600; color: #475569; }
+
+/* Sections */
+.ds-section { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid #e2e8f0; }
+.ds-section:last-child { border-bottom: none; }
+.ds-section h2 {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+.ds-desc {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 24px;
+  max-width: 700px;
+  line-height: 1.6;
+}
+.ds-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin: 24px 0 12px;
+}
+
+/* Palettes */
+.ds-palette { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin-bottom: 16px; }
+.ds-palette-loose { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+.ds-chip {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6px;
+  font-size: 10px;
+  font-weight: 600;
+}
+.ds-chip-light { color: #fff; }
+.ds-chip-primary { outline: 2px solid #3c20e5; outline-offset: 2px; }
+.ds-chip-named { border-radius: 10px; padding: 12px; font-size: 12px; font-weight: 600; min-height: 60px; }
+.ds-val { display: block; font-size: 9px; opacity: 0.7; font-weight: 400; margin-top: 2px; }
+
+/* Cards */
+.ds-inspect-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: border-color .2s;
+}
+.ds-inspect-card:hover { border-color: #cbd5e1; }
+.ds-inspect-card code { font-size: 11px; color: #64748b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
+
+/* Live Preview */
+.ds-live {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.ds-dark { background: #1e293b !important; border-color: #334155 !important; }
+
+/* Typography */
+.ds-typo-group { display: flex; flex-direction: column; gap: 0; }
+.ds-typo-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-bottom: none;
+}
+.ds-typo-row:first-child { border-radius: 12px 12px 0 0; }
+.ds-typo-row:last-child { border-radius: 0 0 12px 12px; border-bottom: 1px solid #e2e8f0; }
+.ds-typo-meta { display: flex; align-items: center; gap: 12px; }
+.ds-typo-meta code { font-size: 11px; color: #3c20e5; background: #ece9fc; padding: 2px 6px; border-radius: 4px; }
+.ds-typo-meta span { font-size: 11px; color: #94a3b8; }
+
+/* Grids */
+.ds-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.ds-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ds-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.ds-stack-center { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-stack-center code { font-size: 11px; color: #64748b; }
+
+/* Spacing */
+.ds-spacing-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+.ds-spacing-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ds-spacing-box { background: #3c20e5; border-radius: 4px; min-width: 4px; min-height: 4px; }
+.ds-spacing-item span { font-size: 13px; font-weight: 600; color: #0f172a; }
+.ds-spacing-item code { font-size: 10px; color: #64748b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
+
+/* Shadow Demos */
+.ds-shadow-demo {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ds-shadow-demo code {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Alert */
+.ds-alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-top: 16px;
+}
+.ds-alert-warning { background: #fef3c7; color: #92400e; border: 1px solid rgba(146, 64, 14, 0.2); }
+.ds-alert-info { background: #ece9fc; color: #3c20e5; border: 1px solid rgba(60, 32, 229, 0.2); }
+
+/* Registry */
+.ds-registry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+.ds-registry-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.ds-registry-path {
+  margin-left: auto;
+  font-size: 10px;
+  color: #94a3b8;
+  background: transparent !important;
+}
+
+/* Inspector */
+.ds-tooltip {
+  position: absolute;
+  background: #0f172a;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.1s;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  max-width: 260px;
+}
+.ds-tooltip-header {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ds-tooltip-tag { color: #a5b4fc; font-weight: 700; text-transform: uppercase; font-size: 10px; }
+.ds-tooltip-class { color: #94a3b8; font-family: monospace; font-size: 10px; word-break: break-all; }
+.ds-tooltip-grid { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; color: #e2e8f0; }
+.ds-tooltip-grid span:nth-child(odd) { color: #94a3b8; }
+.ds-highlight {
+  position: absolute;
+  border: 2px solid #3c20e5;
+  background: rgba(60, 32, 229, 0.08);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition: all 0.1s;
+  border-radius: 4px;
+}
+body.ds-inspect-mode-active .ds-demo-component { cursor: crosshair; }
+body.ds-inspect-mode-active .ds-demo-component * { cursor: crosshair; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .ds-nav { width: 200px; }
+  .ds-main { padding: 32px; }
+  .ds-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .ds-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .ds { flex-direction: column; }
+  .ds-nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .ds-nav-scroll { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; }
+  .ds-nav-group { width: 100%; margin: 8px 0 4px; }
+  .ds-main { padding: 24px 16px; }
+  .ds-grid-2, .ds-grid-3, .ds-grid-4 { grid-template-columns: 1fr; }
+  .ds-palette { grid-template-columns: repeat(5, 1fr); }
+}
+</style>

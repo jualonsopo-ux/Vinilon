@@ -1,0 +1,57 @@
+---
+/**
+ * Reviews Section - Sección de Reseñas de Google
+ *
+ * Muestra las reseñas en dos carruseles infinitos (marquee)
+ * - Row 1: scroll hacia la izquierda
+ * - Row 2: scroll hacia la derecha
+ *
+ * Datos consumidos desde src/data/reviews.ts
+ */
+
+import SectionCard from '../ui/SectionCard.astro';
+import ReviewCard from '../ui/ReviewCard.astro';
+import { reviewsRow1, reviewsRow2, reviewStats } from '../../data/reviews';
+---
+<section id="reviews-section" class="w-full">
+    <SectionCard subtitle={`${reviewStats.totalReviews} reseñas`} class="bg-azure-100">
+        <span slot="title">Lo que dicen <br class="lg:hidden" /> nuestros clientes</span>
+        <h3 slot="actions" class="sr-only">Valoración y Google</h3>
+
+        <div slot="actions" class="flex flex-col items-end justify-between">
+            <span class="font-bold text-brand-600 text-[40px] leading-none">{reviewStats.averageRating}/5</span>
+            <a href={reviewStats.googleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Ver todas las reseñas en Google Business"
+                class="p-1 rounded hover:bg-white/50 transition-colors">
+                <i data-lucide="external-link" class="w-4 h-4 text-azure-400 hover:text-brand-500 transition-colors"></i>
+            </a>
+        </div>
+
+        <!-- Carruseles de reseñas (full-bleed) -->
+        <div class="-mx-4 lg:-mx-8 flex flex-col gap-4 lg:gap-8">
+            <!-- Marquee 1: Izquierda -->
+            <div class="marquee-container">
+                <div class="marquee-track animate-scroll-left">
+                    <div class="flex gap-4">
+                        {reviewsRow1.map(review => (
+                            <ReviewCard {...review} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marquee 2: Derecha -->
+            <div class="marquee-container">
+                <div class="marquee-track animate-scroll-right">
+                    <div class="flex gap-4">
+                        {reviewsRow2.map(review => (
+                            <ReviewCard {...review} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </SectionCard>
+</section>

@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Badge from './Badge.astro';
 
 interface Props {
   slug: string;
@@ -7,26 +8,82 @@ interface Props {
   subtitle: string;
   image: ImageMetadata;
   badge?: string;
+  class?: string;
 }
 
-const { slug, title, subtitle, image, badge } = Astro.props;
+const { slug, title, subtitle, image, badge, class: className } = Astro.props;
 ---
 
-<button class="model-card-trigger snap-item shrink-0" data-model={slug} aria-label={`Ver detalles modelo ${title}`}>
-  <Image 
-    src={image} 
+<button class:list={["model-card-trigger snap-item shrink-0", className]} data-model={slug} aria-label={`Ver detalles modelo ${title}`}>
+  <Image
+    src={image}
     loading="lazy"
     class="w-full h-full object-cover absolute inset-0 transition-transform duration-500 group-hover:scale-110"
-    alt={`Modelo ${title}`} 
+    alt={`Modelo ${title}`}
   />
   <div class="model-card-overlay">
-    {badge && <span class="badge badge-highlight font-semibold mb-1">{badge}</span>}
-    <!-- Added mb-0 to remove 8px margin -->
-    <h4 class="text-white font-bold text-xl leading-tight mb-0">{title}</h4>
-    <p class="text-white/80 mt-1 mb-3">{subtitle}</p>
+    {badge && <Badge variant="highlight" size="md" class="mb-2">{badge}</Badge>}
+    <h3 class="heading-5 text-white mb-0">{title}</h3>
+    <p class="text-sm text-inverse mt-2 mb-4">{subtitle}</p>
     <div class="model-card-cta">
       <i data-lucide="info" class="w-4 h-4"></i>
       <span>Más info</span>
     </div>
   </div>
 </button>
+
+<style>
+  .model-card-trigger {
+    position: relative;
+    aspect-ratio: 3/4;
+    border-radius: 1rem; /* var(--radius) */
+    overflow: hidden;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background-color: var(--azure-100);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .model-card-trigger:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .model-card-trigger:active {
+    transform: scale(0.98);
+  }
+
+  /* Overlay gradient */
+  .model-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem; /* var(--space-4) */
+  }
+
+  /* CTA Button inside card */
+  .model-card-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem; /* var(--space-2) */
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-weight: 600; /* var(--font-semibold) */
+    font-size: 0.875rem; /* var(--text-sm) */
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem; /* var(--radius-sm) */
+    transition: background-color 0.2s ease;
+  }
+
+  .model-card-trigger:hover .model-card-cta {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+</style>

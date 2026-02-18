@@ -1,0 +1,68 @@
+---
+/**
+ * IconBox - Contenedor cuadrado para iconos
+ *
+ * Uso:
+ * <IconBox icon="sun" />
+ * <IconBox icon="shield" size="lg" variant="brand" />
+ * <IconBox size="sm" variant="white"><CustomIcon /></IconBox>
+ */
+
+interface Props {
+  /** Nombre del icono Lucide (si no se usa slot) */
+  icon?: string;
+  /** Tamaño del box: sm (32px), md (36px), lg (40px) */
+  size?: 'sm' | 'md' | 'lg';
+  /** Variante de color */
+  variant?: 'brand' | 'brand-solid' | 'azure' | 'white' | 'orange' | 'success' | 'glass';
+  /** Clases adicionales */
+  class?: string;
+}
+
+const {
+  icon,
+  size = 'lg',
+  variant = 'brand',
+  class: className
+} = Astro.props;
+
+// Mapeo de tamaños (múltiplos de 8)
+const sizeClasses = {
+  sm: 'w-8 h-8',      // 32px
+  md: 'w-10 h-10',    // 40px
+  lg: 'w-12 h-12',    // 48px
+};
+
+// Mapeo de variantes de color
+const variantClasses = {
+  'brand': 'bg-brand-50 text-brand-600 border border-brand-100',
+  'brand-solid': 'bg-brand-600 text-white',
+  'azure': 'bg-azure-50 text-azure-600 border border-azure-100',
+  'white': 'bg-white text-azure-600 border border-azure-200 shadow-sm',
+  'orange': 'bg-orange-50 text-orange-600 border border-orange-100',
+  'success': 'bg-success-light text-success-dark',
+  'glass': 'bg-white/15 text-white border border-white/20',
+};
+
+// Tamaño del icono basado en el tamaño del box
+const iconSizes = {
+  sm: 'w-4 h-4',      // 16px
+  md: 'w-5 h-5',      // 20px
+  lg: 'w-6 h-6',      // 24px
+};
+---
+
+<div
+  class:list={[
+    'rounded-lg flex items-center justify-center flex-shrink-0',
+    sizeClasses[size],
+    variantClasses[variant],
+    className
+  ]}
+>
+  {icon ? (
+    <i data-lucide={icon} class={iconSizes[size]}></i>
+  ) : (
+    <slot />
+  )}
+</div>

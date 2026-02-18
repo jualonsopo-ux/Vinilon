@@ -1,0 +1,96 @@
+---
+/**
+ * SocialIconButton - Botón de red social
+ *
+ * Uso:
+ * <SocialIconButton platform="instagram" href="https://instagram.com/..." />
+ * <SocialIconButton platform="whatsapp" href="https://wa.me/..." variant="footer" />
+ */
+
+interface Props {
+  /** Plataforma social */
+  platform: 'instagram' | 'whatsapp' | 'tiktok' | 'facebook' | 'twitter' | 'linkedin';
+  /** URL del enlace */
+  href: string;
+  /** Variante de estilo */
+  variant?: 'hero' | 'footer';
+  /** Clases adicionales */
+  class?: string;
+}
+
+const {
+  platform,
+  href,
+  variant = 'hero',
+  class: className
+} = Astro.props;
+
+// Configuración por plataforma
+const platformConfig = {
+  instagram: {
+    label: 'Instagram',
+    icon: 'instagram',
+    useLucide: true,
+    hoverClass: 'hover:text-brand-600',
+  },
+  whatsapp: {
+    label: 'WhatsApp',
+    icon: '#icon-whatsapp',
+    useLucide: false,
+    hoverClass: 'hover:text-whatsapp hover:bg-whatsapp-light',
+  },
+  tiktok: {
+    label: 'TikTok',
+    icon: '#icon-tiktok',
+    useLucide: false,
+    hoverClass: 'hover:text-brand-600',
+  },
+  facebook: {
+    label: 'Facebook',
+    icon: 'facebook',
+    useLucide: true,
+    hoverClass: 'hover:text-[#1877F2]',
+  },
+  twitter: {
+    label: 'Twitter/X',
+    icon: 'twitter',
+    useLucide: true,
+    hoverClass: 'hover:text-azure-900',
+  },
+  linkedin: {
+    label: 'LinkedIn',
+    icon: 'linkedin',
+    useLucide: true,
+    hoverClass: 'hover:text-[#0A66C2]',
+  },
+};
+
+const config = platformConfig[platform];
+
+// Clases base según variante
+const variantClasses = {
+  hero: 'icon-btn',
+  footer: 'w-11 h-11 rounded-xl bg-azure-50 text-azure-600 flex items-center justify-center hover:bg-brand-50 transition-colors',
+};
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={`Síguenos en ${config.label}`}
+  class:list={[
+    variantClasses[variant],
+    config.hoverClass,
+    'transition-colors',
+    className
+  ]}
+>
+  {config.useLucide ? (
+    <i data-lucide={config.icon} class="w-5 h-5"></i>
+  ) : (
+    <svg class="w-5 h-5 fill-current">
+      <use href={config.icon} />
+    </svg>
+  )}
+</a>

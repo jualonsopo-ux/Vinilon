@@ -1,0 +1,31 @@
+---
+import SectionCard from '../ui/SectionCard.astro';
+import FeatureCard from '../ui/FeatureCard.astro';
+---
+<section id="how-we-work" class="w-full">
+    <SectionCard title="Cómo Trabajamos" subtitle="Proceso sencillo en 3 pasos">
+        <!-- Steps -->
+        <div class="space-y-4">
+            <!-- Step 1 -->
+            <FeatureCard 
+                step={1} 
+                title="Solicita tu Presupuesto" 
+                description="Contacta con nosotros indicando tu ciudad y tipo de necesidad (podrás hacer una estimación orientativa de tu presupuesto concreto directamente en la web)."
+            />
+
+            <!-- Step 2 -->
+            <FeatureCard 
+                step={2} 
+                title="Asesoramiento Técnico" 
+                description="Analizamos la orientación y el tipo de cristal para recomendarte la lámina exacta."
+            />
+
+            <!-- Step 3 -->
+            <FeatureCard 
+                step={3} 
+                title="Instalación Profesional" 
+                description="Equipo propio en tu zona. Instalación rápida, limpia y sin obras."
+            />
+        </div>
+    </SectionCard>
+</section>

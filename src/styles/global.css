@@ -1,3 +1,32 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   VINILONE - DESIGN SYSTEM
+   Versión: 2.0
+   Última actualización: Febrero 2026
+
+   Este archivo define los tokens de diseño y componentes base del sistema.
+   Trabajamos con CSS Custom Properties como fuente de verdad, sincronizadas
+   con Tailwind CSS en tailwind.config.mjs.
+
+   ESTRUCTURA DEL ARCHIVO:
+   1. Reset & Variables (tokens)
+   2. Tipografía Base
+   3. Componentes: Botones
+   4. Componentes: Formularios
+   5. Componentes: Cards & Bento
+   6. Componentes: Labels & Textos
+   7. Wizard: Calculadora
+   8. Selector Cards
+   9. Toast & Scroll
+   10. Modelos (carrusel + overlay)
+   11. Responsive (768px, 1024px, 1280px)
+   12. Clases Semánticas (utilities)
+
+   PRINCIPIOS:
+   - Mobile First: Base styles son para móvil
+   - Token-driven: Usa variables, no valores hardcodeados
+   - Semántico: Prefiere clases descriptivas (.heading-card vs .text-sm.font-bold)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 /* =========================================
    1. RESET & VARIABLES
    ========================================= */
@@ -32,6 +61,25 @@
     --azure-700: #334155;
     --azure-800: #1E293B;
     --azure-900: #0F172A;
+
+    /* --- COLORES SEMÁNTICOS --- */
+    --color-whatsapp: #25D366;
+    --color-whatsapp-hover: #1DA851;
+
+    /* Error */
+    --color-error: #EF4444;
+    --color-error-light: #FEE2E2;
+    --color-error-dark: #DC2626;
+
+    /* Success */
+    --color-success: #22C55E;
+    --color-success-light: #DCFCE7;
+    --color-success-dark: #14532D;
+
+    /* Warning */
+    --color-warning: #F59E0B;
+    --color-warning-bg: #FEF3C7;
+    --color-warning-text: #92400E;
 
     /* --- GLASSMORPHISM & ACENTOS --- */
     --glass-bg: rgba(255, 255, 255, 0.1);
@@ -83,29 +131,43 @@
     --badge-radius: var(--radius-sm);
     --badge-font-size: var(--text-xs);
 
+    /* Icon Boxes */
+    --icon-box-sm: 2rem;
+    /* 32px */
+    --icon-box-md: 2.25rem;
+    /* 36px */
+    --icon-box-lg: 2.5rem;
+    /* 40px */
+
     /* --- TIPOGRAFÍA --- */
     --font-body: 'Inter', sans-serif;
     --font-heading: 'Inter Tight', 'Inter', sans-serif;
 
-    /* Escala de Tamaños */
+    /* Escala de Tamaños (alineada con Tailwind) */
     --text-xs: 0.75rem;
-    /* 12px */
+    /* 12px - captions, metadata */
     --text-sm: 0.875rem;
-    /* 14px */
+    /* 14px - labels, secondary text */
     --text-base: 1rem;
-    /* 16px */
+    /* 16px - body text */
     --text-lg: 1.125rem;
-    /* 18px */
+    /* 18px - emphasized body */
     --text-xl: 1.25rem;
-    /* 20px */
+    /* 20px - small headings */
     --text-2xl: 1.5rem;
-    /* 24px */
+    /* 24px - card headings */
     --text-3xl: 1.75rem;
-    /* 28px */
+    /* 28px - section headings */
     --text-4xl: 2.25rem;
-    /* 36px */
+    /* 36px - page headings */
     --text-5xl: 2.625rem;
-    /* 42px */
+    /* 42px - hero mobile */
+    --text-6xl: 3rem;
+    /* 48px - hero tablet */
+    --text-7xl: 3.5rem;
+    /* 56px - hero desktop */
+    --text-8xl: 4rem;
+    /* 64px - hero large */
 
     /* Line Heights */
     --leading-none: 1;
@@ -129,7 +191,10 @@
     --font-bold: 700;
     --font-extrabold: 800;
 
-    /* --- ESPACIADO (Base 4px) --- */
+    /* --- ESPACIADO (Base 4px -> Refactorizada) --- */
+    --space-0: 0px;
+    --space-0-5: 0.125rem;
+    /* 2px */
     --space-1: 0.25rem;
     /* 4px */
     --space-2: 0.5rem;
@@ -204,37 +269,46 @@ h2,
 h3,
 h4,
 h5,
+h6,
+p {
+    margin: 0; /* Reset - espaciados se añaden explícitamente */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
     font-family: var(--font-heading);
     font-weight: var(--font-bold);
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
-    margin-bottom: var(--space-2);
 }
 
-/* Tamaños Forzados (Design System) */
+/* Tamaños Base (Mobile-first) - Las clases semánticas tienen precedencia */
 h1 {
-    font-size: var(--text-5xl) !important;
+    font-size: var(--text-5xl);
 }
 
 h2 {
-    font-size: var(--text-4xl) !important;
+    font-size: var(--text-4xl);
 }
 
 h3 {
-    font-size: var(--text-3xl) !important;
+    font-size: var(--text-3xl);
 }
 
 h4 {
-    font-size: var(--text-2xl) !important;
+    font-size: var(--text-2xl);
 }
 
 h5 {
-    font-size: var(--text-xl) !important;
+    font-size: var(--text-xl);
 }
 
 h6 {
-    font-size: var(--text-lg) !important;
+    font-size: var(--text-lg);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -291,44 +365,312 @@ h6 {
 
 /* =========================================
    3. COMPONENTES: BOTONES
+   Sistema unificado basado en múltiplos de 16px
    ========================================= */
 
-/* Base Button Style */
-.btn-action,
-.btn-primary,
-.btn-primary-dark,
-.btn-secondary,
-.btn-whatsapp {
-    display: flex;
+/* --------------------------------------
+   3.1 Button Tokens
+   -------------------------------------- */
+:root {
+    --btn-height-xs: 32px;
+    --btn-height-sm: 40px;
+    --btn-height-md: 48px;
+    --btn-height-lg: 56px;
+
+    --btn-px-xs: 12px;
+    --btn-px-sm: 16px;
+    --btn-px-md: 20px;
+    --btn-px-lg: 24px;
+
+    --btn-font-xs: 12px;
+    --btn-font-sm: 14px;
+    --btn-font-md: 14px;
+    --btn-font-lg: 16px;
+
+    --btn-radius: 12px;
+    --btn-gap: 8px;
+}
+
+/* --------------------------------------
+   3.2 Base Button
+   -------------------------------------- */
+.btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-2);
-    border-radius: var(--radius);
-    transition: all var(--duration-normal) ease;
+    gap: var(--btn-gap);
+    font-family: var(--font-body);
+    font-weight: var(--font-semibold);
+    text-decoration: none;
+    white-space: nowrap;
+    min-width: max-content; /* LEY: Nunca dos líneas de texto */
+    border-radius: var(--btn-radius);
     border: none;
     cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-    font-weight: var(--font-bold);
-    font-size: var(--text-base);
-    box-shadow: var(--shadow-md);
-    position: relative;
-    overflow: hidden;
+    user-select: none;
+    transition: all var(--duration-normal) ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.btn-action:active,
-.btn-primary:active,
-.btn-primary-dark:active,
-.btn-secondary:active,
-.btn-whatsapp:active {
-    transform: scale(var(--scale-press));
+.btn:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
 }
+
+.btn:active:not(.btn--disabled):not(.btn--loading) {
+    transform: scale(0.98);
+}
+
+/* --------------------------------------
+   3.3 Size Variants
+   -------------------------------------- */
+.btn--xs {
+    height: var(--btn-height-xs);
+    padding: 0 var(--btn-px-xs);
+    font-size: var(--btn-font-xs);
+}
+
+.btn--sm {
+    height: var(--btn-height-sm);
+    padding: 0 var(--btn-px-sm);
+    font-size: var(--btn-font-sm);
+}
+
+.btn--md {
+    height: var(--btn-height-md);
+    padding: 0 var(--btn-px-md);
+    font-size: var(--btn-font-md);
+}
+
+.btn--lg {
+    height: var(--btn-height-lg);
+    padding: 0 var(--btn-px-lg);
+    font-size: var(--btn-font-lg);
+}
+
+/* --------------------------------------
+   3.4 Color Variants - Solid
+   -------------------------------------- */
 
 /* Primary (Brand 500) */
-.btn-primary {
+.btn--primary {
     background-color: var(--brand-500);
     color: white;
-    padding: var(--space-4);
+    box-shadow: var(--shadow-md);
+}
+
+.btn--primary:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: var(--brand-600);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Dark (Brand 900) */
+.btn--dark {
+    background-color: var(--brand-900);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn--dark:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: black;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Secondary (White) */
+.btn--secondary {
+    background-color: white;
+    color: var(--azure-900);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--azure-100);
+}
+
+.btn--secondary:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: var(--azure-50);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* WhatsApp */
+.btn--whatsapp {
+    background-color: var(--color-whatsapp);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn--whatsapp:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: var(--color-whatsapp-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(37, 211, 102, 0.3);
+}
+
+/* Danger */
+.btn--danger {
+    background-color: var(--color-error);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn--danger:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: var(--color-error-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* --------------------------------------
+   3.5 Color Variants - Outline
+   -------------------------------------- */
+.btn--outline {
+    background-color: transparent;
+    color: var(--azure-700);
+    border: 1px solid var(--azure-200);
+    box-shadow: none;
+}
+
+.btn--outline:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: var(--azure-50);
+    border-color: var(--azure-300);
+}
+
+.btn--outline-brand {
+    background-color: transparent;
+    color: var(--brand-600);
+    border: 1px solid var(--brand-500);
+    box-shadow: none;
+}
+
+.btn--outline-brand:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: var(--brand-50);
+}
+
+/* --------------------------------------
+   3.6 Color Variants - Ghost
+   -------------------------------------- */
+.btn--ghost {
+    background-color: transparent;
+    color: var(--azure-500);
+    box-shadow: none;
+}
+
+.btn--ghost:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: var(--azure-50);
+    color: var(--azure-700);
+}
+
+.btn--ghost-brand {
+    background-color: transparent;
+    color: var(--brand-600);
+    box-shadow: none;
+}
+
+.btn--ghost-brand:hover:not(.btn--disabled):not(.btn--loading) {
+    background-color: var(--brand-50);
+}
+
+.btn--ghost-white {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    box-shadow: none;
+}
+
+.btn--ghost-white:hover:not(.btn--disabled):not(.btn--loading) {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --------------------------------------
+   3.7 Modifiers
+   -------------------------------------- */
+
+/* Full width */
+.btn--full {
+    width: 100%;
+}
+
+/* Icon only - square */
+.btn--icon-only {
+    padding: 0;
+    aspect-ratio: 1;
+}
+
+.btn--icon-only.btn--xs {
+    width: var(--btn-height-xs);
+}
+
+.btn--icon-only.btn--sm {
+    width: var(--btn-height-sm);
+}
+
+.btn--icon-only.btn--md {
+    width: var(--btn-height-md);
+}
+
+.btn--icon-only.btn--lg {
+    width: var(--btn-height-lg);
+}
+
+/* Uppercase */
+.btn--uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Rounded (pill) */
+.btn--rounded {
+    border-radius: 9999px;
+}
+
+/* --------------------------------------
+   3.8 States
+   -------------------------------------- */
+
+/* Disabled */
+.btn--disabled,
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Loading */
+.btn--loading {
+    pointer-events: none;
+    cursor: wait;
+}
+
+@keyframes btn-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn--loading .animate-spin {
+    animation: btn-spin 1s linear infinite;
+}
+
+/* --------------------------------------
+   3.9 Legacy Aliases (para migración gradual)
+   Eliminar cuando se complete la migración
+   -------------------------------------- */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap);
+    height: var(--btn-height-md);
+    padding: 0 var(--btn-px-md);
+    font-size: var(--btn-font-md);
+    font-weight: var(--font-semibold);
+    border-radius: var(--btn-radius);
+    border: none;
+    cursor: pointer;
+    background-color: var(--brand-500);
+    color: white;
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) ease;
 }
 
 .btn-primary:hover {
@@ -337,11 +679,22 @@ h6 {
     box-shadow: var(--shadow-lg);
 }
 
-/* Dark (Brand 900 / Black) */
 .btn-primary-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap);
+    height: var(--btn-height-md);
+    padding: 0 var(--btn-px-md);
+    font-size: var(--btn-font-md);
+    font-weight: var(--font-semibold);
+    border-radius: var(--btn-radius);
+    border: none;
+    cursor: pointer;
     background-color: var(--brand-900);
     color: white;
-    padding: var(--space-4);
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) ease;
 }
 
 .btn-primary-dark:hover {
@@ -357,47 +710,67 @@ h6 {
     pointer-events: none;
     box-shadow: none;
     transform: none;
-    background-color: var(--azure-500);
 }
 
-/* WhatsApp */
 .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap);
     width: 100%;
-    background-color: #25D366;
+    height: var(--btn-height-md);
+    padding: 0 var(--btn-px-md);
+    font-size: var(--btn-font-md);
+    font-weight: var(--font-semibold);
+    border-radius: var(--btn-radius);
+    border: none;
+    cursor: pointer;
+    background-color: var(--color-whatsapp);
     color: white;
-    padding: var(--space-4);
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) ease;
 }
 
 .btn-whatsapp:hover {
-    background-color: #1DA851;
+    background-color: var(--color-whatsapp-hover);
     transform: translateY(-1px);
     box-shadow: 0 10px 15px -3px rgba(37, 211, 102, 0.3);
 }
 
-/* Secondary (White) */
-.btn-secondary {
-    background-color: white;
-    color: var(--azure-900);
-    padding: var(--space-4);
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap);
+    height: var(--btn-height-sm);
+    padding: 0 var(--btn-px-sm);
+    font-size: var(--btn-font-sm);
+    font-weight: var(--font-semibold);
+    border-radius: var(--btn-radius);
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--azure-500);
+    box-shadow: none;
+    transition: all var(--duration-normal) ease;
 }
 
-.btn-secondary:hover {
+.btn-ghost:hover {
     background-color: var(--azure-50);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-lg);
+    color: var(--azure-700);
 }
 
-/* Header Icon Buttons */
+/* Icon buttons (legacy) */
 .icon-btn {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: var(--radius-lg);
+    width: var(--btn-height-sm);
+    height: var(--btn-height-sm);
+    border-radius: var(--btn-radius);
     background: white;
     color: var(--azure-600);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: var(--card-border);
+    border: 1px solid var(--azure-100);
     box-shadow: var(--shadow-sm);
     transition: all var(--duration-normal) ease;
 }
@@ -405,27 +778,6 @@ h6 {
 .icon-btn:hover {
     background: var(--brand-50);
     color: var(--brand-600);
-}
-
-/* Wizard Previous Button */
-.btn-wizard-prev {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: var(--text-sm);
-    font-weight: var(--font-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    transition: color var(--duration-normal) ease;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--space-2) 0;
-}
-
-.btn-wizard-prev:hover {
-    color: white;
 }
 
 /* =========================================
@@ -460,7 +812,7 @@ h6 {
 }
 
 .input-error {
-    border-color: #EF4444 !important;
+    border-color: var(--color-error) !important;
     animation: shake 0.4s ease-in-out;
 }
 
@@ -523,113 +875,16 @@ h6 {
    5. COMPONENTES: CARDS & BENTO
    ========================================= */
 
-/* Directory Card (Accordion) */
-.directory-card {
-    transition: all var(--duration-normal) ease;
-    background: white;
-    padding: var(--card-padding);
-    border: var(--card-border);
-    border-radius: var(--card-radius);
-}
-
-.directory-card:active {
-    transform: scale(0.99);
-}
-
-.directory-card.active {
-    border-color: var(--brand-500);
-    background-color: var(--brand-50);
-}
-
-.directory-card.active .arrow-icon {
-    transform: rotate(180deg);
-}
-
-.accordion-content {
-    transition: grid-template-rows 0.4s ease-out, opacity 0.4s ease;
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-}
-
-.accordion-content.open {
-    grid-template-rows: 1fr;
-    opacity: 1;
-}
-
-.accordion-inner {
-    overflow: hidden;
-}
-
-/* Bento Grid */
-.bento-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius);
-    transition: transform var(--duration-slow) var(--ease-out);
-    aspect-ratio: 1 / 1;
-    will-change: transform;
-    border: none;
-    padding: 0;
-}
-
-.bento-item:active {
-    transform: scale(0.95);
-}
-
-.bento-overlay {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
-}
-
-.bento-cta-text {
-    color: white;
-    font-weight: var(--font-bold);
-    font-size: var(--text-sm);
-    line-height: var(--leading-tight);
-    padding: 0 var(--space-1);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-}
+/* ELIMINADO: .directory-card - Migrado a BaseCard/SectionCard */
 
 /* =========================================
    6. COMPONENTES: LABELS & TEXTOS
    ========================================= */
 
-.label-sm,
-.sample-label {
-    font-size: var(--text-xs);
-    font-weight: var(--font-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-}
+/* NOTA: Clases .bento-*, .accordion-*, .sample-label, .label-sm, .section-title
+   fueron eliminadas por no estar en uso. Ver commit de limpieza. */
 
-.sample-label {
-    margin-top: var(--space-1);
-    color: var(--azure-400);
-}
 
-.section-title {
-    font-size: var(--text-sm);
-    font-weight: var(--font-bold);
-    color: var(--azure-400);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
-}
-
-.back-link,
-.reviews-title {
-    font-weight: var(--font-bold);
-    font-size: var(--text-base);
-    color: var(--azure-900);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-}
-
-.text-caption {
-    font-size: var(--text-xs);
-    color: var(--azure-500);
-    line-height: var(--leading-tight);
-}
 
 /* =========================================
    7. WIZARD: CALCULADORA Y PASOS
@@ -639,9 +894,7 @@ h6 {
     transition: opacity var(--duration-slow) ease-out;
 }
 
-#calc-province {
-    background-image: none;
-}
+
 
 /* Animations */
 @keyframes fadeIn {
@@ -801,7 +1054,7 @@ h6 {
 }
 
 /* Wizard Breadcrumb */
-#wizard-breadcrumb {
+[id$="-wizard-breadcrumb"] {
     align-items: center;
 }
 
@@ -876,242 +1129,11 @@ h6 {
    8. COMPONENTE: SELECTOR CARD (Revisado)
    ========================================= */
 
-.selector-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--space-2);
-    /* 8px -> var(--space-2) */
-    margin-bottom: var(--space-3);
-    /* 12px -> var(--space-3) */
-    border-radius: var(--radius-lg);
+/* .selector-card eliminada - Ver SelectorCard.astro */
 
-    /* Glassmorphism Variables */
-    background-color: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    transition: all 0.2s ease;
-}
+/* .selector-* styles moved to SelectorCard.astro */
 
-.selector-card:hover {
-    background-color: var(--glass-bg-hover);
-    border-color: var(--glass-border-hover);
-}
 
-.selector-info {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    /* 12px -> var(--space-3) */
-}
-
-.selector-icon-box {
-    width: var(--space-10);
-    /* 40px -> var(--space-10) */
-    height: var(--space-10);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--glass-bg-hover);
-    border-radius: var(--radius-sm);
-    color: white;
-    flex-shrink: 0;
-}
-
-.selector-stepper {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: var(--space-1);
-    border-radius: var(--radius-sm);
-}
-
-.stepper-btn {
-    width: 32px;
-    /* Mantener fijo para touch target mínimo */
-    height: 32px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    background: transparent;
-    color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color var(--duration-fast) ease;
-}
-
-.stepper-btn:hover {
-    background: var(--glass-bg);
-}
-
-.stepper-btn.plus {
-    background: white;
-    color: var(--brand-600);
-}
-
-.stepper-btn.plus:hover {
-    background: var(--azure-100);
-}
-
-.stepper-value {
-    width: 30px;
-    text-align: center;
-    font-weight: bold;
-    color: white;
-}
-
-/* =========================================
-   9. SIMULADOR (Drag & Drop)
-   ========================================= */
-
-.simulador-container {
-    display: flex;
-    gap: var(--space-3);
-    align-items: flex-start;
-}
-
-.window-assembly {
-    position: relative;
-    flex: 1;
-    aspect-ratio: 4/5;
-    background-color: var(--azure-50);
-    border-radius: var(--radius);
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    display: flex;
-    padding: 10px;
-    /* Padding interno seguro */
-    border: 1px solid var(--azure-200);
-    transition: all var(--duration-normal) ease;
-}
-
-.window-assembly.drag-active {
-    border-color: var(--brand-500);
-    box-shadow: 0 0 0 3px rgba(60, 32, 229, 0.15);
-    transform: scale(1.01);
-}
-
-.landscape-view {
-    position: absolute;
-    inset: 0;
-    background-image: url('/assets/img/simulator-landscape.jpg');
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-}
-
-.vinyl-tint-layer {
-    position: absolute;
-    inset: 0;
-    background-color: transparent;
-    transition: background-color 0.5s var(--ease-smooth);
-    z-index: 1;
-    pointer-events: none;
-}
-
-.window-frame {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    gap: var(--space-2);
-    pointer-events: none;
-}
-
-.sash {
-    flex: 1;
-    border: 8px solid rgba(255, 255, 255, 0.95);
-    border-radius: 2px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.reflection {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(120deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 50%);
-}
-
-.handle {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0.8rem;
-    /* 14px aprox */
-    height: 2.5rem;
-    /* 40px aprox */
-    background: var(--azure-200);
-    border-radius: 2px;
-    z-index: 3;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.handle::after {
-    content: '';
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    width: 60%;
-    height: 110%;
-    background: white;
-    transform: rotate(-10deg) translateX(-50%);
-    transform-origin: top center;
-    border-radius: var(--radius-sm);
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* Tarjetas de Vinilo */
-.vinyl-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: grab;
-    touch-action: none;
-    transition: transform var(--duration-normal) ease;
-    position: relative;
-}
-
-.vinyl-card:active {
-    cursor: grabbing;
-    transform: scale(0.95);
-}
-
-.sample-box {
-    width: 100%;
-    aspect-ratio: 1/1;
-    border-radius: var(--card-radius);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: var(--brand-50);
-    color: var(--brand-500);
-    border: var(--card-border);
-    box-shadow: var(--shadow-sm);
-}
-
-/* Fantasma de Arrastre */
-.dragging-ghost {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    width: 70px;
-    height: 70px;
-    opacity: 0.9;
-    box-shadow: var(--shadow-brand);
-    border-radius: var(--radius-lg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: var(--font-bold);
-    font-size: var(--text-lg);
-    will-change: transform;
-}
 
 /* =========================================
    10. UTILIDADES UI: TOAST & SCROLL
@@ -1153,12 +1175,12 @@ h6 {
 }
 
 .toast.error {
-    border: 1px solid #EF4444;
+    border: 1px solid var(--color-error);
 }
 
 .toast.success {
-    border: 1px solid #22C55E;
-    background: rgba(20, 83, 45, 0.9);
+    border: 1px solid var(--color-success);
+    background: var(--color-success-dark);
 }
 
 .toast-icon {
@@ -1233,50 +1255,14 @@ h6 {
     }
 }
 
-.review-card {
-    width: 280px;
-    min-height: 220px;
-    flex-shrink: 0;
-    background: white;
-    padding: var(--space-5);
-    border: var(--card-border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm);
-    user-select: none;
-}
+/* .review-card eliminada - Ver ReviewCard.astro */
 
 
 /* =========================================
    11. COMPONENTES EXTRA (Models, Stats)
    ========================================= */
 
-.calc-model-card {
-    background-color: white;
-    padding: var(--card-padding);
-    border-radius: var(--card-radius);
-    border: 2px solid transparent;
-    transition: all var(--duration-normal) ease;
-}
-
-.calc-model-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.calc-model-card.selected {
-    background-color: white;
-    border-color: var(--brand-400);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
-}
-
-.calc-model-card.selected .check-icon {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.calc-model-card .check-icon.animate-checkmark-pop {
-    opacity: 1;
-}
+/* .calc-model-card styles moved to Wizard.astro */
 
 .model-icon {
     width: 2.5rem;
@@ -1289,413 +1275,59 @@ h6 {
     box-shadow: var(--shadow-sm);
 }
 
-/* Stat Card (Social Proof) */
-.stat-card {
-    background: var(--azure-50);
-    padding: var(--card-padding);
-    border-radius: var(--card-radius);
-    border: var(--card-border);
-    text-align: center;
-}
 
-/* Review Author */
-.review-author {
-    font-size: var(--text-xs);
-    font-weight: var(--font-bold);
-    color: var(--azure-900);
-    text-align: right;
-    margin-top: var(--space-2);
-}
 
-/* Badges Extras */
-.badge {
+/* =========================================
+   BADGES - Legacy aliases para retrocompatibilidad
+   El sistema principal está en Badge.astro
+   ========================================= */
+
+/* Base legacy - será sobrescrito por Badge.astro */
+.badge:not([class*="badge--"]) {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.5rem;
-    border-radius: var(--radius-full);
-    font-size: var(--text-xs);
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-size: 10px;
     font-weight: var(--font-bold);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     line-height: 1;
+    background-color: var(--azure-100);
+    color: var(--azure-700);
+    border: 1px solid var(--azure-200);
 }
 
+/* Legacy modifiers */
 .badge-glass {
-    background: var(--glass-bg-hover);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(4px);
-    border: 1px solid var(--glass-highlight);
-    color: var(--brand-50);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
 }
 
 .badge-highlight {
-    background-color: #FEF3C7;
-    /* Yellow-200 */
-    color: #92400E;
-    /* Yellow-800 */
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning-text);
     border: 1px solid rgba(146, 64, 14, 0.1);
 }
 
-/* =========================================
-   12. COMPONENTE: SOBRE NOSOTROS (Acordeón Dual)
-   ========================================= */
-
-/* Contenedor expandible */
-.about-expandable-content {
-    display: none;
-    overflow: hidden;
-    transition: max-height var(--duration-slow) var(--ease-out),
-        opacity var(--duration-slow) var(--ease-out);
-    max-height: 0;
-    opacity: 0;
-}
-
-.about-expandable-content.open {
-    max-height: none;
-    opacity: 1;
-}
-
-/* Animación de entrada suave */
-.about-expandable-content .directory-card {
-    transform: translateY(-10px);
-    opacity: 0;
-    transition: transform var(--duration-slow) var(--ease-out),
-        opacity var(--duration-slow) var(--ease-out);
-}
-
-.about-expandable-content.open .directory-card {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* Grid de características */
-.about-features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3);
-}
-
-.about-feature-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: var(--space-3);
-    background-color: var(--azure-50);
-    border: 1px solid var(--azure-100);
-    border-radius: var(--radius-sm);
-    transition: transform var(--duration-fast) ease,
-        box-shadow var(--duration-fast) ease;
-}
-
-.about-feature-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-}
-
-/* Rotación del icono flecha */
-.about-arrow-icon.rotated {
-    transform: rotate(180deg);
-}
-
-/* Transición suave del trigger cuando está activo */
-#about-trigger.active {
-    border-color: var(--brand-200);
+.badge-accent {
     background-color: var(--brand-50);
+    color: var(--brand-600);
+    border: 1px solid var(--brand-200);
 }
+
+
 
 /* =========================================
    13. COMPONENTE: NUESTROS MODELOS (Carrusel + Overlay)
    ========================================= */
 
 /* Tarjetas del carrusel de modelos */
-.model-card-trigger {
-    position: relative;
-    width: 75vw;
-    max-width: 280px;
-    aspect-ratio: 3/4;
-    border-radius: var(--radius);
-    overflow: hidden;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    background-color: var(--azure-100);
-    text-align: left;
-    transition: transform var(--duration-normal) ease,
-        box-shadow var(--duration-normal) ease;
-}
 
-.model-card-trigger:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-}
 
-.model-card-trigger:active {
-    transform: scale(0.98);
-}
 
-.model-card-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: var(--space-5);
-}
-
-.model-card-overlay .badge {
-    align-self: flex-start;
-}
-
-.model-card-cta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    font-weight: var(--font-semibold);
-    font-size: var(--text-sm);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-sm);
-    transition: background-color var(--duration-fast) ease;
-}
-
-.model-card-trigger:hover .model-card-cta {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Overlay Fullscreen para detalle de modelo */
-.model-detail-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity var(--duration-slow) var(--ease-out),
-        transform var(--duration-slow) var(--ease-out);
-}
-
-.model-detail-overlay.hidden {
-    display: none;
-}
-
-.model-detail-overlay.open {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Header del overlay */
-.model-detail-header {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--azure-100);
-    padding: var(--space-4);
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    flex-shrink: 0;
-    z-index: 10;
-}
-
-.model-detail-close {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius);
-    background-color: transparent;
-    border: none;
-    color: var(--azure-400);
-    cursor: pointer;
-    transition: background-color var(--duration-fast) var(--ease-out),
-        color var(--duration-fast) var(--ease-out);
-}
-
-.model-detail-close:hover {
-    background-color: var(--azure-100);
-    color: var(--azure-600);
-}
-
-.model-detail-header-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-/* Contenido scrollable del overlay */
-.model-detail-content {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Hero del detalle */
-.model-detail-hero {
-    height: 45vh;
-    min-height: 280px;
-    position: relative;
-    background-color: var(--azure-100);
-}
-
-.model-detail-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Hero Image Carousel */
-.model-detail-hero-carousel {
-    height: 45vh;
-    min-height: 280px;
-    display: flex;
-    gap: var(--space-3);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    background-color: var(--azure-100);
-}
-
-.model-detail-hero-carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.hero-carousel-item {
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    scroll-snap-align: start;
-}
-
-.hero-carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.model-detail-hero-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
-    padding: var(--space-8) var(--space-6) var(--space-6);
-}
-
-/* Grid de specs */
-.model-specs-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3);
-}
-
-.model-spec-card {
-    background-color: var(--azure-50);
-    padding: var(--space-4);
-    border-radius: var(--radius);
-    border: 1px solid var(--azure-100);
-    display: flex;
-    flex-direction: column;
-}
-
-.model-spec-label {
-    font-size: var(--text-sm);
-    color: var(--azure-400);
-    margin-bottom: 2px;
-}
-
-.model-spec-value {
-    font-size: var(--text-base);
-    font-weight: 600;
-    color: var(--azure-900);
-}
-
-/* Footer del overlay */
-.model-detail-footer {
-    padding: var(--space-4);
-    border-top: 1px solid var(--azure-100);
-    background-color: white;
-    flex-shrink: 0;
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* Carrusel de reels/instalaciones en el detalle */
-.model-reels-carousel {
-    display: flex;
-    gap: var(--space-3);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin: 0 calc(var(--space-6) * -1);
-    padding: 0 var(--space-6) var(--space-4);
-}
-
-.model-reels-carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.model-reel-item {
-    flex-shrink: 0;
-    width: 65vw;
-    max-width: 240px;
-    aspect-ratio: 9/16;
-    border-radius: var(--radius);
-    overflow: hidden;
-    scroll-snap-align: start;
-    position: relative;
-    border: 1px solid var(--azure-100);
-    box-shadow: var(--shadow-sm);
-}
-
-.model-reel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.model-reel-play {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--duration-fast) ease;
-}
-
-.model-reel-item:hover .model-reel-play {
-    opacity: 1;
-}
-
-/* =========================================
-   14. CTA WIZARD INLINE
-   ========================================= */
-
-.cta-wizard-step {
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 /* =========================================
    15. RESPONSIVE: TABLET (≥768px)
@@ -1709,17 +1341,17 @@ h6 {
         padding-right: 1.5rem;
     }
 
-    /* Tipografía */
+    /* Tipografía base tags */
     h1 {
-        font-size: 3.5rem !important;
+        font-size: 3.5rem;
     }
 
     h2 {
-        font-size: 3rem !important;
+        font-size: 3rem;
     }
 
     h3 {
-        font-size: 2.25rem !important;
+        font-size: 2.25rem;
     }
 
     /* Hero */
@@ -1742,50 +1374,19 @@ h6 {
         padding: 1.5rem;
     }
 
-    /* Model carousel cards */
-    .model-card-trigger {
-        width: 55vw;
-        max-width: 320px;
-    }
 
-    /* Review cards */
-    .review-card {
-        width: 320px;
-    }
 
     /* Instalaciones carousel items */
     .snap-item {
         width: 60%;
     }
 
-    /* Footer contacto */
-    .footer-contact-row {
-        flex-direction: row;
-        gap: 2rem;
-    }
 
-    /* About: always expanded on tablet+ */
-    #about-trigger {
-        display: none !important;
-    }
 
-    .about-expandable-content {
-        display: block !important;
-        max-height: none !important;
-        opacity: 1 !important;
-    }
 
-    .about-expandable-content .directory-card {
-        transform: none !important;
-        opacity: 1 !important;
-    }
-
-    #about-close {
-        display: none !important;
-    }
 
     /* Model cards: grid instead of carousel — reset bleed wrapper */
-    #models-section .directory-card > div:last-child {
+    #models-section .directory-card>div:last-child {
         margin: 0 !important;
     }
 
@@ -1798,22 +1399,9 @@ h6 {
         padding: 0 !important;
     }
 
-    #models-carousel .model-card-trigger {
-        width: 100% !important;
-        max-width: none !important;
-    }
 
-    /* About beneficios: 2 col grid con altura igual */
-    .about-expandable-content .space-y-3 {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 1fr;
-        gap: var(--space-3);
-    }
 
-    .about-expandable-content .space-y-3>* {
-        margin-top: 0;
-    }
+
 }
 
 /* =========================================
@@ -1830,17 +1418,17 @@ h6 {
         overflow-x: visible;
     }
 
-    /* Tipografía */
+    /* Tipografía base tags */
     h1 {
-        font-size: 4rem !important;
+        font-size: 4rem;
     }
 
     h2 {
-        font-size: 3.5rem !important;
+        font-size: 3.5rem;
     }
 
     h3 {
-        font-size: 2.5rem !important;
+        font-size: 2.5rem;
     }
 
     /* Hero: 2 columns (text left, wizard right) */
@@ -1875,11 +1463,6 @@ h6 {
         margin-left: -50vw;
     }
 
-    /* About beneficios: 2 columnas (heredado de 768px, solo ajusta gap) */
-    .about-expandable-content .space-y-3 {
-        gap: var(--space-4);
-    }
-
     /* Cómo Trabajamos steps: 3 columnas */
     #how-we-work .space-y-3 {
         display: grid;
@@ -1891,11 +1474,7 @@ h6 {
         margin-top: 0;
     }
 
-    /* Model carousel: 3 visibles */
-    .model-card-trigger {
-        width: 30%;
-        max-width: 300px;
-    }
+
 
     /* Instalaciones: 3 items visibles */
     .snap-item {
@@ -1903,29 +1482,25 @@ h6 {
     }
 
     /* Wizard: model cards en fila horizontal (paso 3) */
-    #step-3 .space-y-3,
-    #cta-step-3 .space-y-3 {
+    [id$="-step-3"] .space-y-3 {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: var(--space-3);
     }
 
-    #step-3 .space-y-3>*,
-    #cta-step-3 .space-y-3>* {
+    [id$="-step-3"] .space-y-3>* {
         margin-top: 0;
         margin-bottom: 0;
     }
 
     /* Selector cards (paso 2): 2x2 grid */
-    #step-2 .space-y-3,
-    #cta-step-2 .space-y-3 {
+    [id$="-step-2"] .space-y-3 {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: var(--space-3);
     }
 
-    #step-2 .space-y-3>*,
-    #cta-step-2 .space-y-3>* {
+    [id$="-step-2"] .space-y-3>* {
         margin-top: 0;
         margin-bottom: 0;
     }
@@ -1936,7 +1511,7 @@ h6 {
     }
 
     #cta-initial-content h3 {
-        font-size: 2rem !important;
+        font-size: 2rem;
     }
 
     #cta-initial-content p {
@@ -1955,22 +1530,9 @@ h6 {
         padding-left: 2.5rem;
         padding-right: 2.5rem;
     }
-
-    /* Model specs grid: 4 columnas en overlay */
-    .model-specs-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 
-/* Transición suave para cambios de layout */
-.directory-card,
-.app-container,
-section,
-div {
-    transition: padding 0.3s ease, margin 0.3s ease, gap 0.3s ease, width 0.3s ease;
-}
-
-/* Model Detail Overlay Styles (Robust) */
+/* Model Detail Overlay */
 .model-detail-overlay {
     position: fixed;
     top: 0;
@@ -1978,7 +1540,6 @@ div {
     width: 100vw;
     height: 100vh;
     background-color: rgba(15, 23, 42, 0.4);
-    /* azure-900/40 */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 1000;
@@ -1988,7 +1549,7 @@ div {
     padding: 1rem;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s var(--ease-smooth);
 }
 
 .model-detail-overlay.open {
@@ -2014,4 +1575,377 @@ div {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: var(--azure-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SISTEMA TIPOGRÁFICO - CLASES SEMÁNTICAS
+   Escala modular ~1.25 (Major Third) | Mobile-first | Sin !important
+
+   DISPLAY (Heroes, impacto visual):
+   .display-1    48→64→80px   Hero principal
+   .display-2    36→48→56px   Hero secundario
+
+   HEADINGS (Secciones, cards):
+   .heading-1    42px→64px    Secciones principales
+   .heading-2    36px→48px    Subsecciones
+   .heading-3    28px→40px    Cards grandes
+   .heading-4    24px fijo    Cards medianas
+   .heading-5    20px fijo    Cards pequeñas
+   .heading-6    18px fijo    Items lista, labels
+
+   BODY (Contenido):
+   .text-lg      18px         Intro, lead paragraphs
+   .text-body    16px         Default, párrafos
+   .text-sm      14px         Texto secundario
+   .text-xs      12px         Captions, metadata
+
+   LABELS (UI, metadata):
+   .label        14px         Labels de formulario
+   .eyebrow      12px         Categorías, secciones
+   .caption      12px         Notas, helpers
+   .overline     10px         Tags mínimos
+
+   COLORES DE TEXTO:
+   .text-primary    azure-900    Headings, texto principal
+   .text-secondary  azure-600    Body text, párrafos
+   .text-tertiary   azure-500    Texto secundario
+   .text-muted      azure-400    Metadata, placeholders
+   .text-brand      brand-600    Enlaces, acentos
+   .text-white      white        Sobre fondos oscuros
+   .text-inverse    white/80     Sobre fondos oscuros (suave)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* --------------------------------------
+   DISPLAY CLASSES (Heroes)
+   -------------------------------------- */
+.display-1 {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 3rem;
+    /* 48px mobile */
+    line-height: var(--leading-tight);
+    letter-spacing: -0.03em;
+    color: var(--azure-900);
+}
+
+.display-2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-extrabold);
+    font-size: 2.25rem;
+    /* 36px mobile */
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
+    color: var(--azure-900);
+}
+
+/* --------------------------------------
+   HEADING CLASSES (Secciones, cards)
+   -------------------------------------- */
+.heading-1 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-bold);
+    font-size: 2.625rem;
+    /* 42px mobile */
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
+    color: var(--azure-900);
+}
+
+.heading-2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-bold);
+    font-size: 2.25rem;
+    /* 36px mobile */
+    line-height: var(--leading-tight);
+    letter-spacing: -0.015em;
+    color: var(--azure-900);
+}
+
+.heading-3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-semibold);
+    font-size: 1.75rem;
+    /* 28px mobile */
+    line-height: 1;
+    /* 100% = 28px mobile, 40px desktop */
+    letter-spacing: -0.01em;
+    color: var(--azure-900);
+}
+
+.heading-4 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-semibold);
+    font-size: 1.5rem;
+    /* 24px - fijo en todos */
+    line-height: var(--leading-snug);
+    color: var(--azure-900);
+}
+
+.heading-5 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-semibold);
+    font-size: 1.25rem;
+    /* 20px - fijo en todos */
+    line-height: var(--leading-snug);
+    color: var(--azure-900);
+}
+
+.heading-6 {
+    font-family: var(--font-body);
+    font-weight: var(--font-bold);
+    font-size: 1.125rem;
+    /* 18px - fijo en todos */
+    line-height: var(--leading-snug);
+    letter-spacing: 0.05em;
+    color: var(--azure-900);
+}
+
+/* Legacy alias - migrar a .heading-6 */
+.heading-card {
+    font-family: var(--font-body);
+    font-weight: var(--font-bold);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--azure-900);
+}
+
+.text-title-sm {
+    font-family: var(--font-body);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
+    color: var(--azure-900);
+}
+
+/* --------------------------------------
+   BODY TEXT CLASSES
+   -------------------------------------- */
+.text-lg {
+    font-size: 1.125rem;
+    /* 18px */
+    line-height: 1.6;
+    font-weight: var(--font-normal);
+}
+
+.text-body {
+    font-size: 1rem;
+    /* 16px */
+    line-height: 1.6;
+    font-weight: var(--font-normal);
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.5;
+    font-weight: var(--font-normal);
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    /* 12px */
+    line-height: 1.4;
+    font-weight: var(--font-normal);
+}
+
+/* Legacy alias */
+.text-body-sm {
+    font-size: var(--text-sm);
+    color: var(--azure-600);
+    line-height: var(--leading-relaxed);
+}
+
+/* --------------------------------------
+   LABEL CLASSES (UI, metadata)
+   -------------------------------------- */
+.label {
+    font-size: 0.875rem;
+    /* 14px */
+    font-weight: var(--font-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+.eyebrow {
+    font-size: 0.75rem;
+    /* 12px */
+    font-weight: var(--font-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1;
+}
+
+.caption {
+    font-size: 0.75rem;
+    /* 12px */
+    font-weight: var(--font-normal);
+    line-height: 1.4;
+}
+
+.overline {
+    font-size: 0.625rem;
+    /* 10px */
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1;
+}
+
+/* Legacy aliases */
+.text-eyebrow {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--azure-400);
+    line-height: var(--leading-snug);
+}
+
+/* .text-muted movido a TEXT COLOR CLASSES (solo color, sin font-size) */
+
+.text-caption {
+    font-size: var(--text-xs);
+    color: var(--azure-400);
+    line-height: var(--leading-normal);
+}
+
+.label-uppercase {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--azure-400);
+}
+
+.label-uppercase-brand {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--brand-600);
+}
+
+/* --------------------------------------
+   TEXT COLOR CLASSES
+   -------------------------------------- */
+.text-primary {
+    color: var(--azure-900);
+}
+
+.text-secondary {
+    color: var(--azure-600);
+}
+
+.text-tertiary {
+    color: var(--azure-500);
+}
+
+.text-muted {
+    color: var(--azure-400);
+}
+
+.text-brand {
+    color: var(--brand-600);
+}
+
+.text-white {
+    color: white;
+}
+
+.text-inverse {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* --------------------------------------
+   SPECIAL PURPOSE
+   -------------------------------------- */
+.text-contact {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--azure-500);
+    transition: color var(--duration-normal) ease;
+}
+
+.text-contact:hover {
+    color: var(--brand-600);
+}
+
+.text-link {
+    font-weight: var(--font-medium);
+    color: var(--brand-600);
+    text-decoration: none;
+    transition: color var(--duration-normal) ease;
+}
+
+.text-link:hover {
+    color: var(--brand-700);
+    text-decoration: underline;
+}
+
+/* --------------------------------------
+   RESPONSIVE TYPOGRAPHY
+   -------------------------------------- */
+@media (min-width: 768px) {
+
+    /* Display */
+    .display-1 {
+        font-size: 4rem;
+    }
+
+    /* 64px */
+    .display-2 {
+        font-size: 3rem;
+    }
+
+    /* 48px */
+
+    /* Headings */
+    .heading-1 {
+        font-size: 4rem;
+    }
+
+    /* 64px */
+    .heading-2 {
+        font-size: 3rem;
+    }
+
+    /* 48px */
+    .heading-3 {
+        font-size: 2.5rem;
+    }
+
+    /* 40px */
+    /* H4, H5, H6 son fijos - no cambian */
+}
+
+@media (min-width: 1024px) {
+
+    /* Display */
+    .display-1 {
+        font-size: 5rem;
+    }
+
+    /* 80px */
+    .display-2 {
+        font-size: 3.5rem;
+    }
+
+    /* 56px */
+
+    /* Headings - mismo que tablet */
+    .heading-1 {
+        font-size: 4rem;
+    }
+
+    /* 64px */
+    .heading-2 {
+        font-size: 3rem;
+    }
+
+    /* 48px */
+    .heading-3 {
+        font-size: 2.5rem;
+    }
+
+    /* 40px */
+    /* H4 (24px), H5 (20px), H6 (18px) son fijos - no cambian */
 }

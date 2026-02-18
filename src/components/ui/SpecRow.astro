@@ -1,0 +1,63 @@
+---
+/**
+ * SpecRow - Fila de especificación técnica
+ *
+ * Uso:
+ * <SpecRow
+ *   icon="thermometer-sun"
+ *   label="Reducción de Calor"
+ *   valueId="spec-heat"
+ * />
+ *
+ * O con valor estático:
+ * <SpecRow
+ *   icon="sun"
+ *   label="Protección UV"
+ *   value="99%"
+ * />
+ */
+
+import IconBox from './IconBox.astro';
+
+interface Props {
+  /** Nombre del icono Lucide */
+  icon: string;
+  /** Label descriptivo */
+  label: string;
+  /** Valor estático (si no se usa valueId) */
+  value?: string;
+  /** ID para valor dinámico via JS */
+  valueId?: string;
+  /** Si es la última fila (sin border-bottom) */
+  isLast?: boolean;
+  /** Clases adicionales */
+  class?: string;
+}
+
+const {
+  icon,
+  label,
+  value,
+  valueId,
+  isLast = false,
+  class: className
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "flex items-center justify-between",
+    !isLast && "pb-4 border-b border-azure-100",
+    className
+  ]}
+>
+  <div class="flex items-center gap-4">
+    <IconBox icon={icon} size="sm" variant="brand" />
+    <span class="text-sm text-secondary">{label}</span>
+  </div>
+  {valueId ? (
+    <span id={valueId} class="heading-4"></span>
+  ) : (
+    <span class="heading-4">{value}</span>
+  )}
+</div>

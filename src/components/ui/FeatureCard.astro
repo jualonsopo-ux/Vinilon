@@ -1,0 +1,67 @@
+---
+/**
+ * FeatureCard - Tarjeta unificada para características, beneficios y pasos
+ * Consolida FeatureCard, BenefitCard y StepCard.
+ *
+ * Uso:
+ * <FeatureCard title="Titulo" description="Desc" icon="zap" />
+ * <FeatureCard title="Paso 1" description="Desc" step={1} />
+ * <FeatureCard title="Bordeado" description="Desc" icon="star" variant="bordered" />
+ */
+
+import IconBox from './IconBox.astro';
+import BaseCard from './BaseCard.astro';
+
+interface Props {
+  /** Título de la tarjeta */
+  title: string;
+  /** Descripción del contenido */
+  description: string;
+  /** Nombre del icono Lucide (opcional si se usa step) */
+  icon?: string;
+  /** Número de paso (reemplaza al icono si está presente) */
+  step?: number;
+  /** Estilo visual: 'filled' (bg-color) o 'bordered' (con borde) */
+  variant?: 'filled' | 'bordered';
+  /** Variante de color del IconBox */
+  iconVariant?: 'brand' | 'brand-solid' | 'azure' | 'white' | 'orange' | 'success'; 
+  /** Tamaño del icono */
+  iconSize?: 'sm' | 'md' | 'lg';
+  /** Clases adicionales */
+  class?: string;
+}
+
+const { 
+  title, 
+  description, 
+  icon, 
+  step, 
+  variant = 'filled',
+  iconVariant = 'brand',
+  iconSize = 'lg',
+  class: className 
+} = Astro.props;
+
+// Map feature card variants to BaseCard variants
+const baseVariant = variant === 'bordered' ? 'bordered' : 'filled';
+const computedIconVariant = step ? (Astro.props.iconVariant || 'brand-solid') : iconVariant;
+---
+
+<BaseCard
+  variant={baseVariant}
+  padding="md"
+  radius="lg"
+  class:list={['flex flex-col items-start h-full', className]}
+>
+  <IconBox 
+    icon={icon} 
+    size={iconSize} 
+    variant={computedIconVariant} 
+    class="mb-4"
+  >
+    {step && <span class="text-white font-bold text-lg">{step}</span>}
+  </IconBox>
+  
+  <h3 class="heading-4 text-azure-900 mb-1">{title}</h3>
+  <p class="text-body text-azure-500 leading-relaxed">{description}</p>
+</BaseCard>

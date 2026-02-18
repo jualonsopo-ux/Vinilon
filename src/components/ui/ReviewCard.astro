@@ -1,0 +1,62 @@
+---
+/**
+ * ReviewCard - Tarjeta de reseña de Google
+ *
+ * Uso:
+ * <ReviewCard
+ *   name="Juan García"
+ *   date="2024-02-15"
+ *   text="Excelente servicio..."
+ *   rating={5}
+ * />
+ */
+
+interface Props {
+  /** Nombre del reviewer */
+  name: string;
+  /** Fecha de la reseña (formato ISO: YYYY-MM-DD) */
+  date: string;
+  /** Texto de la reseña */
+  text: string;
+  /** Rating (1-5 estrellas) - por ahora solo mostramos 5 */
+  rating?: number;
+  /** Clases adicionales */
+  class?: string;
+}
+
+const {
+  name,
+  date,
+  text,
+  rating = 5,
+  class: className
+} = Astro.props;
+
+import BaseCard from './BaseCard.astro';
+---
+
+<BaseCard
+  variant="bordered"
+  padding="md"
+  radius="lg"
+  class:list={["flex flex-col shrink-0 w-[280px] min-h-[200px] select-none", className]}
+>
+  <div class="flex justify-between items-start mb-2">
+    <div>
+      <h3 class="heading-5 text-primary">{name}</h3>
+      <span
+        class="caption text-muted block dynamic-date"
+        data-date={date}
+      >
+        Cargando...
+      </span>
+    </div>
+    <svg class="w-5 h-5 flex-shrink-0">
+      <use href="#icon-google" />
+    </svg>
+  </div>
+  <svg class="w-16 h-3 mb-2">
+    <use href="#icon-stars-5" />
+  </svg>
+  <p class="text-body text-secondary leading-relaxed line-clamp-4">{text}</p>
+</BaseCard>

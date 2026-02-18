@@ -1,32 +1,136 @@
 ---
+/**
+ * Button Component
+ * Sistema unificado de botones para toda la aplicación
+ *
+ * @example
+ * <Button variant="primary" size="lg" iconRight="arrow-right">CTA</Button>
+ * <Button variant="ghost" iconLeft="arrow-left">Volver</Button>
+ * <Button variant="secondary" iconOnly size="sm" aria-label="Instagram" />
+ */
+
 interface Props {
-  variant?: 'primary' | 'primary-dark' | 'secondary' | 'whatsapp' | 'action';
+  /** Variante de color */
+  variant?:
+    | 'primary' | 'dark' | 'secondary' | 'whatsapp' | 'danger'  // Solid
+    | 'outline' | 'outline-brand'                                 // Outline
+    | 'ghost' | 'ghost-brand' | 'ghost-white';                   // Ghost
+
+  /** Tamaño del botón */
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+
+  /** Ancho completo */
+  fullWidth?: boolean;
+
+  /** Solo icono (aspect ratio 1:1) */
+  iconOnly?: boolean;
+
+  /** Texto en mayúsculas */
+  uppercase?: boolean;
+
+  /** Bordes redondeados (pill) */
+  rounded?: boolean;
+
+  /** Estado deshabilitado */
+  disabled?: boolean;
+
+  /** Estado de carga */
+  loading?: boolean;
+
+  /** Si tiene href, renderiza como <a> */
   href?: string;
+
+  /** Tipo de botón (solo si no es link) */
   type?: 'button' | 'submit' | 'reset';
+
+  /** Icono izquierdo (nombre Lucide) */
+  iconLeft?: string;
+
+  /** Icono derecho (nombre Lucide) */
+  iconRight?: string;
+
+  /** Clases adicionales */
   class?: string;
+
+  /** ID del elemento */
   id?: string;
+
+  /** Cualquier otro atributo HTML */
   [key: string]: any;
 }
 
-const { 
-  variant = 'primary', 
-  href, 
-  type = 'button', 
-  class: className, 
+const {
+  variant = 'primary',
+  size = 'md',
+  fullWidth = false,
+  iconOnly = false,
+  uppercase = false,
+  rounded = false,
+  disabled = false,
+  loading = false,
+  href,
+  type = 'button',
+  iconLeft,
+  iconRight,
+  class: className,
   id,
-  ...rest 
+  ...rest
 } = Astro.props;
 
+// Determinar el tag a usar
 const Tag = href ? 'a' : 'button';
-const baseClass = `btn-${variant}`;
+
+// Construir clases
+const classes = [
+  'btn',
+  `btn--${variant}`,
+  `btn--${size}`,
+  fullWidth && 'btn--full',
+  iconOnly && 'btn--icon-only',
+  uppercase && 'btn--uppercase',
+  rounded && 'btn--rounded',
+  disabled && 'btn--disabled',
+  loading && 'btn--loading',
+  className
+].filter(Boolean).join(' ');
+
+// Tamaños de iconos según size
+const iconSizes: Record<string, string> = {
+  xs: 'w-4 h-4',
+  sm: 'w-[18px] h-[18px]',
+  md: 'w-5 h-5',
+  lg: 'w-5 h-5'
+};
+const iconSize = iconSizes[size];
 ---
 
 <Tag
   id={id}
-  class:list={[baseClass, className]}
+  class={classes}
   href={href}
   type={!href ? type : undefined}
+  disabled={disabled || loading}
+  aria-disabled={disabled || loading}
   {...rest}
 >
-  <slot />
+  {/* Loading spinner */}
+  {loading && (
+    <i data-lucide="loader-2" class:list={[iconSize, 'animate-spin']}></i>
+  )}
+
+  {/* Left icon */}
+  {iconLeft && !loading && (
+    <i data-lucide={iconLeft} class={iconSize}></i>
+  )}
+
+  {/* Content */}
+  {!iconOnly && <slot />}
+
+  {/* Right icon */}
+  {iconRight && !loading && (
+    <i data-lucide={iconRight} class={iconSize}></i>
+  )}
+
+  {/* Icon only slot (para iconos inline) */}
+  {iconOnly && <slot />}
 </Tag>

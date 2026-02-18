@@ -1,0 +1,209 @@
+---
+/**
+ * Badge Component
+ * Sistema unificado de etiquetas/tags
+ *
+ * @example
+ * <Badge>Etiqueta</Badge>
+ * <Badge variant="highlight" size="sm">Top Ventas</Badge>
+ * <Badge variant="glass">Premium</Badge>
+ */
+
+interface Props {
+  /** ID del elemento */
+  id?: string;
+
+  /** Variante de color */
+  variant?: 'default' | 'brand' | 'highlight' | 'success' | 'error' | 'accent' | 'glass';
+
+  /** Tamaño */
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+
+  /** Icono izquierdo (nombre Lucide) */
+  iconLeft?: string;
+
+  /** Clases adicionales */
+  class?: string;
+}
+
+const {
+  id,
+  variant = 'default',
+  size = 'sm',
+  iconLeft,
+  class: className
+} = Astro.props;
+
+// Construir clases BEM
+const classes = [
+  'badge',
+  `badge--${variant}`,
+  `badge--${size}`,
+  className
+].filter(Boolean).join(' ');
+
+// Tamaños de iconos según size
+const iconSizes: Record<string, string> = {
+  xs: 'w-2.5 h-2.5',
+  sm: 'w-3 h-3',
+  md: 'w-3.5 h-3.5',
+  lg: 'w-4 h-4'
+};
+const iconSize = iconSizes[size];
+---
+
+<span id={id} class={classes}>
+  {iconLeft && (
+    <i data-lucide={iconLeft} class={iconSize}></i>
+  )}
+  <slot />
+</span>
+
+<style is:global>
+/* =========================================
+   BADGE SYSTEM - Design Tokens
+   ========================================= */
+
+:root {
+  /* Size tokens */
+  --badge-px-xs: 6px;
+  --badge-px-sm: 8px;
+  --badge-px-md: 10px;
+  --badge-px-lg: 12px;
+
+  --badge-py-xs: 2px;
+  --badge-py-sm: 3px;
+  --badge-py-md: 4px;
+  --badge-py-lg: 5px;
+
+  --badge-font-xs: 10px;
+  --badge-font-sm: 10px;
+  --badge-font-md: 12px;
+  --badge-font-lg: 12px;
+
+  --badge-radius: 9999px;
+  --badge-gap: 4px;
+}
+
+/* =========================================
+   BASE BADGE STYLES
+   ========================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--badge-gap);
+  border-radius: var(--badge-radius);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* =========================================
+   SIZE VARIANTS
+   ========================================= */
+
+.badge--xs {
+  padding: var(--badge-py-xs) var(--badge-px-xs);
+  font-size: var(--badge-font-xs);
+}
+
+.badge--sm {
+  padding: var(--badge-py-sm) var(--badge-px-sm);
+  font-size: var(--badge-font-sm);
+}
+
+.badge--md {
+  padding: var(--badge-py-md) var(--badge-px-md);
+  font-size: var(--badge-font-md);
+}
+
+.badge--lg {
+  padding: var(--badge-py-lg) var(--badge-px-lg);
+  font-size: var(--badge-font-lg);
+}
+
+/* =========================================
+   COLOR VARIANTS
+   ========================================= */
+
+/* Default (Azure/Neutral) */
+.badge--default {
+  background-color: var(--azure-100);
+  color: var(--azure-700);
+  border: 1px solid var(--azure-200);
+}
+
+/* Brand */
+.badge--brand {
+  background-color: var(--brand-600);
+  color: white;
+}
+
+/* Highlight (Warning - para Top Ventas, promociones) */
+.badge--highlight {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border: 1px solid rgba(146, 64, 14, 0.1);
+}
+
+/* Success */
+.badge--success {
+  background-color: var(--color-success-light);
+  color: var(--color-success-dark);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+/* Error */
+.badge--error {
+  background-color: var(--color-error-light);
+  color: var(--color-error-dark);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Accent (Brand suave) */
+.badge--accent {
+  background-color: var(--brand-50);
+  color: var(--brand-600);
+  border: 1px solid var(--brand-200);
+}
+
+/* Glass (para fondos oscuros) */
+.badge--glass {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================
+   LEGACY ALIASES (para migración gradual)
+   ========================================= */
+
+/* .badge-highlight -> .badge--highlight */
+.badge-highlight {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border: 1px solid rgba(146, 64, 14, 0.1);
+}
+
+/* .badge-glass -> .badge--glass */
+.badge-glass {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* .badge-accent -> .badge--accent */
+.badge-accent {
+  background-color: var(--brand-50);
+  color: var(--brand-600);
+  border: 1px solid var(--brand-200);
+}
+</style>

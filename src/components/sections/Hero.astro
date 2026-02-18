@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import logoImage from '../../assets/img/Logo_Vinilone.png';
+import Button from '../ui/Button.astro';
+---
+<header class="relative z-10 flex flex-col items-center text-center mt-4 mb-8 animate-fade-in">
+    <div class="mb-5 pt-20 md:pt-28 lg:pt-32"> <!-- Replaced [80px] with pt-20 (5rem) -->
+        <Image src={logoImage} alt="Logotipo de Vinilone"
+            class="h-12 w-auto object-contain mx-auto" width={180} height={48} loading="eager" />
+    </div>
+
+    <h1 class="font-black text-azure-900 leading-tight mb-2 tracking-tight">
+        Privacidad y frescor <br>
+        <span class="text-brand-600">sin perder la luz</span>
+    </h1>
+
+    <p class="text-azure-500 max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-5 leading-relaxed text-lg md:text-xl">
+        <!-- Changed h5 to p for semantic correctness -->
+        Expertos en láminas solares. Instalación profesional en toda España.
+    </p>
+
+    <div
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#E0E7FF]/30 text-azure-600 text-sm font-medium mb-6 backdrop-blur-sm border border-white/50 shadow-sm">
+        <i data-lucide="map-pin" class="w-4 h-4 text-brand-600 fill-brand-600/20"></i>
+        <span>Servicio Nacional • España</span>
+    </div>
+
+    <div class="flex gap-3 md:gap-4 mb-6">
+        <Button
+            variant="secondary"
+            size="sm"
+            iconOnly
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Síguenos en Instagram"
+        >
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+        </Button>
+        <Button
+            variant="secondary"
+            size="sm"
+            iconOnly
+            href="https://whatsapp.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contáctanos por WhatsApp"
+            class="hover:text-[#25D366]"
+        >
+            <svg class="w-5 h-5 fill-current"><use href="#icon-whatsapp"/></svg>
+        </Button>
+        <Button
+            variant="secondary"
+            size="sm"
+            iconOnly
+            href="https://tiktok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Síguenos en TikTok"
+        >
+            <svg class="w-5 h-5 fill-current"><use href="#icon-tiktok"/></svg>
+        </Button>
+    </div>
+
+</header>

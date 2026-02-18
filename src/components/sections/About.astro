@@ -1,0 +1,79 @@
+---
+import SectionCard from '../ui/SectionCard.astro';
+import FeatureCard from '../ui/FeatureCard.astro';
+import { Image } from 'astro:assets';
+---
+<section id="about-section" class="w-full">
+    <!-- Trigger Button (Vista inicial) -->
+    <SectionCard 
+        title="Sobre Nosotros" 
+        subtitle="Nuestra tecnología y experiencia" 
+        class="animate-fade-in shadow-none"
+        collapsible={true}
+    >
+        <!-- Descripción -->
+        <p class="text-base text-azure-600 leading-relaxed">
+            <span class="font-bold text-brand-600">Vinilone</span> no vende pegatinas, vende
+            confort. Nos especializamos en soluciones que mejoran el aislamiento térmico y la
+            estética de cualquier inmueble.
+        </p>
+
+        <!-- Lista vertical de beneficios -->
+        <div class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
+            <FeatureCard
+                icon="thermometer-sun"
+                title="Control Térmico y Ahorro"
+                description="Mejora el confort térmico reduciendo el calor directo. Esto se traduce en un notable ahorro energético en aire acondicionado."
+            />
+            <FeatureCard
+                icon="eye-off"
+                title="Privacidad Diurna"
+                description={'Efecto espejo durante el día: "ves sin ser visto". Mantén tu intimidad total desde el exterior sin sacrificar la luz natural.'}
+            />
+            <FeatureCard
+                icon="shield"
+                title="Protección UV del 99%"
+                description="Bloquea los rayos ultravioleta dañinos, protegiendo suelos, muebles y escaparates de la decoloración y el deterioro."
+            />
+            <FeatureCard
+                icon="badge-check"
+                title="Garantía y Durabilidad"
+                description="Inversión a largo plazo. Ofrecemos 5 años de garantía con una vida útil de nuestros materiales de hasta 15 años."
+            />
+        </div>
+
+        <!-- Carrusel de Instalaciones (full-bleed) -->
+        <div class="-mx-4 lg:-mx-8">
+            <h4 class="eyebrow text-muted px-4 lg:px-8 mb-4">Instalaciones Recientes</h4>
+            <div class="h-scroll-snap flex gap-4 px-4 lg:px-8 overflow-x-auto lg:overflow-visible lg:grid lg:grid-cols-3 lg:gap-8">
+                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] group shrink-0">
+                    <Image src={import('../../assets/img/office-madrid.jpg')} loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt="Oficinas en Madrid" />
+                    <div
+                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                        <span class="text-white text-sm font-medium">Oficinas Madrid</span>
+                    </div>
+                </div>
+                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] group shrink-0">
+                    <Image src={import('../../assets/img/model-valencia.jpg')} loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt="Residencial Valencia" />
+                    <div
+                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                        <span class="text-white text-sm font-medium">Residencial Valencia</span>
+                    </div>
+                </div>
+                <div class="snap-item w-4/5 relative overflow-hidden aspect-[4/3] group shrink-0">
+                    <Image src={import('../../assets/img/model-andalucia.jpg')} loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt="Nave Industrial Norte" />
+                    <div
+                        class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+                        <span class="text-white text-sm font-medium">Nave Industrial Norte</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </SectionCard>
+</section>

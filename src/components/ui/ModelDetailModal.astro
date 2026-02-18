@@ -1,0 +1,191 @@
+---
+/**
+ * ModelDetailModal - Modal de detalle de modelo
+ *
+ * Componente extraído de Models.astro para mejor mantenibilidad.
+ * Recibe los datos de modelos y renderiza el modal con toda la info.
+ *
+ * @example
+ * <ModelDetailModal models={MODELS} />
+ */
+
+import Badge from './Badge.astro';
+import Button from './Button.astro';
+import SpecRow from './SpecRow.astro';
+import FeatureCard from './FeatureCard.astro';
+
+interface ModelFeature {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+interface ModelData {
+  title: string;
+  subtitle: string;
+  badge?: string;
+  price: string;
+  desc: string;
+  specs: { heat: string; uv: string; light: string };
+  features: ModelFeature[];
+  image: string;
+}
+
+interface Props {
+  models: Record<string, ModelData>;
+}
+
+const { models } = Astro.props;
+---
+
+<div id="models-detail-view" class="hidden">
+  <!-- Backdrop -->
+  <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 lg:p-8"
+       style="padding-bottom: max(1rem, env(safe-area-inset-bottom)); padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); padding-top: max(1rem, env(safe-area-inset-top));">
+
+    <!-- Modal Card -->
+    <div
+      class="bg-white w-full max-w-[1216px] h-full lg:h-auto lg:max-h-[90vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="detail-title"
+    >
+      <!-- Header -->
+      <div class="flex-none px-6 py-4 lg:px-8 lg:py-6 border-b border-azure-100 flex justify-between items-center gap-4">
+        <Button
+          id="btn-back-internal"
+          variant="ghost"
+          size="sm"
+          iconLeft="arrow-left"
+          class="flex-none"
+          aria-label="Volver al listado de modelos"
+        >
+          Volver
+        </Button>
+        <Button
+          id="btn-x-internal"
+          variant="ghost"
+          size="sm"
+          iconOnly
+          class="lg:hidden flex-none"
+          aria-label="Cerrar detalle"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </Button>
+      </div>
+
+      <!-- Body (scrollable) -->
+      <div class="flex-1 overflow-y-auto">
+        <div class="flex flex-col lg:flex-row gap-8 p-6 lg:p-8">
+
+          <!-- Columna Izquierda: Imagen + Reels -->
+          <div class="flex-1 lg:flex-[1.4] flex flex-col gap-4 self-stretch">
+            <!-- Imagen principal 4:3 -->
+            <div class="relative w-full aspect-[4/3] bg-azure-100 rounded-xl overflow-hidden group">
+              <img
+                id="detail-img"
+                src=""
+                alt=""
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <Badge
+                id="detail-badge"
+                variant="highlight"
+                size="md"
+                class="absolute top-4 left-4 shadow-lg hidden"
+              />
+              <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/10 to-transparent"></div>
+            </div>
+
+            <!-- Card Reels -->
+            <div class="bg-azure-50 rounded-xl p-4 border border-azure-100 flex flex-col gap-4">
+              <h3 class="heading-4 text-tertiary">Ver reels</h3>
+              <div class="grid grid-cols-4 gap-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div class="aspect-[9/16] bg-azure-200 rounded-lg overflow-hidden relative group/reel cursor-pointer hover:ring-2 hover:ring-brand-500 transition-all">
+                    <div class="w-full h-full bg-azure-300 group-hover/reel:opacity-90 transition-opacity"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <div class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm">
+                        <i data-lucide="play" class="w-3 h-3 text-brand-600 fill-brand-600"></i>
+                      </div>
+                    </div>
+                    <span class="absolute bottom-2 left-0 right-0 text-center caption text-white font-bold drop-shadow-md">
+                      Reel {i}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Info -->
+          <div class="flex-1 flex flex-col gap-4 self-stretch">
+            <!-- Título + Subtítulo -->
+            <div class="flex flex-col gap-2">
+              <h2 id="detail-title" class="heading-1"></h2>
+              <p id="detail-subtitle" class="text-lg text-tertiary"></p>
+            </div>
+
+            <!-- Descripción -->
+            <p id="detail-desc" class="text-body text-secondary"></p>
+
+            <!-- Card Specs -->
+            <div class="bg-azure-50 rounded-xl p-4 border border-azure-100 flex flex-col gap-4">
+              <h3 class="heading-4 text-tertiary">Especificaciones técnicas</h3>
+              <div class="flex flex-col gap-4">
+                <SpecRow icon="thermometer-sun" label="Reducción de Calor" valueId="spec-heat" />
+                <SpecRow icon="shield" label="Protección UV" valueId="spec-uv" />
+                <SpecRow icon="eye" label="Transmisión de Luz" valueId="spec-light" isLast />
+              </div>
+            </div>
+
+            <!-- Features Grid (pre-rendered por modelo) -->
+            {Object.entries(models).map(([key, model]) => (
+              <div data-model-features={key} class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {model.features.map((f) => (
+                  <FeatureCard icon={f.icon} title={f.title} description={f.desc} />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex-none px-6 py-4 lg:px-8 lg:py-6 border-t border-azure-100 flex items-center justify-between gap-4"
+           style="padding-bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom)));">
+        <!-- Precio -->
+        <div class="flex flex-col gap-2">
+          <span class="eyebrow text-muted">Precio estimado material</span>
+          <div class="flex items-baseline gap-2">
+            <span id="detail-price" class="heading-2"></span>
+            <span class="text-sm text-muted">/ m²</span>
+          </div>
+        </div>
+        <!-- Acciones -->
+        <div class="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="md"
+            iconLeft="file-text"
+            class="hidden lg:flex"
+            aria-label="Descargar ficha técnica"
+          >
+            Ficha Técnica
+          </Button>
+          <Button
+            id="btn-add-budget-internal"
+            variant="primary"
+            size="md"
+            iconRight="arrow-right"
+            uppercase
+          >
+            Pedir Presupuesto
+          </Button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

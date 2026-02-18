@@ -1,0 +1,82 @@
+---
+/**
+ * GalleryItem - Item de galería con imagen y caption overlay
+ *
+ * Uso con imagen de Astro:
+ * <GalleryItem
+ *   image={import('../assets/img/office-madrid.jpg')}
+ *   alt="Oficinas en Madrid"
+ *   caption="Oficinas Madrid"
+ * />
+ *
+ * Uso con URL estática:
+ * <GalleryItem
+ *   src="/assets/img/office-madrid.jpg"
+ *   alt="Oficinas en Madrid"
+ *   caption="Oficinas Madrid"
+ * />
+ */
+
+import { Image } from 'astro:assets';
+
+interface Props {
+  /** Imagen importada de Astro (preferido) */
+  image?: ImageMetadata | Promise<{ default: ImageMetadata }>;
+  /** URL de imagen estática (fallback) */
+  src?: string;
+  /** Texto alternativo */
+  alt: string;
+  /** Caption que aparece en el overlay */
+  caption: string;
+  /** Aspect ratio */
+  aspectRatio?: '4/3' | '16/9' | '1/1' | '3/4';
+  /** Clases adicionales */
+  class?: string;
+}
+
+const {
+  image,
+  src,
+  alt,
+  caption,
+  aspectRatio = '4/3',
+  class: className
+} = Astro.props;
+
+// Resolver la imagen si es una Promise
+const resolvedImage = image && 'then' in image ? (await image).default : image;
+
+const aspectClasses = {
+  '4/3': 'aspect-[4/3]',
+  '16/9': 'aspect-video',
+  '1/1': 'aspect-square',
+  '3/4': 'aspect-[3/4]',
+};
+---
+
+<div
+  class:list={[
+    'snap-item relative overflow-hidden group shrink-0',
+    aspectClasses[aspectRatio],
+    className
+  ]}
+>
+  {resolvedImage ? (
+    <Image
+      src={resolvedImage}
+      loading="lazy"
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      alt={alt}
+    />
+  ) : src ? (
+    <img
+      src={src}
+      loading="lazy"
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      alt={alt}
+    />
+  ) : null}
+  <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3">
+    <span class="text-white text-sm font-medium">{caption}</span>
+  </div>
+</div>

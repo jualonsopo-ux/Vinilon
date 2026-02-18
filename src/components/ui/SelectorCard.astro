@@ -1,0 +1,154 @@
+---
+/**
+ * SelectorCard - Tarjeta selectora con stepper (+/-)
+ * Usado en el Wizard para selección de cantidad de ventanas
+ *
+ * Uso:
+ * <SelectorCard
+ *   icon="door-open"
+ *   title="Grande"
+ *   subtitle="Balcón / Ventanal"
+ *   windowType="grande"
+ *   counterId="hero-count-grande"
+ * />
+ */
+
+import IconBox from './IconBox.astro';
+
+interface Props {
+  /** Nombre del icono Lucide */
+  icon: string;
+  /** Título principal */
+  title: string;
+  /** Subtítulo descriptivo */
+  subtitle: string;
+  /** Tipo de ventana para data-attribute */
+  windowType: string;
+  /** ID del contador (para el span que muestra el valor) */
+  counterId: string;
+  /** Valor inicial del contador */
+  initialValue?: number;
+  /** Clases adicionales */
+  class?: string;
+}
+
+const {
+  icon,
+  title,
+  subtitle,
+  windowType,
+  counterId,
+  initialValue = 0,
+  class: className
+} = Astro.props;
+
+import BaseCard from './BaseCard.astro';
+---
+
+<BaseCard
+  variant="glass"
+  padding="sm" 
+  radius="lg"
+  hoverEffect="border"
+  class:list={["flex items-center justify-between mb-3 transition-colors duration-200", className]}
+>
+  <div class="selector-info flex items-center gap-3">
+    <IconBox icon={icon} size="lg" variant="glass" />
+    <div>
+      <p class="text-white font-bold text-lg leading-tight">{title}</p>
+      <p class="text-white/60 text-sm">{subtitle}</p>
+    </div>
+  </div>
+  <div
+    class="selector-stepper"
+    role="group"
+    aria-label={`Cantidad de ventanas ${title.toLowerCase()}`}
+  >
+    <button
+      class="stepper-btn"
+      data-action="update-counter"
+      data-window={windowType}
+      data-value="-1"
+      aria-label={`Reducir cantidad de ${title}`}
+    >
+      -
+    </button>
+    <span id={counterId} class="stepper-value" aria-live="polite">
+      {initialValue}
+    </span>
+    <button
+      class="stepper-btn plus"
+      data-action="update-counter"
+      data-window={windowType}
+      data-value="1"
+      aria-label={`Aumentar cantidad de ${title}`}
+    >
+      +
+    </button>
+  </div>
+</BaseCard>
+
+<style>
+  .selector-stepper {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem; /* var(--space-1) */
+    background-color: rgba(0, 0, 0, 0.05); /* Lightened for better contrast on white/glass */
+    padding: 0.25rem;
+    border-radius: 0.5rem; /* var(--radius-sm) */
+  }
+
+  /* Adjust for glass variant if needed */
+  :global(.bg-glass-bg) .selector-stepper {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .stepper-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: var(--azure-900);
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+  }
+
+  :global(.bg-glass-bg) .stepper-btn {
+    color: white;
+  }
+
+  .stepper-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  :global(.bg-glass-bg) .stepper-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .stepper-btn.plus {
+    background: var(--brand-600); /* Fallback */
+    background: white;
+    color: var(--brand-600);
+  }
+
+  .stepper-btn.plus:hover {
+    background: var(--azure-100);
+  }
+
+  .stepper-value {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--azure-900);
+  }
+
+  :global(.bg-glass-bg) .stepper-value {
+    color: white;
+  }
+</style>
